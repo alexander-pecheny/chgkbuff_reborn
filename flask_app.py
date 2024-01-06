@@ -151,6 +151,7 @@ select id, name, surname from players where id in ({player_ids});
 
 RENDERED_CONTENT_STUB = """\
 <h2>Статистика игрока <a href="https://rating.chgk.info/player/{player_id}">{player_id} {player_name}</a> с {date_from} по {date_to}</h2>
+<p>По клику на ID игрока открывается его страничка на турнирном сайте, на имя-фамилию — его статистика на buff, по клику на количество игр — страничка с вашими совместными играми.</p>
 <ol>
 {lis}
 </ol>
@@ -199,7 +200,7 @@ def make_query(player_id, date_from, date_to):
     lis = []
     for tup in mc:
         lis.append(
-            f"""<li><a href="/stats?player_id={tup[0]}&date_from={date_from}&date_to={date_to}">{tup[0]} {player_dict[tup[0]]}</a> <sup><a href="https://rating.chgk.info/player/{tup[0]}">ТС</a></sup> — <a href="/together?id1={player_id}&id2={tup[0]}&date_from={date_from}&date_to={date_to}">{tup[1]} игр{get_suffix(tup[1])}</a></li>"""
+            f"""<li><a href="https://rating.chgk.info/player/{tup[0]}">{tup[0]}</a>, <a href="/stats?player_id={tup[0]}&date_from={date_from}&date_to={date_to}">{player_dict[tup[0]]}</a> — <a href="/together?id1={player_id}&id2={tup[0]}&date_from={date_from}&date_to={date_to}">{tup[1]} игр{get_suffix(tup[1])}</a></li>"""
         )
     lis = "\n".join(lis)
     return RENDERED_CONTENT_STUB.format(
