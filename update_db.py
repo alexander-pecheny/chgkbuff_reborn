@@ -2,10 +2,12 @@
 # -*- coding: utf-8 -*-
 import os
 import argparse
+import copy
 import sqlite3
 import time
 import datetime
 import logging
+import logging.handlers
 import json
 
 import requests
@@ -33,7 +35,7 @@ CREATE TABLE IF NOT EXISTS tournaments (
     maii_rating integer
 );
 CREATE TABLE IF NOT EXISTS tournament_results (
-    id integer PRIMARY KEY,
+    id integer,
     team_id integer,
     team_current_name text,
     team_current_town integer,
@@ -136,14 +138,20 @@ class DbUpdater:
                 f"{req.content.decode('utf8', errors='replace')}"
             )
 
+    def wrap_sql_value(self, val):
+        if val is None:
+            return "NULL"
+        return repr(val)
+
     def insert_wrapper(self, dct, table_name):
         cur = self.conn.cursor()
         ks = sorted(dct.keys())
+        values = tuple(dct[k] for k in ks)
         query = (
             f"insert into {table_name}({','.join(ks)}) "
-            f"values ({','.join([repr(dct[k]) for k in ks])});"
+            f"values ({','.join(['?'] * len(values))});"
         )
-        cur.execute(query)
+        cur.execute(query, values)
         self.conn.commit()
 
     def update_player(self, dct):
@@ -160,7 +168,7 @@ class DbUpdater:
         if current_rec:
             updates = []
             current_rec_parsed = dict(
-                zip(["id", "name", "surname", "patronymic"], current_rec[0])
+                zip(["id", "name", "surname", "patronymic"], current_rec)
             )
             for key in ["name", "surname", "patronymic"]:
                 if current_rec_parsed[key] != player_dict[key]:
@@ -210,15 +218,17 @@ class DbUpdater:
             for person in tourn_info[key]:
                 self.update_player(person)
 
-
     def req_results(self, tournament_id):
         self.logger.debug(f"processing results of {tournament_id}...")
-        req = requests.get(f"{API}/tournaments/{tournament_id}/results.json", params={
-            "includeTeamMembers": 1,
-            "includeMasksAndControversials": 1,
-            "includeTeamFlags": 1,
-            "includeRatingB": 1,
-        })
+        req = requests.get(
+            f"{API}/tournaments/{tournament_id}/results.json",
+            params={
+                "includeTeamMembers": 1,
+                "includeMasksAndControversials": 1,
+                "includeTeamFlags": 1,
+                "includeRatingB": 1,
+            },
+        )
         time.sleep(0.5)
         try:
             return req.json()
@@ -228,6 +238,10 @@ class DbUpdater:
                 f"{req.content.decode('utf8', errors='replace')}"
             )
 
+    def wrap_town(self, town):
+        if town:
+            return town["name"]
+
     def update_results(self, tournament_id):
         results = self.req_results(tournament_id)
         if not results:
@@ -236,36 +250,53 @@ class DbUpdater:
         cur.execute(f"delete from tournament_results where id = {tournament_id};")
         self.conn.commit()
         for res in results:
+            tm = copy.deepcopy(res["teamMembers"])
+            for t in tm:
+                t.pop("player")
             result_dict = {
                 "id": tournament_id,
                 "team_id": res["team"]["id"],
                 "team_current_name": res["current"]["name"],
-                "team_current_town": res["current"]["town"]["name"],
-                "team_members": json.dumps([x["player"]["id"] for x in res["teamMembers"]]),
-                "team_members_full": json.dumps(res["teamMembers"]),
+                "team_current_town": self.wrap_town(res["current"]["town"]),
+                "team_members": json.dumps(
+                    [x["player"]["id"] for x in res["teamMembers"]]
+                ),
+                "team_members_full": json.dumps(tm),
                 "position": res.get("position"),
                 "questions_total": res.get("questionsTotal"),
                 "mask": res.get("mask"),
-                "controversials": json.dumps(res.get("controversials")),
-                "flags": json.dumps(res.get("flags")),
-                "rating": json.dumps(res.get("rating"))
+                "controversials": json.dumps(
+                    res.get("controversials"), ensure_ascii=False
+                ),
+                "flags": json.dumps(res.get("flags"), ensure_ascii=False),
+                "rating": json.dumps(res.get("rating"), ensure_ascii=False),
             }
             self.insert_wrapper(result_dict, "tournament_results")
             for player in res["teamMembers"]:
-                self.update_player(player)
+                self.update_player(player["player"])
         return "ok"
 
     def process_tournaments_batch(self, res):
         for tournament in res:
             if parse_datetime(tournament["lastEditDate"]) > self.last_db_update:
-                self.update_tournament_data(tournament["id"])
-                self.update_results(tournament["id"])
+                try:
+                    self.update_tournament_data(tournament["id"])
+                except Exception as e:
+                    self.logger.error(
+                        f"exception {type(e)} {e} while trying to update tournament data for {tournament['id']}"
+                    )
+                try:
+                    self.update_results(tournament["id"])
+                except Exception as e:
+                    self.logger.error(
+                        f"exception {type(e)} {e} while trying to update tournament results for {tournament['id']}"
+                    )
 
     def get_last_db_update(self):
         cur = self.conn.cursor()
         last_date = cur.execute("select max(datetime) from db_updates;").fetchone()
-        if last_date:
-            return parse_datetime(last_date[0][0])
+        if last_date[0]:
+            return parse_datetime(last_date[0])
         else:
             return parse_datetime("1970-01-01T00:00:00+03:00")
 
