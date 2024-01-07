@@ -7,17 +7,37 @@ import logging.handlers
 import os
 import sqlite3
 from collections import Counter
+from functools import wraps
 
-import networkx as nx
 import dill
-
+import networkx as nx
 from config import Config
-from flask import Flask, flash, redirect, render_template_string, request, url_for
+from flask import (
+    Flask,
+    abort,
+    current_app,
+    flash,
+    redirect,
+    render_template_string,
+    request,
+    url_for,
+)
 
 UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
 DIR = os.path.dirname(os.path.abspath(__file__))
 DB_LOC = os.path.join(DIR, "buff.db")
 GRAPH_PATH = os.path.join(DIR, "graph.pickle")
+
+
+def debug_only(f):
+    @wraps(f)
+    def wrapped(**kwargs):
+        if not current_app.debug:
+            abort(404)
+
+        return f(**kwargs)
+
+    return wrapped
 
 
 class GraphContainer:
@@ -107,7 +127,6 @@ HTML_STUB = (
 <input type="submit" value="Рассчитать"></input>
 </form>
 {{ rendered_content|safe }}
-<p>См. также: <a href="{{ url_for('.handshakes') }}">N рукопожатий</a>.</p>
 </body>
 """
 )
@@ -366,6 +385,7 @@ def validate_stats_args(player_id, date_from, date_to, strict=False):
 
 
 @app.route("/handshakes", methods=["GET", "POST"])
+@debug_only
 def handshakes():
     if request.method == "GET":
         return render_template_string(HANDSHAKES_STUB, rendered_content="")
