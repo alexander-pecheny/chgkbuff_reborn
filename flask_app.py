@@ -117,8 +117,8 @@ HANDSHAKES_STUB = (
     + """\
 <h1>N рукопожатий</h1>
 <form action="{{ url_for('.handshakes') }}" method="post">
-<label for="player_id1">ID игрока 1</label><input name="player_id1" placeholder="12345"></input>
-<label for="player_id2">ID игрока 2</label><input name="player_id2" placeholder="67890"></input>
+<label for="player_id1">ID игрока 1</label><input name="player_id1" placeholder="12345" value="{{ player_id1|safe }}"></input>
+<label for="player_id2">ID игрока 2</label><input name="player_id2" placeholder="67890" value="{{ player_id2|safe }}"></input>
 <input type="submit" value="Рассчитать"></input>
 </form>
 {{ rendered_content|safe }}
@@ -374,25 +374,36 @@ def handshakes():
     player_id2 = tryint(form_content.get("player_id2"))
     if not player_id1 or not player_id2:
         flash("Оба ID должны быть валидны", "red")
-        return redirect(url_for(".handshakes"))
+        return render_template_string(
+            HANDSHAKES_STUB,
+            rendered_content="",
+            player_id1=player_id1,
+            player_id2=player_id2,
+        )
     if not gc.g:
         gc.load_graph(GRAPH_PATH)
+    if not gc.g.has_node(player_id1) or not gc.g.has_node(player_id2):
+        flash("Игрок не найден", "red")
+        return render_template_string(
+            HANDSHAKES_STUB,
+            rendered_content="",
+            player_id1=player_id1,
+            player_id2=player_id2,
+        )
     try:
         shortest_path = nx.shortest_path(gc.g, tryint(player_id1), tryint(player_id2))
-    except nx.NodeNotFound:
-        flash("Игрок не найден")
-        return redirect(url_for(".handshakes"))
     except nx.NetworkXNoPath:
         shortest_path = []
     player_dict = {}
-    if shortest_path:
-        conn = sqlite3.connect(DB_LOC)
-        cur = conn.cursor()
-        player_query = PLAYER_QUERY_STUB.format(
-            player_ids=",".join([str(p) for p in shortest_path])
+    conn = sqlite3.connect(DB_LOC)
+    cur = conn.cursor()
+    player_query = PLAYER_QUERY_STUB.format(
+        player_ids=",".join(
+            sorted(map(str, set(shortest_path) | set([player_id1, player_id2])))
         )
-        for res in cur.execute(player_query):
-            player_dict[res[0]] = f"{res[1]} {(res[2] or '-')[0]}."
+    )
+    for res in cur.execute(player_query):
+        player_dict[res[0]] = f"{res[1]} {(res[2] or '-')[0]}."
 
     def name(p_id):
         return player_dict.get(p_id) or "Игрок не найден"
@@ -412,7 +423,12 @@ def handshakes():
         result.append("</ol>")
     else:
         result.append("Путь не найден")
-    return render_template_string(HANDSHAKES_STUB, rendered_content="\n".join(result))
+    return render_template_string(
+        HANDSHAKES_STUB,
+        rendered_content="\n".join(result),
+        player_id1=player_id1,
+        player_id2=player_id2,
+    )
 
 
 @app.route("/", methods=["GET", "POST"])
