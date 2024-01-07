@@ -150,7 +150,7 @@ select id, name, surname from players where id in ({player_ids});
 """
 
 RENDERED_CONTENT_STUB = """\
-<h2>Статистика игрока <a href="https://rating.chgk.info/player/{player_id}">{player_id} {player_name}</a> с {date_from} по {date_to}</h2>
+<h2>Статистика игрока <a href="https://rating.chgk.info/player/{player_id}">{player_id}</a>, <a href="/stats?player_id={player_id}&date_from={date_from}&date_to={date_to}">{player_name}</a> с {date_from} по {date_to}</h2>
 <p>По клику на ID игрока открывается его страничка на турнирном сайте, на имя-фамилию — его статистика на buff, по клику на количество игр — страничка с вашими совместными играми.</p>
 <ol>
 {lis}
@@ -230,6 +230,10 @@ def stats():
     return render_template_string(HTML_STUB, rendered_content=rendered_content)
 
 
+def r_link(player_id):
+    return f"https://rating.chgk.info/player/{player_id}"
+
+
 def make_together_query(player_id1, player_id2, date_from, date_to):
     player_id1 = tryint(player_id1)
     player_id2 = tryint(player_id2)
@@ -264,7 +268,7 @@ def make_together_query(player_id1, player_id2, date_from, date_to):
         return f"/stats?player_id={player_id}&date_from={date_from}&date_to={date_to}"
 
     result = [
-        f"""<h2>Совместные игры игроков <a href="{a_link(player_id1)}">{player_id1} {name(player_id1)}</a> и <a href="{a_link(player_id2)}">{player_id2} {name(player_id2)}</a> с {date_from} по {date_to}</h2>""",
+        f"""<h2>Совместные игры игроков <a href="{r_link(player_id1)}">{player_id1}</a>, <a href="{a_link(player_id1)}">{name(player_id1)}</a> и <a href="{r_link(player_id2)}">{player_id2}</a>, <a href="{a_link(player_id2)}">{name(player_id2)}</a> с {date_from} по {date_to}</h2>""",
         "<ol>",
     ]
     for tourn in tourns:
