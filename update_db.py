@@ -11,8 +11,11 @@ import logging.handlers
 import json
 
 import requests
+import dill
+from create_graph import create_graph
 
 UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
+DIR = os.path.dirname(os.path.abspath(__file__))
 
 API = "https://api.rating.chgk.net"
 
@@ -313,6 +316,12 @@ class DbUpdater:
             {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
         )
         self.logger.info("update finished successfully!")
+        self.logger.info("now creating graph...")
+        cur = self.conn.cursor()
+        graph = create_graph(cur)
+        with open(os.path.join(DIR, "graph.pickle"), "wb") as f:
+            dill.dump(graph, f)
+        self.logger.info("graph dumped!")
 
 
 def main():
@@ -323,7 +332,7 @@ def main():
     if os.path.isabs(args.db):
         db_path = args.db
     else:
-        db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), args.db))
+        db_path = os.path.abspath(os.path.join(DIR, args.db))
     db_init(db_path)
     DbUpdater(db_path).update()
 
