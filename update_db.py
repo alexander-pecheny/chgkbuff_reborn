@@ -93,6 +93,15 @@ def parse_datetime(s):
     return datetime.datetime.strptime(s, DT_FORMAT_STRING)
 
 
+def req_sleep(*args, **kwargs):
+    """
+    rating.chgk.info's API has rate limit of 2 requests per second
+    """
+    req = getattr(requests, args[0])(*args[1:], **kwargs)
+    time.sleep(0.5)
+    return req
+
+
 class DbUpdater:
     def __init__(self, db_path):
         self.db_path = db_path
@@ -117,10 +126,9 @@ class DbUpdater:
 
     def req_tournaments(self, page=1):
         self.logger.debug(f"processing tournaments page {page}...")
-        req = requests.get(
-            f"{API}/tournaments.json", params={"page": page, "itemsPerPage": 100}
+        req = req_sleep(
+            "get", f"{API}/tournaments.json", params={"page": page, "itemsPerPage": 100}
         )
-        time.sleep(0.5)
         try:
             return req.json()
         except Exception as e:
@@ -131,8 +139,7 @@ class DbUpdater:
 
     def req_tournament(self, tournament_id):
         self.logger.debug(f"processing tournament {tournament_id}...")
-        req = requests.get(f"{API}/tournaments/{tournament_id}.json")
-        time.sleep(0.5)
+        req = req_sleep("get", f"{API}/tournaments/{tournament_id}.json")
         try:
             return req.json()
         except Exception as e:
@@ -223,7 +230,8 @@ class DbUpdater:
 
     def req_results(self, tournament_id):
         self.logger.debug(f"processing results of {tournament_id}...")
-        req = requests.get(
+        req = req_sleep(
+            "get",
             f"{API}/tournaments/{tournament_id}/results.json",
             params={
                 "includeTeamMembers": 1,
@@ -232,7 +240,6 @@ class DbUpdater:
                 "includeRatingB": 1,
             },
         )
-        time.sleep(0.5)
         try:
             return req.json()
         except Exception as e:
