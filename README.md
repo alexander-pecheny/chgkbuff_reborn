@@ -65,3 +65,4 @@ server {
 
 После этого сервис должен быть доступен по `https://your.domain.com`
 
+7\. Настроить еженочное обновление базы: `crontab -e` и добавляем строчку `5 1 * * * {{path/to/python}} {{path/to/buff}}/update_db.py`
