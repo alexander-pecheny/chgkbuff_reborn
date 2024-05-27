@@ -323,12 +323,12 @@ class DbUpdater:
             {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
         )
         self.logger.info("update finished successfully!")
-        self.logger.info("now creating graph...")
-        cur = self.conn.cursor()
-        graph = create_graph(cur)
-        with open(os.path.join(DIR, "graph.pickle"), "wb") as f:
-            dill.dump(graph, f)
-        self.logger.info("graph dumped!")
+        # self.logger.info("now creating graph...")
+        # cur = self.conn.cursor()
+        # graph = create_graph(cur)
+        # with open(os.path.join(DIR, "graph.pickle"), "wb") as f:
+        #     dill.dump(graph, f)
+        # self.logger.info("graph dumped!")
 
 
 def main():
