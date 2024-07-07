@@ -8,6 +8,7 @@ import os
 import sqlite3
 from collections import Counter
 from functools import wraps
+from typing import NamedTuple
 
 import dill
 import networkx as nx
@@ -27,6 +28,14 @@ UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
 DIR = os.path.dirname(os.path.abspath(__file__))
 DB_LOC = os.path.join(DIR, "buff.db")
 GRAPH_PATH = os.path.join(DIR, "graph.pickle")
+
+
+class Tournament(NamedTuple):
+    id: int
+    name: str
+    date_start: str
+    date_end: str
+    type: str
 
 
 def debug_only(f):
@@ -124,6 +133,9 @@ HTML_STUB = (
 <label for="player_id">Ваш ID</label><input name="player_id" placeholder="12345"></input>
 <label for="date_from">С даты</label><input name="date_from" placeholder="1990-02-28"></input>
 <label for="date_to">По дату</label><input name="date_to" placeholder="2024-02-28"></input>
+<div><input id="all_tournaments" type="radio" name="tournament_types" value="all_tournaments" checked=""><label for="all_tournaments">Все турниры</label></div>
+<div><input id="lan_sync" type="radio" name="tournament_types" value="lan_sync"><label for="lan_sync">Очники и синхроны</label></div>
+<div><input id="online_async" type="radio" name="tournament_types" value="online_async"><label for="online_async">Онлайны и асинхроны</label></div>
 <input type="submit" value="Рассчитать"></input>
 </form>
 {{ rendered_content|safe }}
@@ -172,12 +184,21 @@ with results as (
     where team_members match '{player_id}'
 ), right_tournaments as (
     select
-        id as tournament_id
+        id as tournament_id,
+        name,
+        date_start,
+        date_end,
+        tournament_type
     from tournaments
     where date_start > '{date_from}' and date_start < '{date_to}' and tournament_type != 'Общий зачёт'
 )
 select
-    r.*
+    r.tournament_id as tournament_id,
+    r.team_members as team_members,        
+    r1.name as name,
+    r1.date_start as date_start,
+    r1.date_end as date_end,
+    r1.tournament_type as tournament_type
 from results as r
 inner join right_tournaments as r1 on (r.tournament_id = r1.tournament_id);
 """
@@ -191,12 +212,20 @@ with results as (
 ), right_tournaments as (
     select
         id as tournament_id,
-        name as tournament_name
+        name as tournament_name,
+        date_start,
+        date_end,
+        tournament_type
     from tournaments
     where date_start > '{date_from}' and date_start < '{date_to}' and tournament_type != 'Общий зачёт'
 )
 select
-    r.*, tournament_name
+    r.tournament_id as tournament_id,
+    r.team_members as team_members,
+    r1.tournament_name as tournament_name,
+    r1.date_start as date_start,
+    r1.date_end as date_end,
+    r1.tournament_type as tournament_type
 from results as r
 inner join right_tournaments as r1 on (r.tournament_id = r1.tournament_id);
 """
@@ -206,7 +235,7 @@ select id, name, surname from players where id in ({player_ids});
 """
 
 RENDERED_CONTENT_STUB = """\
-<h2>Статистика игрока <a href="https://rating.chgk.info/player/{player_id}">{player_id}</a>, <a href="/stats?player_id={player_id}&date_from={date_from}&date_to={date_to}">{player_name}</a> с {date_from} по {date_to}</h2>
+<h2>Статистика игрока <a href="https://rating.chgk.info/player/{player_id}">{player_id}</a>, <a href="/stats?player_id={player_id}&date_from={date_from}&date_to={date_to}">{player_name}</a> с {date_from} по {date_to} ({tournament_types})</h2>
 <p>По клику на ID игрока открывается его страничка на турнирном сайте, на имя-фамилию — его статистика на buff, по клику на количество игр — страничка с вашими совместными играми.</p>
 <ol>
 {lis}
@@ -224,7 +253,28 @@ def get_suffix(num):
     return ""
 
 
-def make_query(player_id, date_from, date_to):
+def is_online_async(tourn: Tournament):
+    return tourn.type == "Асинхрон" or "онлайн" in tourn.name.lower()
+
+
+def tourn_match(tourn: Tournament, tournament_types: str):
+    if tournament_types == "lan_sync" and is_online_async(tourn):
+        return False
+    elif tournament_types == "online_async" and not is_online_async(tourn):
+        return False
+    return True
+
+
+def hr_tournament_types(tournament_types):
+    if tournament_types == "lan_sync":
+        return "очники и синхроны"
+    elif tournament_types == "online_async":
+        return "онлайны и асинхроны"
+    else:
+        return "все турниры"
+
+
+def make_query(player_id, date_from, date_to, tournament_types):
     player_id = tryint(player_id)
     conn = sqlite3.connect(DB_LOC)
     cur = conn.cursor()
@@ -239,6 +289,11 @@ def make_query(player_id, date_from, date_to):
     cntr = Counter()
     for res in cur.execute(query):
         members = json.loads(res[1])
+        tourn = Tournament(
+            id=res[0], name=res[2], date_start=res[3], date_end=res[4], type=res[5]
+        )
+        if not tourn_match(tourn, tournament_types):
+            continue
         if player_id not in members:
             continue
         for p_id in members:
@@ -256,7 +311,9 @@ def make_query(player_id, date_from, date_to):
     lis = []
     for tup in mc:
         lis.append(
-            f"""<li><a href="https://rating.chgk.info/player/{tup[0]}">{tup[0]}</a>, <a href="/stats?player_id={tup[0]}&date_from={date_from}&date_to={date_to}">{player_dict[tup[0]]}</a> — <a href="/together?id1={player_id}&id2={tup[0]}&date_from={date_from}&date_to={date_to}">{tup[1]} игр{get_suffix(tup[1])}</a></li>"""
+            f"""<li><a href="https://rating.chgk.info/player/{tup[0]}">{tup[0]}</a>, """
+            f"""<a href="/stats?player_id={tup[0]}&date_from={date_from}&date_to={date_to}&tournament_types={tournament_types}">{player_dict[tup[0]]}</a> — """
+            f"""<a href="/together?id1={player_id}&id2={tup[0]}&date_from={date_from}&date_to={date_to}&tournament_types={tournament_types}">{tup[1]} игр{get_suffix(tup[1])}</a></li>"""
         )
     lis = "\n".join(lis)
     return RENDERED_CONTENT_STUB.format(
@@ -265,6 +322,7 @@ def make_query(player_id, date_from, date_to):
         date_from=date_from,
         date_to=date_to,
         lis=lis,
+        tournament_types=hr_tournament_types(tournament_types),
     )
 
 
@@ -280,6 +338,7 @@ def stats():
     player_id = request.args.get("player_id")
     date_from = request.args.get("date_from")
     date_to = request.args.get("date_to")
+    tournament_types = request.args.get("tournament_types")
     ok, flashes = validate_stats_args(player_id, date_from, date_to, strict=True)
     if not ok:
         for _flash in flashes:
@@ -288,7 +347,7 @@ def stats():
     logger.debug(
         f"player_id={type(player_id)} {player_id}, date_from={type(date_from)} {date_from}, date_to={type(date_to)} {date_to}"
     )
-    rendered_content = make_query(player_id, date_from, date_to)
+    rendered_content = make_query(player_id, date_from, date_to, tournament_types)
     logger.debug(f"rendered_content={type(rendered_content)} {rendered_content}")
     return render_template_string(
         HTML_STUB,
@@ -307,7 +366,15 @@ def a_link(player_id, date_from=None, date_to=None):
     return f"/stats?player_id={player_id}&date_from={date_from}&date_to={date_to}"
 
 
-def make_together_query(player_id1, player_id2, date_from, date_to):
+def format_dates(start, end):
+    start = start.split("T")[0]
+    end = end.split("T")[0]
+    if start == end:
+        return start
+    return f"{start}–{end}"
+
+
+def make_together_query(player_id1, player_id2, date_from, date_to, tournament_types):
     player_id1 = tryint(player_id1)
     player_id2 = tryint(player_id2)
     conn = sqlite3.connect(DB_LOC)
@@ -326,7 +393,12 @@ def make_together_query(player_id1, player_id2, date_from, date_to):
         members = json.loads(res[1])
         if player_id1 not in members or player_id2 not in members:
             continue
-        tourns.append((res[0], res[2]))
+        tourn = Tournament(
+            id=res[0], name=res[2], date_start=res[3], date_end=res[4], type=res[5]
+        )
+        if not tourn_match(tourn, tournament_types):
+            continue
+        tourns.append(tourn)
     player_query = PLAYER_QUERY_STUB.format(
         player_ids=",".join([str(player_id1), str(player_id2)])
     )
@@ -338,15 +410,15 @@ def make_together_query(player_id1, player_id2, date_from, date_to):
         return player_dict.get(player_id) or "Игрок не найден"
 
     def a_link(player_id):
-        return f"/stats?player_id={player_id}&date_from={date_from}&date_to={date_to}"
+        return f"/stats?player_id={player_id}&date_from={date_from}&date_to={date_to}&tournament_types={tournament_types}"
 
     result = [
-        f"""<h2>Совместные игры игроков <a href="{r_link(player_id1)}">{player_id1}</a>, <a href="{a_link(player_id1)}">{name(player_id1)}</a> и <a href="{r_link(player_id2)}">{player_id2}</a>, <a href="{a_link(player_id2)}">{name(player_id2)}</a> с {date_from} по {date_to}</h2>""",
+        f"""<h2>Совместные игры игроков <a href="{r_link(player_id1)}">{player_id1}</a>, <a href="{a_link(player_id1)}">{name(player_id1)}</a> и <a href="{r_link(player_id2)}">{player_id2}</a>, <a href="{a_link(player_id2)}">{name(player_id2)}</a> с {date_from} по {date_to} ({hr_tournament_types(tournament_types)})</h2>""",
         "<ol>",
     ]
-    for tourn in tourns:
+    for tourn in sorted(tourns, key=lambda t: (t.date_start, t.name)):
         result.append(
-            f"""<li><a href="https://rating.chgk.info/tournament/{tourn[0]}">{tourn[0]} {tourn[1]}</a></li>"""
+            f"""<li><a href="https://rating.chgk.info/tournament/{tourn.id}">{tourn.id} {tourn.name}</a> <small>({format_dates(tourn.date_start, tourn.date_end)}, {tourn.type})</small></li>"""
         )
     result.append("</ol>")
     return "\n".join(result)
@@ -358,6 +430,9 @@ def together():
     player_id2 = request.args.get("id2")
     date_from = request.args.get("date_from")
     date_to = request.args.get("date_to")
+    tournament_types = request.args.get("tournament_types")
+    if tournament_types not in ("lan_sync", "online_async", "all_tournaments"):
+        tournament_types = "all_tournaments"
     ok1, flashes1 = validate_stats_args(player_id1, date_from, date_to, strict=False)
     ok2, flashes2 = validate_stats_args(player_id2, date_from, date_to, strict=False)
     flashes = sorted(set(flashes1) | set(flashes2))
@@ -365,7 +440,9 @@ def together():
         for _flash in flashes:
             flash(*_flash)
         return redirect(url_for(".index"))
-    rendered_content = make_together_query(player_id1, player_id2, date_from, date_to)
+    rendered_content = make_together_query(
+        player_id1, player_id2, date_from, date_to, tournament_types
+    )
     return render_template_string(
         HTML_STUB,
         rendered_content=rendered_content,
@@ -488,6 +565,7 @@ def index():
             player_id=player_id,
             date_from=date_from or "1990-01-01",
             date_to=date_to or datetime.date.today().strftime("%Y-%m-%d"),
+            tournament_types=form_content.get("tournament_types"),
         )
     )
 
