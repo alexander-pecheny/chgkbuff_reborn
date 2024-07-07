@@ -130,12 +130,12 @@ HTML_STUB = (
     + """\
 <h1>С кем вы играли чаще всего?</h1>
 <form action="{{ url_for('.index') }}" method="post">
-<label for="player_id">Ваш ID</label><input name="player_id" placeholder="12345"></input>
-<label for="date_from">С даты</label><input name="date_from" placeholder="1990-02-28"></input>
-<label for="date_to">По дату</label><input name="date_to" placeholder="2024-02-28"></input>
-<div><input id="all_tournaments" type="radio" name="tournament_types" value="all_tournaments" checked=""><label for="all_tournaments">Все турниры</label></div>
-<div><input id="lan_sync" type="radio" name="tournament_types" value="lan_sync"><label for="lan_sync">Очники и синхроны</label></div>
-<div><input id="online_async" type="radio" name="tournament_types" value="online_async"><label for="online_async">Онлайны и асинхроны</label></div>
+<label for="player_id">Ваш ID</label><input name="player_id" placeholder="12345"[PLAYER_ID]></input>
+<label for="date_from">С даты</label><input name="date_from" placeholder="1990-02-28"[DATE_FROM]></input>
+<label for="date_to">По дату</label><input name="date_to" placeholder="2024-02-28"[DATE_TO]></input>
+<div><input id="all_tournaments" type="radio" name="tournament_types" value="all_tournaments" [ALL_TOURNAMENTS_CHECKED]><label for="all_tournaments">Все турниры</label></div>
+<div><input id="lan_sync" type="radio" name="tournament_types" value="lan_sync" [LAN_SYNC_CHECKED]><label for="lan_sync">Очники и синхроны</label></div>
+<div><input id="online_async" type="radio" name="tournament_types" value="online_async" [ONLINE_ASYNC_CHECKED]><label for="online_async">Онлайны и асинхроны</label></div>
 <input type="submit" value="Рассчитать"></input>
 </form>
 {{ rendered_content|safe }}
@@ -157,6 +157,46 @@ HANDSHAKES_STUB = (
 </body>
 """
 )
+
+
+def get_html_stub(
+    player_id="",
+    date_from="",
+    date_to="",
+    tournament_types="",
+):
+    result = HTML_STUB
+    if player_id:
+        result = result.replace("[PLAYER_ID]", f'value="{player_id}"')
+    else:
+        result = result.replace("[PLAYER_ID]", "")
+    if date_from:
+        result = result.replace("[DATE_FROM]", f'value="{date_from}"')
+    else:
+        result = result.replace("[DATE_FROM]", "")
+    if date_to:
+        result = result.replace("[DATE_TO]", f'value="{date_to}"')
+    else:
+        result = result.replace("[DATE_TO]", "")
+    if tournament_types == "lan_sync":
+        result = (
+            result.replace("[LAN_SYNC_CHECKED]", 'checked=""')
+            .replace("[ONLINE_ASYNC_CHECKED]", "")
+            .replace("[ALL_TOURNAMENTS_CHECKED]", "")
+        )
+    elif tournament_types == "online_async":
+        result = (
+            result.replace("[LAN_SYNC_CHECKED]", '')
+            .replace("[ONLINE_ASYNC_CHECKED]", 'checked=""')
+            .replace("[ALL_TOURNAMENTS_CHECKED]", "")
+        )
+    else:
+        result = (
+            result.replace("[LAN_SYNC_CHECKED]", "")
+            .replace("[ONLINE_ASYNC_CHECKED]", "")
+            .replace("[ALL_TOURNAMENTS_CHECKED]", 'checked=""')
+        )
+    return result
 
 
 def tryint(x):
@@ -350,7 +390,7 @@ def stats():
     rendered_content = make_query(player_id, date_from, date_to, tournament_types)
     logger.debug(f"rendered_content={type(rendered_content)} {rendered_content}")
     return render_template_string(
-        HTML_STUB,
+        get_html_stub(player_id, date_from, date_to, tournament_types),
         rendered_content=rendered_content,
         last_db_update=get_last_db_update(),
     )
@@ -444,7 +484,7 @@ def together():
         player_id1, player_id2, date_from, date_to, tournament_types
     )
     return render_template_string(
-        HTML_STUB,
+        get_html_stub(player_id1, date_from, date_to, tournament_types),
         rendered_content=rendered_content,
         last_db_update=get_last_db_update(),
     )
@@ -547,7 +587,7 @@ def handshakes():
 def index():
     if request.method == "GET":
         return render_template_string(
-            HTML_STUB, rendered_content="", last_db_update=get_last_db_update()
+            get_html_stub(), rendered_content="", last_db_update=get_last_db_update()
         )
     form_content = request.form.to_dict()
     print(form_content)
