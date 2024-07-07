@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import os
 import argparse
 import copy
-import sqlite3
-import time
 import datetime
+import json
 import logging
 import logging.handlers
-import json
+import os
+import sqlite3
+import sys
+import time
 
 import requests
-import dill
-from create_graph import create_graph
+# from create_graph import create_graph
 
 UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
 DIR = os.path.dirname(os.path.abspath(__file__))
@@ -60,6 +60,20 @@ CREATE TABLE IF NOT EXISTS players (
 CREATE TABLE IF NOT EXISTS db_updates (
     datetime text
 );
+CREATE VIRTUAL TABLE IF NOT EXISTS search USING fts5(id, team_id, team_members);
+"""
+
+
+DELETED_TOURNAMENTS = """
+with dtrns as (
+    select
+        s.id as id,
+        s.name as name,
+        t.id as t_id
+    from tournaments as s
+    left join tournament_ids as t on s.id = t.id
+)
+select id, name from dtrns where t_id is null;
 """
 
 
@@ -93,13 +107,10 @@ def parse_datetime(s):
     return datetime.datetime.strptime(s, DT_FORMAT_STRING)
 
 
-def req_sleep(*args, **kwargs):
-    """
-    rating.chgk.info's API has rate limit of 2 requests per second
-    """
-    req = getattr(requests, args[0])(*args[1:], **kwargs)
-    time.sleep(0.5)
-    return req
+def sqlite_repr(s):
+    if s is None:
+        return "null"
+    return repr(s)
 
 
 class DbUpdater:
@@ -122,11 +133,20 @@ class DbUpdater:
         logger.addHandler(consoleHandler)
         logger.addHandler(fileHandler)
         self.logger = logger
+        self.session = requests.Session()
         self.last_db_update = self.get_last_db_update()
+
+    def req_sleep(self, *args, **kwargs):
+        """
+        rating.chgk.info's API has rate limit of 2 requests per second
+        """
+        req = getattr(self.session, args[0])(*args[1:], **kwargs)
+        time.sleep(0.5)
+        return req
 
     def req_tournaments(self, page=1):
         self.logger.debug(f"processing tournaments page {page}...")
-        req = req_sleep(
+        req = self.req_sleep(
             "get", f"{API}/tournaments.json", params={"page": page, "itemsPerPage": 100}
         )
         try:
@@ -139,7 +159,7 @@ class DbUpdater:
 
     def req_tournament(self, tournament_id):
         self.logger.debug(f"processing tournament {tournament_id}...")
-        req = req_sleep("get", f"{API}/tournaments/{tournament_id}.json")
+        req = self.req_sleep("get", f"{API}/tournaments/{tournament_id}.json")
         try:
             return req.json()
         except Exception as e:
@@ -182,7 +202,7 @@ class DbUpdater:
             )
             for key in ["name", "surname", "patronymic"]:
                 if current_rec_parsed[key] != player_dict[key]:
-                    updates.append(f"{key} = {repr(player_dict[key])}")
+                    updates.append(f"{key} = {sqlite_repr(player_dict[key])}")
             if updates:
                 cur.execute(
                     f"update players set {','.join(updates)} where id = {dct['id']};"
@@ -230,7 +250,7 @@ class DbUpdater:
 
     def req_results(self, tournament_id):
         self.logger.debug(f"processing results of {tournament_id}...")
-        req = req_sleep(
+        req = self.req_sleep(
             "get",
             f"{API}/tournaments/{tournament_id}/results.json",
             params={
@@ -263,14 +283,15 @@ class DbUpdater:
             tm = copy.deepcopy(res["teamMembers"])
             for t in tm:
                 t.pop("player")
+            team_members_short = json.dumps(
+                [x["player"]["id"] for x in res["teamMembers"]]
+            )
             result_dict = {
                 "id": tournament_id,
                 "team_id": res["team"]["id"],
                 "team_current_name": res["current"]["name"],
                 "team_current_town": self.wrap_town(res["current"]["town"]),
-                "team_members": json.dumps(
-                    [x["player"]["id"] for x in res["teamMembers"]]
-                ),
+                "team_members": team_members_short,
                 "team_members_full": json.dumps(tm),
                 "position": res.get("position"),
                 "questions_total": res.get("questionsTotal"),
@@ -282,12 +303,14 @@ class DbUpdater:
                 "rating": json.dumps(res.get("rating"), ensure_ascii=False),
             }
             self.insert_wrapper(result_dict, "tournament_results")
+            self.insert_wrapper({"id": tournament_id, "team_members": team_members_short}, "search")
             for player in res["teamMembers"]:
                 self.update_player(player["player"])
         return "ok"
 
     def process_tournaments_batch(self, res):
         for tournament in res:
+            self.insert_wrapper({"id": tournament["id"]}, "tournament_ids")
             if parse_datetime(tournament["lastEditDate"]) > self.last_db_update:
                 try:
                     self.update_tournament_data(tournament["id"])
@@ -310,15 +333,37 @@ class DbUpdater:
         else:
             return parse_datetime("1970-01-01T00:00:00+03:00")
 
+    def init_tourn_id_table(self):
+        cur = self.conn.cursor()
+        try:
+            cur.execute("drop table tournament_ids;")
+        except sqlite3.OperationalError:
+            print("couldn't delete tournament_ids table as it doesn't exist")
+        cur.execute("create table tournament_ids(id integer primary key);")
+        self.conn.commit()
+
+    def handle_deleted_tournaments(self):
+        cur = self.conn.cursor()
+        deleted_tournaments = cur.execute(DELETED_TOURNAMENTS).fetchall()
+        for tup in deleted_tournaments:
+            cur.execute(f"delete from tournaments where id = {tup[0]};")
+            cur.execute(f"delete from tournament_results where id = {tup[0]};")
+            cur.execute(f"delete from search where id = {tup[0]};")
+            print(f"Удалён турнир {tup[0]} {tup[1]}")
+        cur.execute("drop table tournament_ids;")
+        self.conn.commit()
+
     def update(self):
         start = datetime.datetime.now(UTC_PLUS_3)
         page = 1
+        self.init_tourn_id_table()
         res = self.req_tournaments(page=1)
         self.process_tournaments_batch(res)
         while len(res) == 100:
             page += 1
             res = self.req_tournaments(page=page)
             self.process_tournaments_batch(res)
+        self.handle_deleted_tournaments()
         self.insert_wrapper(
             {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
         )

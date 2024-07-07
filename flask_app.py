@@ -127,6 +127,7 @@ HTML_STUB = (
 <input type="submit" value="Рассчитать"></input>
 </form>
 {{ rendered_content|safe }}
+<p><small>Последнее обновление базы: {{last_db_update|safe}}</small></p>
 </body>
 """
 )
@@ -167,8 +168,8 @@ with results as (
     select
         id as tournament_id,
         team_members
-    from tournament_results
-    where team_members like '%{player_id}%'
+    from search
+    where team_members match '{player_id}'
 ), right_tournaments as (
     select
         id as tournament_id
@@ -184,10 +185,9 @@ inner join right_tournaments as r1 on (r.tournament_id = r1.tournament_id);
 TOGETHER_QUERY_STUB = """\
 with results as (
     select
-        id as tournament_id,
-        team_members
-    from tournament_results
-    where team_members like '%{player_id1}%' and team_members like '%{player_id2}%'
+        id as tournament_id, team_members
+    from search
+    where team_members match '{player_id1}' and team_members match '{player_id2}'
 ), right_tournaments as (
     select
         id as tournament_id,
@@ -268,6 +268,13 @@ def make_query(player_id, date_from, date_to):
     )
 
 
+def get_last_db_update():
+    conn = sqlite3.connect(DB_LOC)
+    cur = conn.cursor()
+    last_update = cur.execute("select max(datetime) from db_updates;").fetchone()
+    return last_update[0].split("+")[0].replace("T", " ")
+
+
 @app.route("/stats", methods=["GET", "POST"])
 def stats():
     player_id = request.args.get("player_id")
@@ -283,7 +290,11 @@ def stats():
     )
     rendered_content = make_query(player_id, date_from, date_to)
     logger.debug(f"rendered_content={type(rendered_content)} {rendered_content}")
-    return render_template_string(HTML_STUB, rendered_content=rendered_content)
+    return render_template_string(
+        HTML_STUB,
+        rendered_content=rendered_content,
+        last_db_update=get_last_db_update(),
+    )
 
 
 def r_link(player_id):
@@ -355,7 +366,11 @@ def together():
             flash(*_flash)
         return redirect(url_for(".index"))
     rendered_content = make_together_query(player_id1, player_id2, date_from, date_to)
-    return render_template_string(HTML_STUB, rendered_content=rendered_content)
+    return render_template_string(
+        HTML_STUB,
+        rendered_content=rendered_content,
+        last_db_update=get_last_db_update(),
+    )
 
 
 def validate_stats_args(player_id, date_from, date_to, strict=False):
@@ -454,7 +469,9 @@ def handshakes():
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
-        return render_template_string(HTML_STUB, rendered_content="")
+        return render_template_string(
+            HTML_STUB, rendered_content="", last_db_update=get_last_db_update()
+        )
     form_content = request.form.to_dict()
     print(form_content)
     player_id = tryint(form_content.get("player_id"))
