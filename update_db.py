@@ -278,6 +278,7 @@ class DbUpdater:
             return
         cur = self.conn.cursor()
         cur.execute(f"delete from tournament_results where id = {tournament_id};")
+        cur.execute(f"delete from search where id = {tournament_id};")
         self.conn.commit()
         for res in results:
             tm = copy.deepcopy(res["teamMembers"])

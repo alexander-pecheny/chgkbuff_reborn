@@ -327,7 +327,10 @@ def make_query(player_id, date_from, date_to, tournament_types):
     )
     logger.debug(query)
     cntr = Counter()
+    already_encountered = set()
     for res in cur.execute(query):
+        if res[0] in already_encountered:
+            continue
         members = json.loads(res[1])
         tourn = Tournament(
             id=res[0], name=res[2], date_start=res[3], date_end=res[4], type=res[5]
@@ -336,6 +339,7 @@ def make_query(player_id, date_from, date_to, tournament_types):
             continue
         if player_id not in members:
             continue
+        already_encountered.add(res[0])
         for p_id in members:
             if p_id == player_id:
                 continue
@@ -429,10 +433,14 @@ def make_together_query(player_id1, player_id2, date_from, date_to, tournament_t
     )
     logger.debug(query)
     tourns = []
+    already_encountered = set()
     for res in cur.execute(query):
+        if res[0] in already_encountered:
+            continue
         members = json.loads(res[1])
         if player_id1 not in members or player_id2 not in members:
             continue
+        already_encountered.add(res[0])
         tourn = Tournament(
             id=res[0], name=res[2], date_start=res[3], date_end=res[4], type=res[5]
         )
