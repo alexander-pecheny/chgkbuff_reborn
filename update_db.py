@@ -114,8 +114,9 @@ def sqlite_repr(s):
 
 
 class DbUpdater:
-    def __init__(self, db_path):
+    def __init__(self, db_path, args):
         self.db_path = db_path
+        self.args = args
         self.conn = sqlite3.connect(db_path)
         dir_name = os.path.dirname(db_path)
         log_path = os.path.join(dir_name, "db_updater.log")
@@ -357,29 +358,31 @@ class DbUpdater:
     def update(self):
         start = datetime.datetime.now(UTC_PLUS_3)
         page = 1
-        self.init_tourn_id_table()
-        res = self.req_tournaments(page=1)
-        self.process_tournaments_batch(res)
-        while len(res) == 100:
-            page += 1
-            res = self.req_tournaments(page=page)
+        if self.args.tourn_ids:
+            for t_id_ in self.args.tourn_ids.split(","):
+                t_id = int(t_id_.strip())
+                self.logger.info(f"updating data for {t_id}...")
+                self.update_tournament_data(t_id)
+                self.update_results(t_id)
+        else:
+            self.init_tourn_id_table()
+            res = self.req_tournaments(page=1)
             self.process_tournaments_batch(res)
-        self.handle_deleted_tournaments()
-        self.insert_wrapper(
-            {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
-        )
-        self.logger.info("update finished successfully!")
-        # self.logger.info("now creating graph...")
-        # cur = self.conn.cursor()
-        # graph = create_graph(cur)
-        # with open(os.path.join(DIR, "graph.pickle"), "wb") as f:
-        #     dill.dump(graph, f)
-        # self.logger.info("graph dumped!")
+            while len(res) == 100:
+                page += 1
+                res = self.req_tournaments(page=page)
+                self.process_tournaments_batch(res)
+            self.handle_deleted_tournaments()
+            self.insert_wrapper(
+                {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
+            )
+            self.logger.info("update finished successfully!")
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--db", default="buff.db")
+    parser.add_argument("--tourn_ids")
     args = parser.parse_args()
 
     if os.path.isabs(args.db):
@@ -387,7 +390,7 @@ def main():
     else:
         db_path = os.path.abspath(os.path.join(DIR, args.db))
     db_init(db_path)
-    DbUpdater(db_path).update()
+    DbUpdater(db_path, args).update()
 
 
 if __name__ == "__main__":
