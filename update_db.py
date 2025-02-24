@@ -136,6 +136,9 @@ class DbUpdater:
         self.logger = logger
         self.session = requests.Session()
         self.last_db_update = self.get_last_db_update()
+        self.items_per_page = 100
+        self.page = 1
+        self.page_thresh = None
 
     def req_sleep(self, *args, **kwargs):
         """
@@ -145,11 +148,29 @@ class DbUpdater:
         time.sleep(0.5)
         return req
 
-    def req_tournaments(self, page=1):
-        self.logger.debug(f"processing tournaments page {page}...")
+    def req_tournaments(self):
+        if self.page_thresh is not None and self.page == self.page_thresh:
+            self.page -= 1
+            self.items_per_page = 100
+            self.page /= 10
+            self.page += 1
+            self.page_thresh = None
+        self.logger.debug(f"processing tournaments page {self.page} (ipp={self.items_per_page})...")
         req = self.req_sleep(
-            "get", f"{API}/tournaments.json", params={"page": page, "itemsPerPage": 100}
+            "get", f"{API}/tournaments.json", params={"page": self.page, "itemsPerPage": self.items_per_page}
         )
+        if req.status_code == 500 and self.items_per_page == 100:
+            self.page -= 1
+            self.items_per_page = 10
+            self.page *= 10
+            self.page += 1
+            req = self.req_sleep(
+                "get", f"{API}/tournaments.json", params={"page": self.page, "itemsPerPage": self.items_per_page}
+            )
+            self.page_thresh = self.page + 10
+        if req.status_code == 500:
+            raise Exception(f"status 500 while try to get {req.url}")
+        self.page += 1
         try:
             return req.json()
         except Exception as e:
@@ -366,11 +387,10 @@ class DbUpdater:
                 self.update_results(t_id)
         else:
             self.init_tourn_id_table()
-            res = self.req_tournaments(page=1)
+            res = self.req_tournaments()
             self.process_tournaments_batch(res)
-            while len(res) == 100:
-                page += 1
-                res = self.req_tournaments(page=page)
+            while len(res) == self.items_per_page:
+                res = self.req_tournaments()
                 self.process_tournaments_batch(res)
             self.handle_deleted_tournaments()
             self.insert_wrapper(
