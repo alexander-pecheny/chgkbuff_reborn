@@ -152,7 +152,7 @@ class DbUpdater:
         if self.page_thresh is not None and self.page == self.page_thresh:
             self.page -= 1
             self.items_per_page = 100
-            self.page /= 10
+            self.page //= 10
             self.page += 1
             self.page_thresh = None
         self.logger.debug(f"processing tournaments page {self.page} (ipp={self.items_per_page})...")
