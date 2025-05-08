@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS tournament_results (
     flags text,
     rating text
 );
+CREATE INDEX IF NOT EXISTS idx_tournament_results_id ON tournament_results(id);
 CREATE TABLE IF NOT EXISTS players (
     id integer PRIMARY KEY,
     name text,
