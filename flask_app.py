@@ -469,7 +469,11 @@ def render_table(rows):
         table += "<tr>"
         for i, cell in enumerate(row):
             width = column_widths.get(i, "auto")
-            cell_style = f"width: {width}; padding: 8px;"
+            cell_style = f"width: {width}; padding: clamp(2px, 1vw, 8px);"
+            if i == 0:  # Team name column
+                cell_style += " font-size: clamp(0.8rem, 2vw, 1rem);"
+            else:  # Other columns
+                cell_style += " font-size: clamp(0.7rem, 1.5vw, 1rem); white-space: nowrap; text-align: right;"
             table += f'<td style="{cell_style}">{cell}</td>'
         table += "</tr>"
 
