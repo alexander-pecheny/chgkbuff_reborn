@@ -6,13 +6,13 @@ import logging
 import logging.handlers
 import os
 import sqlite3
-from collections import Counter
+import textwrap
+from collections import Counter, defaultdict
 from functools import wraps
 from typing import NamedTuple
 
 import dill
 import networkx as nx
-from config import Config
 from flask import (
     Flask,
     abort,
@@ -23,6 +23,8 @@ from flask import (
     request,
     url_for,
 )
+
+from config import Config
 
 UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
 DIR = os.path.dirname(os.path.abspath(__file__))
@@ -113,6 +115,9 @@ HTML_HEADER = """\
             color: rgb(144, 2, 2);
             border-color: rgb(144, 2, 2);
         }
+        body {
+            font-variant-numeric: tabular-nums;
+        }
     </style>
 </head>
 <body>
@@ -139,6 +144,14 @@ HTML_STUB = (
 <input type="submit" value="Рассчитать"></input>
 </form>
 {{ rendered_content|safe }}
+<p><small>Последнее обновление базы: {{last_db_update|safe}}</small></p>
+</body>
+"""
+)
+
+TOURNAMENT_STUB = (
+    HTML_HEADER
+    + """{{ rendered_content|safe }}
 <p><small>Последнее обновление базы: {{last_db_update|safe}}</small></p>
 </body>
 """
@@ -186,7 +199,7 @@ def get_html_stub(
         )
     elif tournament_types == "online_async":
         result = (
-            result.replace("[LAN_SYNC_CHECKED]", '')
+            result.replace("[LAN_SYNC_CHECKED]", "")
             .replace("[ONLINE_ASYNC_CHECKED]", 'checked=""')
             .replace("[ALL_TOURNAMENTS_CHECKED]", "")
         )
@@ -377,6 +390,126 @@ def get_last_db_update():
     return last_update[0].split("+")[0].replace("T", " ")
 
 
+def get_cat(share):
+    if 0 <= share <= 0.1:
+        return "a"
+    if 0.1 < share <= 0.33:
+        return "b"
+    if 0.33 < share <= 0.66:
+        return "c"
+    if 0.66 < share <= 0.9:
+        return "d"
+    if share > 0.9:
+        return "e"
+
+
+def safe_div(a, b):
+    if b == 0:
+        return 0
+    return a / b
+
+
+def calculate_questions_categs(results):
+    t_questions = {}
+    total_questions = len(results[0]["mask"])
+    teams_taken = defaultdict(list)
+    t_rating = Counter()
+    t_by_cat = defaultdict(Counter)
+    n_teams = len(results)
+    questions_by_cat = Counter()
+    for res in results:
+        team = (res["id"], res["team_current_name"])
+        t_questions[team] = sum([1 for v in list(res["mask"]) if v == "1"])
+        for i, v in enumerate(list(res["mask"])):
+            q_num = i + 1
+            if v == "1":
+                teams_taken[q_num].append(team)
+    for q_ in range(total_questions):
+        q = q_ + 1
+        teams = teams_taken[q]
+        rating = n_teams - len(teams) + 1
+        cat = get_cat(len(teams) / n_teams)
+        questions_by_cat[cat] += 1
+        for t in teams:
+            t_rating[t] += rating
+            t_by_cat[t][cat] += 1
+    pre = f"Всего вопросов: 👹 — {questions_by_cat['a']}, 😥 — {questions_by_cat['b']}, 🙂 — {questions_by_cat['c']}, 👶 — {questions_by_cat['d']}, 🐣 — {questions_by_cat['e']}."
+    header = ["Команда", "Рейтинг", "Взято", "Ср. рейт", "👹", "😥", "🙂", "👶", "🐣"]
+    rows = [header]
+    srt = sorted(t_questions, key=lambda x: (t_questions[x], t_rating[x]), reverse=True)
+    for t in srt:
+        q = t_questions[t]
+        r = t_rating[t]
+        avg_rating = round(safe_div(r, q), 2)
+        row = [
+            f'<a href="https://rating.chgk.info/teams/{t[0]}">{t[1]}</a>',
+            r,
+            q,
+            avg_rating,
+        ] + [t_by_cat[t][c] for c in ["a", "b", "c", "d", "e"]]
+        rows.append(row)
+    return rows, pre
+
+
+def render_table(rows):
+    column_widths = {
+        0: "39%",  # Team name
+        1: "12%",  # Rating
+        2: "12%",  # Taken
+        3: "12%",  # Avg rating
+        4: "5%",  # A
+        5: "5%",  # B
+        6: "5%",  # C
+        7: "5%",  # D
+        8: "5%",  # E
+    }
+    table_style = "width: 100%; table-layout: fixed; border-collapse: collapse;"
+    table = f'<table style="{table_style}">'
+    for row in rows:
+        table += "<tr>"
+        for i, cell in enumerate(row):
+            width = column_widths.get(i, "auto")
+            cell_style = f"width: {width}; padding: 8px;"
+            table += f'<td style="{cell_style}">{cell}</td>'
+        table += "</tr>"
+
+    table += "</table>"
+    return table
+
+
+@app.route("/tournament/<int:tournament_id>")
+def tournament(tournament_id):
+    conn = sqlite3.connect(DB_LOC)
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    tournament = cur.execute(
+        "select id, name, date_start from tournaments where id = ?;", (tournament_id,)
+    ).fetchone()
+    if not tournament:
+        flash(f"Турнир {tournament_id} не найден", "red")
+        return redirect(url_for(".index"))
+    results = cur.execute(
+        "select id, team_current_name, mask from tournament_results where id = ? and mask is not null;",
+        (tournament_id,),
+    ).fetchall()
+    if not results:
+        flash(f"Повопросные результаты для турнира {tournament_id} недоступны", "red")
+        return redirect(url_for(".index"))
+    rows, pre = calculate_questions_categs(results)
+    table = render_table(rows)
+    rendered_content = textwrap.dedent(f"""\
+    <h1><a href="https://rating.chgk.info/tournament/{tournament["id"]}">{tournament["id"]}</a> {tournament["name"]}</a></h1>
+    <p>{tournament["date_start"].split("T")[0]}</p>
+    <p>{pre}</p>
+    {table}
+    """)
+    return render_template_string(
+        TOURNAMENT_STUB,
+        rendered_content=rendered_content,
+        last_db_update=get_last_db_update(),
+    )
+
+
 @app.route("/stats", methods=["GET", "POST"])
 def stats():
     player_id = request.args.get("player_id")
@@ -466,7 +599,7 @@ def make_together_query(player_id1, player_id2, date_from, date_to, tournament_t
     ]
     for tourn in sorted(tourns, key=lambda t: (t.date_start, t.name)):
         result.append(
-            f"""<li><a href="https://rating.chgk.info/tournament/{tourn.id}">{tourn.id} {tourn.name}</a> <small>({format_dates(tourn.date_start, tourn.date_end)}, {tourn.type})</small></li>"""
+            f"""<li><a href="https://rating.chgk.info/tournament/{tourn.id}">{tourn.id}</a> <a href="/tournament/{tourn.id}">{tourn.name}</a> <small>({format_dates(tourn.date_start, tourn.date_end)}, {tourn.type})</small></li>"""
         )
     result.append("</ol>")
     return "\n".join(result)
