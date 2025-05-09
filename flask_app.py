@@ -391,7 +391,9 @@ def get_last_db_update():
 
 
 def get_cat(share):
-    if 0 <= share <= 0.1:
+    if share == 0:
+        return "coffin"
+    if 0 < share <= 0.1:
         return "a"
     if 0.1 < share <= 0.33:
         return "b"
@@ -418,7 +420,7 @@ def calculate_questions_categs(results):
     n_teams = len(results)
     questions_by_cat = Counter()
     for res in results:
-        team = (res["id"], res["team_current_name"])
+        team = (res["team_id"], res["team_current_name"])
         t_questions[team] = sum([1 for v in list(res["mask"]) if v == "1"])
         for i, v in enumerate(list(res["mask"])):
             q_num = i + 1
@@ -433,7 +435,7 @@ def calculate_questions_categs(results):
         for t in teams:
             t_rating[t] += rating
             t_by_cat[t][cat] += 1
-    pre = f"Всего вопросов: 👹 — {questions_by_cat['a']}, 😥 — {questions_by_cat['b']}, 🙂 — {questions_by_cat['c']}, 👶 — {questions_by_cat['d']}, 🐣 — {questions_by_cat['e']}."
+    pre = f"Всего вопросов: ⚰️ — {questions_by_cat['coffin']}, 👹 — {questions_by_cat['a']}, 😥 — {questions_by_cat['b']}, 🙂 — {questions_by_cat['c']}, 👶 — {questions_by_cat['d']}, 🐣 — {questions_by_cat['e']}."
     header = ["Команда", "Рейтинг", "Взято", "Ср. рейт", "👹", "😥", "🙂", "👶", "🐣"]
     rows = [header]
     srt = sorted(t_questions, key=lambda x: (t_questions[x], t_rating[x]), reverse=True)
@@ -493,7 +495,7 @@ def tournament(tournament_id):
         flash(f"Турнир {tournament_id} не найден", "red")
         return redirect(url_for(".index"))
     results = cur.execute(
-        "select id, team_current_name, mask from tournament_results where id = ? and mask is not null;",
+        "select team_id, team_current_name, mask from tournament_results where id = ? and mask is not null;",
         (tournament_id,),
     ).fetchall()
     if not results:
