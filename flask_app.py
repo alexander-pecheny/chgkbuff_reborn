@@ -419,9 +419,12 @@ def calculate_questions_categs(results):
     t_by_cat = defaultdict(Counter)
     n_teams = len(results)
     questions_by_cat = Counter()
+    discarded = None
     for res in results:
         team = (res["team_id"], res["team_current_name"])
         t_questions[team] = sum([1 for v in list(res["mask"]) if v == "1"])
+        if discarded is None:
+            discarded = sum([1 for v in list(res["mask"]) if v == "X"])
         for i, v in enumerate(list(res["mask"])):
             q_num = i + 1
             if v == "1":
@@ -435,7 +438,16 @@ def calculate_questions_categs(results):
         for t in teams:
             t_rating[t] += rating
             t_by_cat[t][cat] += 1
-    pre = f"Всего вопросов: ⚰️ — {questions_by_cat['coffin']}, 👹 — {questions_by_cat['a']}, 😥 — {questions_by_cat['b']}, 🙂 — {questions_by_cat['c']}, 👶 — {questions_by_cat['d']}, 🐣 — {questions_by_cat['e']}."
+    pre = (
+        f"""Всего вопросов: <abbr title="0 взятых">⚰️</abbr> — {questions_by_cat['coffin']},"""
+        f""" <abbr title="<20% взятых">👹</abbr> — {questions_by_cat['a']},"""
+        f""" <abbr title="21–40% взятых">😥</abbr> — {questions_by_cat['b']},"""
+        f""" <abbr title="41–60% взятых">🙂</abbr> — {questions_by_cat['c']},"""
+        f""" <abbr title="61–80% взятых">👶</abbr> — {questions_by_cat['d']},"""
+        f""" <abbr title="81–100% взятых">🐣</abbr> — {questions_by_cat['e']}."""
+    )
+    if discarded:
+        pre += f""" Снято: {discarded}."""
     header = ["Команда", "Рейтинг", "Взято", "Ср. рейт", "👹", "😥", "🙂", "👶", "🐣"]
     rows = [header]
     srt = sorted(t_questions, key=lambda x: (t_questions[x], t_rating[x]), reverse=True)
