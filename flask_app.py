@@ -457,12 +457,12 @@ def calculate_questions_categs(results):
             t_rating[t] += rating
             t_by_cat[t][cat] += 1
     pre = (
-        f"""Всего вопросов: <abbr title="0 взятых">⚰️</abbr> — {questions_by_cat['coffin']},"""
-        f""" <abbr title="<20% взятых">👹</abbr> — {questions_by_cat['a']},"""
-        f""" <abbr title="21–40% взятых">😥</abbr> — {questions_by_cat['b']},"""
-        f""" <abbr title="41–60% взятых">🙂</abbr> — {questions_by_cat['c']},"""
-        f""" <abbr title="61–80% взятых">👶</abbr> — {questions_by_cat['d']},"""
-        f""" <abbr title="81–100% взятых">🐣</abbr> — {questions_by_cat['e']}."""
+        f"""Всего вопросов: <abbr title="0 взятых" tabindex="0">⚰️</abbr> — {questions_by_cat['coffin']},"""
+        f""" <abbr title="<20% взятых" tabindex="0">👹</abbr> — {questions_by_cat['a']},"""
+        f""" <abbr title="21–40% взятых" tabindex="0">😥</abbr> — {questions_by_cat['b']},"""
+        f""" <abbr title="41–60% взятых" tabindex="0">🙂</abbr> — {questions_by_cat['c']},"""
+        f""" <abbr title="61–80% взятых" tabindex="0">👶</abbr> — {questions_by_cat['d']},"""
+        f""" <abbr title="81–100% взятых" tabindex="0">🐣</abbr> — {questions_by_cat['e']}."""
     )
     if discarded:
         pre += f""" Снято: {discarded}."""
