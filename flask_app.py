@@ -118,6 +118,24 @@ HTML_HEADER = """\
         body {
             font-variant-numeric: tabular-nums;
         }
+        @media (pointer: coarse), (hover: none) {
+            [title] {
+                position: relative;
+                display: inline-flex;
+                justify-content: center;
+            }
+            [title]:focus::after {
+                content: attr(title);
+                position: absolute;
+                top: 90%;
+                color: #000;
+                background-color: #fff;
+                border: 1px solid;
+                width: fit-content;
+                padding: 3px;
+                font-size: 10px;
+            }
+        }
     </style>
 </head>
 <body>
