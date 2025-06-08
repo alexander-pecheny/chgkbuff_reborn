@@ -8,10 +8,10 @@ import logging
 import logging.handlers
 import os
 import sqlite3
-import sys
 import time
 
 import requests
+
 # from create_graph import create_graph
 
 UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
@@ -35,7 +35,8 @@ CREATE TABLE IF NOT EXISTS tournaments (
     town_id integer,
     in_rating integer,
     maii_aegis integer,
-    maii_rating integer
+    maii_rating integer,
+    questions_by_tour text
 );
 CREATE TABLE IF NOT EXISTS tournament_results (
     id integer,
@@ -156,9 +157,13 @@ class DbUpdater:
             self.page //= 10
             self.page += 1
             self.page_thresh = None
-        self.logger.debug(f"processing tournaments page {self.page} (ipp={self.items_per_page})...")
+        self.logger.debug(
+            f"processing tournaments page {self.page} (ipp={self.items_per_page})..."
+        )
         req = self.req_sleep(
-            "get", f"{API}/tournaments.json", params={"page": self.page, "itemsPerPage": self.items_per_page}
+            "get",
+            f"{API}/tournaments.json",
+            params={"page": self.page, "itemsPerPage": self.items_per_page},
         )
         if req.status_code == 500 and self.items_per_page == 100:
             self.page -= 1
@@ -166,7 +171,9 @@ class DbUpdater:
             self.page *= 10
             self.page += 1
             req = self.req_sleep(
-                "get", f"{API}/tournaments.json", params={"page": self.page, "itemsPerPage": self.items_per_page}
+                "get",
+                f"{API}/tournaments.json",
+                params={"page": self.page, "itemsPerPage": self.items_per_page},
             )
             self.page_thresh = self.page + 10
         if req.status_code == 500:
@@ -234,6 +241,13 @@ class DbUpdater:
         else:
             self.insert_wrapper(player_dict, "players")
 
+    @classmethod
+    def get_questions_by_tour(cls, tourn_info):
+        qty = tourn_info.get("questionQty")
+        if not qty:
+            return
+        return ",".join([str(v) for v in qty.values()])
+
     def update_tournament_data(self, tournament_id):
         tourn_info = self.req_tournament(tournament_id)
         if not tourn_info:
@@ -260,6 +274,7 @@ class DbUpdater:
                 "in_rating": int(tourn_info["tournamentInRatingBalanced"]),
                 "maii_aegis": int(tourn_info["maiiAegis"]),
                 "maii_rating": int(tourn_info["maiiRating"]),
+                "questions_by_tour": self.get_questions_by_tour(tourn_info),
             }
             self.insert_wrapper(tourn_dict, "tournaments")
             return "ok"
@@ -327,7 +342,9 @@ class DbUpdater:
                 "rating": json.dumps(res.get("rating"), ensure_ascii=False),
             }
             self.insert_wrapper(result_dict, "tournament_results")
-            self.insert_wrapper({"id": tournament_id, "team_members": team_members_short}, "search")
+            self.insert_wrapper(
+                {"id": tournament_id, "team_members": team_members_short}, "search"
+            )
             for player in res["teamMembers"]:
                 self.update_player(player["player"])
         return "ok"
