@@ -18,6 +18,7 @@ UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
 DIR = os.path.dirname(os.path.abspath(__file__))
 
 API = "https://api.rating.chgk.net"
+RATING_API = "https://rating.chgk.gg/api/v1/b"
 
 DB_INIT = """\
 CREATE TABLE IF NOT EXISTS tournaments (
@@ -63,6 +64,19 @@ CREATE TABLE IF NOT EXISTS db_updates (
     datetime text
 );
 CREATE VIRTUAL TABLE IF NOT EXISTS search USING fts5(id, team_id, team_members);
+CREATE TABLE IF NOT EXISTS releases (
+    id integer PRIMARY KEY,
+    date text,
+    updated_at text,
+    q real
+);
+CREATE TABLE IF NOT EXISTS ratings (
+    release_id integer,
+    team_id integer,
+    place real,
+    rating integer,
+    trb integer
+);
 """
 
 
@@ -113,6 +127,33 @@ def sqlite_repr(s):
     if s is None:
         return "null"
     return repr(s)
+
+
+def parse_date(s):
+    return datetime.datetime.strptime(s.split("T")[0], "%Y-%m-%d").date()
+
+
+def get_releases():
+    releases = requests.get(f"{RATING_API}/releases.json").json()
+    time.sleep(0.5)
+    return releases["items"]
+
+
+def download_release(release_id):
+    result = []
+    page = 1
+    while True:
+        print(f"downloading page {page} of release {release_id}...")
+        ratings = requests.get(
+            f"{RATING_API}/teams/{release_id}.json?page={page}"
+        ).json()
+        time.sleep(0.5)
+        result.extend(ratings["items"])
+        if ratings["current_page"] >= ratings["pages"]:
+            break
+        else:
+            page += 1
+    return result
 
 
 class DbUpdater:
@@ -394,9 +435,53 @@ class DbUpdater:
         cur.execute("drop table tournament_ids;")
         self.conn.commit()
 
+    def get_releases_in_db(self):
+        cur = self.conn.cursor()
+        releases = cur.execute("select id, updated_at from releases;").fetchall()
+        return {r[0]: r[1] for r in releases}
+    
+    def update_release(self, release_dict):
+        release_id = release_dict["id"]
+        print(f"updating release {release_id}...")
+        ratings = download_release(release_id)
+        cur = self.conn.cursor()
+        cur.execute(f"delete from releases where id = {release_id};")
+        cur.execute(f"delete from ratings where release_id = {release_id};")
+        self.conn.commit()
+        self.insert_wrapper(
+            {
+                "id": release_id,
+                "date": release_dict["date"],
+                "updated_at": release_dict["updated_at"],
+                "q": release_dict["q"],
+            },
+            "releases",
+        )
+        for item in ratings:
+            self.insert_wrapper(
+                {
+                    "release_id": release_id,
+                    "team_id": item["team_id"],
+                    "place": item["place"],
+                    "rating": item["rating"],
+                    "trb": item["trb"],
+                },
+                "ratings",
+            )
+
+    def update_ratings(self):
+        print("updating ratings...")
+        releases = get_releases()
+        for release in releases:
+            releases_in_db = self.get_releases_in_db()
+            if (
+                release["id"] not in releases_in_db
+                or release["updated_at"] > releases_in_db[release["id"]]
+            ):
+                self.update_release(release)
+
     def update(self):
         start = datetime.datetime.now(UTC_PLUS_3)
-        page = 1
         if self.args.tourn_ids:
             for t_id_ in self.args.tourn_ids.split(","):
                 t_id = int(t_id_.strip())
@@ -404,13 +489,14 @@ class DbUpdater:
                 self.update_tournament_data(t_id)
                 self.update_results(t_id)
         else:
-            self.init_tourn_id_table()
-            res = self.req_tournaments()
-            self.process_tournaments_batch(res)
-            while len(res) == self.items_per_page:
-                res = self.req_tournaments()
-                self.process_tournaments_batch(res)
-            self.handle_deleted_tournaments()
+            # self.init_tourn_id_table()
+            # res = self.req_tournaments()
+            # self.process_tournaments_batch(res)
+            # while len(res) == self.items_per_page:
+            #     res = self.req_tournaments()
+            #     self.process_tournaments_batch(res)
+            # self.handle_deleted_tournaments()
+            self.update_ratings()
             self.insert_wrapper(
                 {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
             )

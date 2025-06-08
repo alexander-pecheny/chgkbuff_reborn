@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import bisect
 import datetime
 import json
 import logging
 import logging.handlers
+import math
 import os
 import sqlite3
 import textwrap
@@ -13,6 +15,7 @@ from typing import NamedTuple
 
 import dill
 import networkx as nx
+from config import Config
 from flask import (
     Flask,
     abort,
@@ -24,12 +27,24 @@ from flask import (
     url_for,
 )
 
-from config import Config
-
 UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
 DIR = os.path.dirname(os.path.abspath(__file__))
 DB_LOC = os.path.join(DIR, "buff.db")
 GRAPH_PATH = os.path.join(DIR, "graph.pickle")
+TRUEDL_COEFF_PAIRS = [
+    (10, 1.61),
+    (25, 1.52),
+    (50, 1.43),
+    (100, 1.32),
+    (250, 1.16),
+    (500, 1.0),
+    (1000, 0.81),
+    (2000, 0.6),
+    (3000, 0.43),
+    (5000, 0.31),
+]
+TRUEDL_COEFF_KEYS = [x[0] for x in TRUEDL_COEFF_PAIRS]
+TRUEDL_COEFF_VALUES = [x[1] for x in TRUEDL_COEFF_PAIRS]
 
 
 class Tournament(NamedTuple):
@@ -513,19 +528,99 @@ def render_table(rows):
     return table
 
 
+def get_truedl_coeff(place, log_coeff=False):
+    if place >= 5000:
+        return
+    if log_coeff:
+        return round(-0.29 * math.log(place + 46.8) + 2.75, 2)
+    else:
+        return TRUEDL_COEFF_VALUES[bisect.bisect_left(TRUEDL_COEFF_KEYS, place)]
+
+
+def get_real_truedl(questions, total_questions, place_in_rating, log_coeff=False):
+    coeff = get_truedl_coeff(place_in_rating, log_coeff=log_coeff)
+    return round(
+        (1 - min(questions / coeff, total_questions) / total_questions) * 10.0, 1
+    )
+
+
+def _calc_truedl_inner(team_id, mask, ratings_dict):
+    try:
+        place_in_rating = ratings_dict[team_id]
+    except KeyError:
+        return
+    questions = sum([1 for v in list(mask) if v == "1"])
+    total_questions = sum([1 for v in list(mask) if v != "X"])
+    return get_real_truedl(questions, total_questions, place_in_rating)
+
+
+def _calc_truedl_by_tour(results, ratings_dict, questions_by_tour):
+    truedls = []
+    questions_by_tour_parsed = [int(q) for q in questions_by_tour.split(",")]
+    truedls_by_tour = defaultdict(list)
+    for team_res in results:
+        rating_parsed = json.loads(team_res["rating"])
+        if not rating_parsed["inRating"]:
+            continue
+        mask = team_res["mask"]
+        truedl_team = _calc_truedl_inner(team_res["team_id"], mask, ratings_dict)
+        if truedl_team is None:
+            continue
+        truedls.append(truedl_team)
+        tour_id = 1
+        tour_start = 0
+        for tour_len in questions_by_tour_parsed:
+            tour_truedl = _calc_truedl_inner(
+                team_res["team_id"], mask[tour_start : tour_start + tour_len], ratings_dict
+            )
+            if tour_truedl is None:
+                continue
+            truedls_by_tour[tour_id].append(tour_truedl)
+            tour_start += tour_len
+            tour_id += 1
+    truedl = round(sum(truedls) / len(truedls), 1)
+    truedls_by_tour_result = []
+    for vals in truedls_by_tour.values():
+        truedls_by_tour_result.append(round(sum(vals) / len(vals), 1))
+    return truedl, truedls_by_tour_result
+
+
+def calc_truedl_by_tour(tournament, results):
+    conn = sqlite3.connect(DB_LOC)
+    conn.row_factory = sqlite3.Row
+    cur = conn.cursor()
+    release_id = cur.execute(
+        "select id from releases where date < ? order by date desc limit 1;",
+        (tournament["date_start"],),
+    ).fetchone()[0]
+    team_ids = ",".join([str(res["team_id"]) for res in results])
+    ratings = cur.execute(
+        f"select team_id, place from ratings where release_id = {release_id} and team_id in ({team_ids}) limit {len(team_ids)};"
+    ).fetchall()
+    ratings_dict = {r["team_id"]: r["place"] for r in ratings}
+    truedl, truedl_by_tour = _calc_truedl_by_tour(
+        results, ratings_dict, tournament["questions_by_tour"]
+    )
+    truedl_by_tour_formatted = ", ".join(
+        [f"{i + 1} — {v}" for i, v in enumerate(truedl_by_tour)]
+    )
+    return f"<p>TrueDL: {truedl}, по турам: {truedl_by_tour_formatted}</p>"
+
+
 @app.route("/tournament/<int:tournament_id>")
 def tournament(tournament_id):
     conn = sqlite3.connect(DB_LOC)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
     tournament = cur.execute(
-        "select id, name, date_start from tournaments where id = ?;", (tournament_id,)
+        "select id, name, date_start, questions_by_tour from tournaments where id = ?;",
+        (tournament_id,),
     ).fetchone()
     if not tournament:
         flash(f"Турнир {tournament_id} не найден", "red")
         return redirect(url_for(".index"))
     results = cur.execute(
-        "select team_id, team_current_name, mask from tournament_results where id = ? and mask is not null;",
+        "select team_id, team_current_name, mask, rating from tournament_results where id = ? and mask is not null;",
         (tournament_id,),
     ).fetchall()
     if not results:
@@ -533,9 +628,15 @@ def tournament(tournament_id):
         return redirect(url_for(".index"))
     rows, pre = calculate_questions_categs(results)
     table = render_table(rows)
+    # try:
+    truedl_by_tour = calc_truedl_by_tour(tournament, results)
+    # except Exception as e:
+        # logger.error(f"Error calculating truedl by tour: {type(e)}{e}")
+        # truedl_by_tour = ""
     rendered_content = textwrap.dedent(f"""\
     <h1><a href="https://rating.chgk.info/tournament/{tournament["id"]}">{tournament["id"]}</a> {tournament["name"]}</a></h1>
     <p>{tournament["date_start"].split("T")[0]}</p>
+    {truedl_by_tour}
     <p>{pre}</p>
     {table}
     """)
