@@ -560,7 +560,7 @@ def _calc_truedl_by_tour(results, ratings_dict, questions_by_tour):
     truedls_by_tour = defaultdict(list)
     for team_res in results:
         rating_parsed = json.loads(team_res["rating"])
-        if not rating_parsed["inRating"]:
+        if not rating_parsed or not rating_parsed["inRating"]:
             continue
         mask = team_res["mask"]
         truedl_team = _calc_truedl_inner(team_res["team_id"], mask, ratings_dict)
@@ -578,10 +578,16 @@ def _calc_truedl_by_tour(results, ratings_dict, questions_by_tour):
             truedls_by_tour[tour_id].append(tour_truedl)
             tour_start += tour_len
             tour_id += 1
-    truedl = round(sum(truedls) / len(truedls), 1)
+    try:
+        truedl = round(sum(truedls) / len(truedls), 1)
+    except ZeroDivisionError:
+        truedl = 0
     truedls_by_tour_result = []
     for vals in truedls_by_tour.values():
-        truedls_by_tour_result.append(round(sum(vals) / len(vals), 1))
+        try:
+            truedls_by_tour_result.append(round(sum(vals) / len(vals), 1))
+        except ZeroDivisionError:
+            truedls_by_tour_result.append(0)
     return truedl, truedls_by_tour_result
 
 
