@@ -489,13 +489,13 @@ class DbUpdater:
                 self.update_tournament_data(t_id)
                 self.update_results(t_id)
         else:
-            # self.init_tourn_id_table()
-            # res = self.req_tournaments()
-            # self.process_tournaments_batch(res)
-            # while len(res) == self.items_per_page:
-            #     res = self.req_tournaments()
-            #     self.process_tournaments_batch(res)
-            # self.handle_deleted_tournaments()
+            self.init_tourn_id_table()
+            res = self.req_tournaments()
+            self.process_tournaments_batch(res)
+            while len(res) == self.items_per_page:
+                res = self.req_tournaments()
+                self.process_tournaments_batch(res)
+            self.handle_deleted_tournaments()
             self.update_ratings()
             self.insert_wrapper(
                 {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
