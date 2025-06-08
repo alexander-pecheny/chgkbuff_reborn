@@ -489,12 +489,14 @@ class DbUpdater:
     def update_tournaments_last_month(self):
         cur = self.conn.cursor()
         now = datetime.datetime.now(UTC_PLUS_3).date()
-        last_month = (
-            datetime.datetime.now(UTC_PLUS_3) - datetime.timedelta(days=30)
-        ).date()
+        if now.weekday() == 0:
+            delta = 90  # on mondays we update for the last 3 months
+        else:
+            delta = 30
+        threshold = now - datetime.timedelta(days=delta)
         tournaments = cur.execute(
             "select id from tournaments where date_start >= ? and date_start < ?;",
-            (last_month, now),
+            (threshold, now),
         ).fetchall()
         for tournament in tournaments:
             if tournament[0] not in self.updated_tournament_ids:
