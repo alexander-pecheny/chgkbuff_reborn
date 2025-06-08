@@ -589,10 +589,13 @@ def calc_truedl_by_tour(tournament, results):
     conn = sqlite3.connect(DB_LOC)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    release_id = cur.execute(
-        "select id from releases where date < ? order by date desc limit 1;",
-        (tournament["date_start"],),
-    ).fetchone()[0]
+    try:
+        release_id = cur.execute(
+            "select id from releases where date < ? order by date desc limit 1;",
+            (tournament["date_start"],),
+        ).fetchone()[0]
+    except (AttributeError, TypeError, IndexError):
+        release_id = cur.execute("select min(id) as id from releases;").fetchone()[0]
     team_ids = ",".join([str(res["team_id"]) for res in results])
     ratings = cur.execute(
         f"select team_id, place from ratings where release_id = {release_id} and team_id in ({team_ids}) limit {len(team_ids)};"
@@ -628,11 +631,11 @@ def tournament(tournament_id):
         return redirect(url_for(".index"))
     rows, pre = calculate_questions_categs(results)
     table = render_table(rows)
-    # try:
-    truedl_by_tour = calc_truedl_by_tour(tournament, results)
-    # except Exception as e:
-        # logger.error(f"Error calculating truedl by tour: {type(e)}{e}")
-        # truedl_by_tour = ""
+    try:
+        truedl_by_tour = calc_truedl_by_tour(tournament, results)
+    except Exception as e:
+        logger.error(f"Error calculating truedl by tour: {type(e)}{e}")
+        truedl_by_tour = ""
     rendered_content = textwrap.dedent(f"""\
     <h1><a href="https://rating.chgk.info/tournament/{tournament["id"]}">{tournament["id"]}</a> {tournament["name"]}</a></h1>
     <p>{tournament["date_start"].split("T")[0]}</p>
