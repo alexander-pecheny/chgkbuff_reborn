@@ -77,6 +77,7 @@ CREATE TABLE IF NOT EXISTS ratings (
     rating integer,
     trb integer
 );
+CREATE INDEX IF NOT EXISTS idx_ratings ON ratings(release_id, team_id);
 """
 
 
@@ -182,6 +183,7 @@ class DbUpdater:
         self.items_per_page = 100
         self.page = 1
         self.page_thresh = None
+        self.updated_tournament_ids = set()
 
     def req_sleep(self, *args, **kwargs):
         """
@@ -394,18 +396,7 @@ class DbUpdater:
         for tournament in res:
             self.insert_wrapper({"id": tournament["id"]}, "tournament_ids")
             if parse_datetime(tournament["lastEditDate"]) > self.last_db_update:
-                try:
-                    self.update_tournament_data(tournament["id"])
-                except Exception as e:
-                    self.logger.error(
-                        f"exception {type(e)} {e} while trying to update tournament data for {tournament['id']}"
-                    )
-                try:
-                    self.update_results(tournament["id"])
-                except Exception as e:
-                    self.logger.error(
-                        f"exception {type(e)} {e} while trying to update tournament results for {tournament['id']}"
-                    )
+                self.update_tournament_full(tournament["id"])
 
     def get_last_db_update(self):
         cur = self.conn.cursor()
@@ -439,7 +430,7 @@ class DbUpdater:
         cur = self.conn.cursor()
         releases = cur.execute("select id, updated_at from releases;").fetchall()
         return {r[0]: r[1] for r in releases}
-    
+
     def update_release(self, release_dict):
         release_id = release_dict["id"]
         print(f"updating release {release_id}...")
@@ -480,14 +471,42 @@ class DbUpdater:
             ):
                 self.update_release(release)
 
+    def update_tournament_full(self, tournament_id):
+        try:
+            self.update_tournament_data(tournament_id)
+        except Exception as e:
+            self.logger.error(
+                f"exception {type(e)} {e} while trying to update tournament data for {tournament_id}"
+            )
+        try:
+            self.update_results(tournament_id)
+        except Exception as e:
+            self.logger.error(
+                f"exception {type(e)} {e} while trying to update tournament results for {tournament_id}"
+            )
+        self.updated_tournament_ids.add(tournament_id)
+
+    def update_tournaments_last_month(self):
+        cur = self.conn.cursor()
+        now = datetime.datetime.now(UTC_PLUS_3).date()
+        last_month = (
+            datetime.datetime.now(UTC_PLUS_3) - datetime.timedelta(days=30)
+        ).date()
+        tournaments = cur.execute(
+            "select id from tournaments where date_start >= ? and date_start < ?;",
+            (last_month, now),
+        ).fetchall()
+        for tournament in tournaments:
+            if tournament[0] not in self.updated_tournament_ids:
+                self.update_tournament_full(tournament[0])
+
     def update(self):
         start = datetime.datetime.now(UTC_PLUS_3)
         if self.args.tourn_ids:
             for t_id_ in self.args.tourn_ids.split(","):
                 t_id = int(t_id_.strip())
                 self.logger.info(f"updating data for {t_id}...")
-                self.update_tournament_data(t_id)
-                self.update_results(t_id)
+                self.update_tournament_full(t_id)
         else:
             self.init_tourn_id_table()
             res = self.req_tournaments()
@@ -496,6 +515,7 @@ class DbUpdater:
                 res = self.req_tournaments()
                 self.process_tournaments_batch(res)
             self.handle_deleted_tournaments()
+            self.update_tournaments_last_month()
             self.update_ratings()
             self.insert_wrapper(
                 {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
