@@ -30,7 +30,7 @@ User=ap
 Group=www-data
 WorkingDirectory={{path/to/buff}}
 Environment="PATH={{path/to/python/bin}}"
-ExecStart={{path/to/python/bin}}/uwsgi --ini app.ini --logto /tmp/buff.log
+ExecStart={{path/to/python/bin}}/uwsgi --ini app.ini
 Restart=on-failure
 RestartSec=5s
 
