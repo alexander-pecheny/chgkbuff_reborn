@@ -68,19 +68,8 @@ if __name__ == "__main__":
     conn = sqlite3.connect(DB_LOC)
     cur = conn.cursor()
 
-    # Create both NetworkX graph (for backward compatibility) and database graph
-    G = create_graph(cur)
-    
-    with open(GRAPH_PATH, "wb") as f:
-        dill.dump(G, f)
-
     num_nodes, num_edges = create_graph_db(cur)
 
-    print("NetworkX Graph:")
-    print("Number of nodes", len(G.nodes))
-    print("Number of edges", len(G.edges))
-    print("Average degree", sum(dict(G.degree).values()) / len(G.nodes))
-    
     print("\nDatabase Graph:")
     print("Number of nodes", num_nodes)
     print("Number of edges", num_edges)
