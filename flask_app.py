@@ -30,6 +30,7 @@ from flask import (
 UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
 DIR = os.path.dirname(os.path.abspath(__file__))
 DB_LOC = os.path.join(DIR, "buff.db")
+GRAPH_DB_LOC = os.path.join(DIR, "graph.db")
 GRAPH_PATH = os.path.join(DIR, "graph.pickle")
 TRUEDL_COEFF_PAIRS = [
     (10, 1.61),
@@ -64,6 +65,71 @@ def debug_only(f):
         return f(**kwargs)
 
     return wrapped
+
+
+def db_shortest_path(start_player, end_player, graph_db_path):
+    """
+    Find shortest path between two players using database-based BFS.
+    Returns list of player IDs forming the path, or empty list if no path exists.
+    """
+    from collections import deque
+
+    if start_player == end_player:
+        return [start_player]
+
+    conn = sqlite3.connect(graph_db_path)
+    cur = conn.cursor()
+
+    # Check if both players exist in the graph
+    existing_players = cur.execute(
+        "SELECT player_id FROM nodes WHERE player_id IN (?, ?)",
+        (start_player, end_player),
+    ).fetchall()
+
+    if len(existing_players) != 2:
+        conn.close()
+        return []
+
+    # BFS implementation
+    queue = deque([(start_player, [start_player])])
+    visited = {start_player}
+
+    while queue:
+        current_player, path = queue.popleft()
+
+        if current_player == end_player:
+            conn.close()
+            return path
+
+        # Get all neighbors of current player
+        neighbors = cur.execute(
+            """
+            SELECT player2 FROM edges WHERE player1 = ?
+            UNION
+            SELECT player1 FROM edges WHERE player2 = ?
+        """,
+            (current_player, current_player),
+        ).fetchall()
+
+        for (neighbor,) in neighbors:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                new_path = path + [neighbor]
+                queue.append((neighbor, new_path))
+
+    conn.close()
+    return []
+
+
+def db_has_player(player_id, graph_db_path):
+    """Check if player exists in the graph database"""
+    conn = sqlite3.connect(graph_db_path)
+    cur = conn.cursor()
+    result = cur.execute(
+        "SELECT 1 FROM nodes WHERE player_id = ? LIMIT 1", (player_id,)
+    ).fetchone()
+    conn.close()
+    return result is not None
 
 
 class GraphContainer:
@@ -472,12 +538,12 @@ def calculate_questions_categs(results):
             t_rating[t] += rating
             t_by_cat[t][cat] += 1
     pre = (
-        f"""Всего вопросов: <abbr title="0 взятых" tabindex="0">⚰️</abbr> — {questions_by_cat['coffin']},"""
-        f""" <abbr title="<20% взятых" tabindex="0">👹</abbr> — {questions_by_cat['a']},"""
-        f""" <abbr title="21–40% взятых" tabindex="0">😥</abbr> — {questions_by_cat['b']},"""
-        f""" <abbr title="41–60% взятых" tabindex="0">🙂</abbr> — {questions_by_cat['c']},"""
-        f""" <abbr title="61–80% взятых" tabindex="0">👶</abbr> — {questions_by_cat['d']},"""
-        f""" <abbr title="81–100% взятых" tabindex="0">🐣</abbr> — {questions_by_cat['e']}."""
+        f"""Всего вопросов: <abbr title="0 взятых" tabindex="0">⚰️</abbr> — {questions_by_cat["coffin"]},"""
+        f""" <abbr title="<20% взятых" tabindex="0">👹</abbr> — {questions_by_cat["a"]},"""
+        f""" <abbr title="21–40% взятых" tabindex="0">😥</abbr> — {questions_by_cat["b"]},"""
+        f""" <abbr title="41–60% взятых" tabindex="0">🙂</abbr> — {questions_by_cat["c"]},"""
+        f""" <abbr title="61–80% взятых" tabindex="0">👶</abbr> — {questions_by_cat["d"]},"""
+        f""" <abbr title="81–100% взятых" tabindex="0">🐣</abbr> — {questions_by_cat["e"]}."""
     )
     if discarded:
         pre += f""" Снято: {discarded}."""
@@ -571,7 +637,9 @@ def _calc_truedl_by_tour(results, ratings_dict, questions_by_tour):
         tour_start = 0
         for tour_len in questions_by_tour_parsed:
             tour_truedl = _calc_truedl_inner(
-                team_res["team_id"], mask[tour_start : tour_start + tour_len], ratings_dict
+                team_res["team_id"],
+                mask[tour_start : tour_start + tour_len],
+                ratings_dict,
             )
             if tour_truedl is None:
                 continue
@@ -804,7 +872,6 @@ def validate_stats_args(player_id, date_from, date_to, strict=False):
 
 
 @app.route("/handshakes", methods=["GET", "POST"])
-@debug_only
 def handshakes():
     if request.method == "GET":
         return render_template_string(HANDSHAKES_STUB, rendered_content="")
@@ -819,20 +886,23 @@ def handshakes():
             player_id1=player_id1,
             player_id2=player_id2,
         )
-    if not gc.g:
-        gc.load_graph(GRAPH_PATH)
-    if not gc.g.has_node(player_id1) or not gc.g.has_node(player_id2):
-        flash("Игрок не найден", "red")
+    # Check if both players exist in the graph database
+    not_has_id1 = player_id1 if not db_has_player(player_id1, GRAPH_DB_LOC) else None
+    not_has_id2 = player_id2 if not db_has_player(player_id2, GRAPH_DB_LOC) else None
+    if not_has_id1 or not_has_id2:
+        flash(
+            f"Игрок(и) {','.join(map(str, list(filter(bool, [not_has_id1, not_has_id2]))))} не найдены",
+            "red",
+        )
         return render_template_string(
             HANDSHAKES_STUB,
             rendered_content="",
             player_id1=player_id1,
             player_id2=player_id2,
         )
-    try:
-        shortest_path = nx.shortest_path(gc.g, tryint(player_id1), tryint(player_id2))
-    except nx.NetworkXNoPath:
-        shortest_path = []
+
+    # Find shortest path using database-based BFS
+    shortest_path = db_shortest_path(player_id1, player_id2, GRAPH_DB_LOC)
     player_dict = {}
     conn = sqlite3.connect(DB_LOC)
     cur = conn.cursor()
