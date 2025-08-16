@@ -220,6 +220,9 @@ HTML_HEADER = """\
     </style>
 </head>
 <body>
+<header>
+<small><a href="/">с кем вы играли чаще всего?</a> · <a href="/handshakes">N рукопожатий</a> · <a href="/tournaments">турниры</a></small>
+</header>
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
@@ -937,6 +940,239 @@ def handshakes():
         rendered_content="\n".join(result),
         player_id1=player_id1,
         player_id2=player_id2,
+    )
+
+
+@app.route("/tournaments")
+def tournaments():
+    page = request.args.get("page", 1, type=int)
+    if page < 0 or not isinstance(page, int):
+        flash("Неверный номер страницы", "red")
+        return redirect(url_for(".index"))
+    per_page = 2500
+    offset = (page - 1) * per_page
+
+    conn = sqlite3.connect(DB_LOC)
+    cur = conn.cursor()
+
+    # Handle zeroth page for next year tournaments
+
+    one_week_from_now = (
+        datetime.date.today() + datetime.timedelta(days=7)
+    ).strftime("%Y-%m-%d")
+    if page == 0:
+        next_year = datetime.date.today() + datetime.timedelta(days=365)
+
+        total_count = cur.execute(
+            "SELECT COUNT(*) FROM tournaments WHERE date_end > ? and date_end <= ?",
+            (one_week_from_now, next_year),
+        ).fetchone()[0]
+
+        results = cur.execute(
+            "SELECT id, name, date_start, date_end, tournament_type, editors FROM tournaments WHERE date_end > ? AND date_end <= ? ORDER BY date_start ASC LIMIT ?",
+            (one_week_from_now, next_year, per_page),
+        ).fetchall()
+    else:
+
+        total_count = cur.execute(
+            "SELECT COUNT(*) FROM tournaments WHERE date_end <= ?", (one_week_from_now,)
+        ).fetchone()[0]
+
+        results = cur.execute(
+            "SELECT id, name, date_start, date_end, tournament_type, editors FROM tournaments WHERE date_end <= ? ORDER BY date_start DESC LIMIT ? OFFSET ?",
+            (one_week_from_now, per_page, offset),
+        ).fetchall()
+
+    tournament_ids = [str(r[0]) for r in results]
+    tournaments_with_results = set()
+    if tournament_ids:
+        placeholders = ",".join(["?"] * len(tournament_ids))
+        has_results = cur.execute(
+            f"SELECT DISTINCT id FROM tournament_results WHERE id IN ({placeholders}) AND mask IS NOT NULL",
+            tournament_ids,
+        ).fetchall()
+        tournaments_with_results = {r[0] for r in has_results}
+
+    filter_input = '''
+    <div style="margin-bottom: 10px;">
+        <input type="text" id="tournamentFilter" placeholder="Фильтр по названию" oninput="filterTournaments()">
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label><input type="checkbox" id="filterObychny" checked onchange="filterTournaments()"> обычный</label>
+        <label style="margin-left: 15px;"><input type="checkbox" id="filterSynchron" checked onchange="filterTournaments()"> синхрон</label>
+        <label style="margin-left: 15px;"><input type="checkbox" id="filterAsynchron" checked onchange="filterTournaments()"> асинхрон</label>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <label><input type="checkbox" id="filterWithResults" onchange="filterTournaments()"> только с результатами</label>
+    </div>
+    '''
+
+    table_html = '<div><table id="tournamentsTable" style="table-layout: fixed; font-size: clamp(0.8rem, 2.5vw, 1rem);"><colgroup><col style="width: 7.5%;"><col style="width: 27%;"><col style="width: 14%;"><col style="width: 14%;"><col style="width: 12%;"><col style="width: 25.5%;"></colgroup><thead><tr><th style="padding: clamp(4px, 1.5vw, 10px);">ID</th><th style="padding: clamp(4px, 1.5vw, 10px);">Название турнира</th><th style="padding: clamp(4px, 1.5vw, 10px);">Начало</th><th style="padding: clamp(4px, 1.5vw, 10px);">Окончание</th><th style="padding: clamp(4px, 1.5vw, 10px);">Тип</th><th style="padding: clamp(4px, 1.5vw, 10px);">Редакторы</th></tr></thead><tbody>'
+
+    for tournament_id, name, date_start, date_end, tournament_type, editors in results:
+        start_date = date_start.split("T")[0] if date_start else "-"
+        end_date = date_end.split("T")[0] if date_end else "-"
+
+        if tournament_id in tournaments_with_results:
+            name_link = f'<a href="/tournament/{tournament_id}">{name}</a>'
+        else:
+            name_link = name
+
+        # Determine tournament type class for filtering
+        type_class = ""
+        if tournament_type == "Асинхрон":
+            type_class = "type-asynchron"
+        elif tournament_type == "Синхрон":
+            type_class = "type-synchron"
+        else:
+            type_class = "type-obychny"
+
+        # Add results class for filtering
+        results_class = "has-results" if tournament_id in tournaments_with_results else "no-results"
+
+        # Format editors with names and links
+        editors_display = "-"
+        if editors and editors != "[]":
+            try:
+                editor_ids = json.loads(editors)
+                if editor_ids:
+                    # Get editor names
+                    editor_placeholders = ",".join(["?"] * len(editor_ids))
+                    editor_names = cur.execute(
+                        f"SELECT id, name, surname FROM players WHERE id IN ({editor_placeholders})",
+                        editor_ids
+                    ).fetchall()
+                    
+                    editor_links = []
+                    for editor_id, first_name, last_name in editor_names:
+                        display_name = f"{first_name} {(last_name or '-')[0]}."
+                        editor_links.append(f'<a href="https://rating.chgk.info/player/{editor_id}">{display_name}</a>')
+                    
+                    editors_display = ", ".join(editor_links)
+            except (json.JSONDecodeError, TypeError):
+                editors_display = "-"
+
+        table_html += f"""<tr class="{type_class} {results_class}">
+            <td style="padding: clamp(4px, 1.5vw, 10px);"><a href="https://rating.chgk.info/tournament/{tournament_id}">{tournament_id}</a></td>
+            <td style="padding: clamp(4px, 1.5vw, 10px);">{name_link}</td>
+            <td style="padding: clamp(4px, 1.5vw, 10px);">{start_date}</td>
+            <td style="padding: clamp(4px, 1.5vw, 10px);">{end_date}</td>
+            <td style="padding: clamp(4px, 1.5vw, 10px);">{tournament_type or 'обычный'}</td>
+            <td style="padding: clamp(4px, 1.5vw, 10px); font-size: 0.9em;">{editors_display}</td>
+        </tr>"""
+
+    table_html += "</tbody></table></div>"
+
+    # Handle pagination for zeroth page
+    if page == 0:
+        pagination_html = '<p><a href="/tournaments?page=1">раньше →</a></p>'
+    else:
+        total_pages = math.ceil(total_count / per_page)
+        pagination_html = "<p>"
+        if page == 1:
+            pagination_html += (
+                '<a href="/tournaments?page=0">← позже</a> '
+            )
+        if page > 1:
+            pagination_html += (
+                f'<a href="/tournaments?page={page - 1}">← позже</a> '
+            )
+        pagination_html += f"{page} из {total_pages} "
+        if page < total_pages:
+            pagination_html += f'<a href="/tournaments?page={page + 1}">раньше →</a>'
+        pagination_html += "</p>"
+
+    filter_script = """
+    <script>
+    function filterTournaments() {
+        const nameFilter = document.getElementById('tournamentFilter').value.toLowerCase();
+        const obychnyChecked = document.getElementById('filterObychny').checked;
+        const synchronChecked = document.getElementById('filterSynchron').checked;
+        const asynchronChecked = document.getElementById('filterAsynchron').checked;
+        const withResultsChecked = document.getElementById('filterWithResults').checked;
+        
+        const table = document.getElementById('tournamentsTable');
+        const rows = table.getElementsByTagName('tr');
+        
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            const nameCell = row.getElementsByTagName('td')[1];
+            
+            if (nameCell) {
+                // Check name filter
+                const name = nameCell.textContent || nameCell.innerText;
+                const nameMatches = name.toLowerCase().indexOf(nameFilter) > -1;
+                
+                // Check type filter
+                const hasObychny = row.classList.contains('type-obychny');
+                const hasSynchron = row.classList.contains('type-synchron');
+                const hasAsynchron = row.classList.contains('type-asynchron');
+                
+                const typeMatches = (hasObychny && obychnyChecked) || 
+                                   (hasSynchron && synchronChecked) || 
+                                   (hasAsynchron && asynchronChecked);
+                
+                // Check results filter
+                const hasResults = row.classList.contains('has-results');
+                const resultsMatches = !withResultsChecked || hasResults;
+                
+                // Show row only if all filters match
+                if (nameMatches && typeMatches && resultsMatches) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            }
+        }
+    }
+    </script>
+    """
+
+    header_text = "<h1>Турниры</h1>"
+
+    rendered_content = f"""
+    <style>
+        .wide-table-container {{
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }}
+        .narrow-content {{
+            max-width: 800px;
+            margin: 0 auto;
+        }}
+        .wide-table-container table {{
+            width: 1200px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }}
+        .wide-table-container > div {{
+            overflow-x: auto;
+        }}
+    </style>
+    <div class="narrow-content">
+        {header_text}
+        {pagination_html}
+        {filter_input}
+    </div>
+    <div class="wide-table-container">
+        {table_html}
+    </div>
+    <div class="narrow-content">
+        {pagination_html}
+    </div>
+    {filter_script}
+    """
+
+    return render_template_string(
+        TOURNAMENT_STUB,
+        rendered_content=rendered_content,
+        last_db_update=get_last_db_update(),
     )
 
 
