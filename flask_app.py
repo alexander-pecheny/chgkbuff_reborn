@@ -949,7 +949,7 @@ def tournaments():
     if page < 0 or not isinstance(page, int):
         flash("Неверный номер страницы", "red")
         return redirect(url_for(".index"))
-    per_page = 2500
+    per_page = 750
     offset = (page - 1) * per_page
 
     conn = sqlite3.connect(DB_LOC)
