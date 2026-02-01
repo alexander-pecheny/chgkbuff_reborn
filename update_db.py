@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS tournaments (
     appeal_jury text,
     town_id integer,
     in_rating integer,
-    maii_aegis integer,
     maii_rating integer,
     questions_by_tour text
 );
@@ -315,7 +314,6 @@ class DbUpdater:
                 "appeal_jury": json.dumps([x["id"] for x in tourn_info["appealJury"]]),
                 "town_id": tourn_info.get("idtown"),
                 "in_rating": int(tourn_info["tournamentInRatingBalanced"]),
-                "maii_aegis": int(tourn_info["maiiAegis"]),
                 "maii_rating": int(tourn_info["maiiRating"]),
                 "questions_by_tour": self.get_questions_by_tour(tourn_info),
             }
