@@ -495,15 +495,15 @@ def get_last_db_update():
 def get_cat(share):
     if share == 0:
         return "coffin"
-    if 0 < share <= 0.1:
+    if 0 < share <= 0.2:
         return "a"
-    if 0.1 < share <= 0.33:
+    if 0.2 < share <= 0.4:
         return "b"
-    if 0.33 < share <= 0.66:
+    if 0.4 < share <= 0.6:
         return "c"
-    if 0.66 < share <= 0.9:
+    if 0.6 < share <= 0.8:
         return "d"
-    if share > 0.9:
+    if 0.8 < share <= 1:
         return "e"
 
 
@@ -541,8 +541,8 @@ def calculate_questions_categs(results):
             t_rating[t] += rating
             t_by_cat[t][cat] += 1
     pre = (
-        f"""Всего вопросов: <abbr title="0 взятых" tabindex="0">⚰️</abbr> — {questions_by_cat["coffin"]},"""
-        f""" <abbr title="<20% взятых" tabindex="0">👹</abbr> — {questions_by_cat["a"]},"""
+        f"""Всего вопросов: <abbr title="0% взятых" tabindex="0">⚰️</abbr> — {questions_by_cat["coffin"]},"""
+        f""" <abbr title="1–20% взятых" tabindex="0">👹</abbr> — {questions_by_cat["a"]},"""
         f""" <abbr title="21–40% взятых" tabindex="0">😥</abbr> — {questions_by_cat["b"]},"""
         f""" <abbr title="41–60% взятых" tabindex="0">🙂</abbr> — {questions_by_cat["c"]},"""
         f""" <abbr title="61–80% взятых" tabindex="0">👶</abbr> — {questions_by_cat["d"]},"""
