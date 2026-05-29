@@ -290,13 +290,17 @@ class DbUpdater:
             return
         return ",".join([str(v) for v in qty.values()])
 
+    @staticmethod
+    def maybe_int(val):
+        if val is None:
+            return None
+        return int(val)
+
     def update_tournament_data(self, tournament_id):
         tourn_info = self.req_tournament(tournament_id)
         if not tourn_info:
             return
         cur = self.conn.cursor()
-        cur.execute(f"delete from tournaments where id = {tournament_id};")
-        self.conn.commit()
         try:
             tourn_dict = {
                 "id": tournament_id,
@@ -313,19 +317,24 @@ class DbUpdater:
                 "game_jury": json.dumps([x["id"] for x in tourn_info["gameJury"]]),
                 "appeal_jury": json.dumps([x["id"] for x in tourn_info["appealJury"]]),
                 "town_id": tourn_info.get("idtown"),
-                "in_rating": int(tourn_info["tournamentInRatingBalanced"]),
-                "maii_rating": int(tourn_info["maiiRating"]),
+                # the API used to expose this as "tournamentInRatingBalanced";
+                # it was renamed to "rating" (a boolean). Use .get so a future
+                # rename degrades to NULL instead of wiping the whole record.
+                "in_rating": self.maybe_int(tourn_info.get("rating")),
+                "maii_rating": self.maybe_int(tourn_info.get("maiiRating")),
                 "questions_by_tour": self.get_questions_by_tour(tourn_info),
             }
-            self.insert_wrapper(tourn_dict, "tournaments")
-            return "ok"
         except Exception as e:
             self.logger.error(
                 f"couldn't update tournament data for {tournament_id}: {type(e)} {e}"
             )
-        for key in ("orgcommittee", "editors", "gameJury", "appealJury"):
-            for person in tourn_info[key]:
-                self.update_player(person)
+            return
+        # delete only after we successfully built the new record, so a parsing
+        # failure can never leave a tournament without metadata
+        cur.execute(f"delete from tournaments where id = {tournament_id};")
+        self.conn.commit()
+        self.insert_wrapper(tourn_dict, "tournaments")
+        return "ok"
 
     def req_results(self, tournament_id):
         self.logger.debug(f"processing results of {tournament_id}...")
