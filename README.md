@@ -1,3 +1,5 @@
+> **Основной репозиторий этого проекта — https://code.pecheny.me/pecheny/chgkbuff_reborn, пожалуйста, создавайте issues там.**
+
 # Buff
 
 ## Что такое и как работает
