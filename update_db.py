@@ -77,6 +77,9 @@ CREATE TABLE IF NOT EXISTS ratings (
     trb integer
 );
 CREATE INDEX IF NOT EXISTS idx_ratings ON ratings(release_id, team_id);
+CREATE INDEX IF NOT EXISTS idx_tournaments_date_start ON tournaments(date_start DESC, id ASC);
+CREATE INDEX IF NOT EXISTS idx_tournaments_date_end ON tournaments(date_end);
+CREATE INDEX IF NOT EXISTS idx_results_with_mask ON tournament_results(id) WHERE mask IS NOT NULL;
 """
 
 

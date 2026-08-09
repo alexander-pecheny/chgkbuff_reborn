@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"math"
 	"sort"
-	"strings"
 )
 
 type Editor struct {
@@ -29,10 +28,14 @@ func (s *Store) Tournaments(page int, cutoff, horizon string, perPage int) (Tour
 	var result TournamentPage
 	var rows *sql.Rows
 	var err error
-	const columns = "select id, name, date_start, date_end, tournament_type, editors from tournaments"
+	// The has-results flag comes from a subquery rather than a second pass: with the partial
+	// index on masked results it is one probe per listed row.
+	const columns = `select id, name, date_start, date_end, tournament_type, editors,
+		exists(select 1 from tournament_results r where r.id = t.id and r.mask is not null)
+		from tournaments t`
 	if page == 0 {
 		rows, err = s.db.Query(columns+
-			" where date_end > ? and date_end <= ? order by date_start asc limit ?", cutoff, horizon, perPage)
+			" where date_end > ? and date_end <= ? order by date_start asc, id asc limit ?", cutoff, horizon, perPage)
 	} else {
 		var total int
 		if err := s.db.QueryRow(
@@ -41,7 +44,7 @@ func (s *Store) Tournaments(page int, cutoff, horizon string, perPage int) (Tour
 		}
 		result.TotalPages = int(math.Ceil(float64(total) / float64(perPage)))
 		rows, err = s.db.Query(columns+
-			" where date_end <= ? order by date_start desc limit ? offset ?", cutoff, perPage, (page-1)*perPage)
+			" where date_end <= ? order by date_start desc, id asc limit ? offset ?", cutoff, perPage, (page-1)*perPage)
 	}
 	if err != nil {
 		return result, err
@@ -51,7 +54,7 @@ func (s *Store) Tournaments(page int, cutoff, horizon string, perPage int) (Tour
 	for rows.Next() {
 		var listing Listing
 		var start, end, kind, editors sql.NullString
-		if err := rows.Scan(&listing.ID, &listing.Name, &start, &end, &kind, &editors); err != nil {
+		if err := rows.Scan(&listing.ID, &listing.Name, &start, &end, &kind, &editors, &listing.HasResults); err != nil {
 			return result, err
 		}
 		listing.DateStart, listing.DateEnd, listing.Type = start.String, end.String, kind.String
@@ -67,41 +70,7 @@ func (s *Store) Tournaments(page int, cutoff, horizon string, perPage int) (Tour
 	if err := rows.Err(); err != nil {
 		return result, err
 	}
-	if err := s.fillResultFlags(result.Rows); err != nil {
-		return result, err
-	}
 	return result, s.fillEditorNames(result.Rows)
-}
-
-func (s *Store) fillResultFlags(listings []Listing) error {
-	if len(listings) == 0 {
-		return nil
-	}
-	args := make([]any, len(listings))
-	for i, listing := range listings {
-		args[i] = listing.ID
-	}
-	rows, err := s.db.Query("select distinct id from tournament_results where id in (?"+
-		strings.Repeat(",?", len(args)-1)+") and mask is not null", args...)
-	if err != nil {
-		return err
-	}
-	defer rows.Close()
-	withResults := map[int]bool{}
-	for rows.Next() {
-		var id int
-		if err := rows.Scan(&id); err != nil {
-			return err
-		}
-		withResults[id] = true
-	}
-	if err := rows.Err(); err != nil {
-		return err
-	}
-	for i := range listings {
-		listings[i].HasResults = withResults[listings[i].ID]
-	}
-	return nil
 }
 
 // Editors the site credits but has no player record for would render as a nameless link.
