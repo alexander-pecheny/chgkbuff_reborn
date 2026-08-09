@@ -65,18 +65,10 @@ your.domain.com {
 }
 ```
 
-Перезагрузить конфиг: `sudo systemctl reload caddy`. Сертификат Caddy получит сам.
+Перезагрузить конфиг: `sudo systemctl reload caddy`.
 
 6\. Настроить еженочное обновление базы: `crontab -e` и добавляем строчку
 
 ```
 5 1 * * * cd {{path/to/buff}} && python update_db.py && python create_graph.py && sudo systemctl restart buff
 ```
-
-Рестарт обязателен: сервер держит `graph.bin` отображённым в память и не увидит новый файл сам.
-
-## Разработка
-
-Тесты сверяют ответы Go-версии с тем, что отвечал Flask: `go test ./...`. Ожидания лежат в `testdata/` и снимаются с работающего Flask-приложения через `gen_fixtures.py`. Тесты, которым нужны `buff.db` или `graph.bin`, пропускаются, если этих файлов нет.
-
-`flask_app.py` — уходящая реализация веба, она остаётся до переключения продакшена на Go.

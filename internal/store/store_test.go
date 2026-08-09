@@ -10,8 +10,9 @@ import (
 	"code.pecheny.me/pecheny/chgkbuff_reborn/internal/store"
 )
 
-// Every expectation here was captured from the Flask app by gen_fixtures.py against this
-// same buff.db, so a mismatch means the port changed behaviour.
+// Every expectation here was captured from the Flask app this package replaced, running
+// against this same buff.db, so a mismatch means behaviour changed. The app and the
+// gen_fixtures.py that captured them were removed in the commit after 67bc0b1.
 
 func openStore(t testing.TB) *store.Store {
 	t.Helper()
