@@ -1,0 +1,6565 @@
+[
+ {
+  "player_id": 30152,
+  "date_from": "1990-01-01",
+  "date_to": "2026-01-01",
+  "tournament_types": "all_tournaments",
+  "player_name": "Артём С.",
+  "teammates": [
+   {
+    "player_id": 28751,
+    "name": "Иван С.",
+    "games": 325
+   },
+   {
+    "player_id": 27822,
+    "name": "Михаил С.",
+    "games": 316
+   },
+   {
+    "player_id": 4270,
+    "name": "Александра Б.",
+    "games": 293
+   },
+   {
+    "player_id": 27403,
+    "name": "Максим Р.",
+    "games": 275
+   },
+   {
+    "player_id": 19599,
+    "name": "Павел М.",
+    "games": 163
+   },
+   {
+    "player_id": 23178,
+    "name": "Елизавета О.",
+    "games": 160
+   },
+   {
+    "player_id": 30270,
+    "name": "Сергей С.",
+    "games": 151
+   },
+   {
+    "player_id": 87210,
+    "name": "Елизавета Д.",
+    "games": 120
+   },
+   {
+    "player_id": 39244,
+    "name": "Павел А.",
+    "games": 116
+   },
+   {
+    "player_id": 78101,
+    "name": "Али Б.",
+    "games": 112
+   },
+   {
+    "player_id": 6482,
+    "name": "Ким Г.",
+    "games": 102
+   },
+   {
+    "player_id": 14904,
+    "name": "Марина А.",
+    "games": 98
+   },
+   {
+    "player_id": 46976,
+    "name": "Мансур З.",
+    "games": 92
+   },
+   {
+    "player_id": 4637,
+    "name": "Антон Б.",
+    "games": 90
+   },
+   {
+    "player_id": 25724,
+    "name": "Юрий П.",
+    "games": 85
+   },
+   {
+    "player_id": 34476,
+    "name": "Роман Ц.",
+    "games": 82
+   },
+   {
+    "player_id": 9785,
+    "name": "Владислав Д.",
+    "games": 77
+   },
+   {
+    "player_id": 88067,
+    "name": "Алиса Т.",
+    "games": 73
+   },
+   {
+    "player_id": 23737,
+    "name": "Андрей О.",
+    "games": 72
+   },
+   {
+    "player_id": 148624,
+    "name": "Дамир М.",
+    "games": 71
+   },
+   {
+    "player_id": 5328,
+    "name": "Дмитрий В.",
+    "games": 67
+   },
+   {
+    "player_id": 63529,
+    "name": "Дмитрий Т.",
+    "games": 62
+   },
+   {
+    "player_id": 13782,
+    "name": "Тимур К.",
+    "games": 58
+   },
+   {
+    "player_id": 31231,
+    "name": "Александр Т.",
+    "games": 58
+   },
+   {
+    "player_id": 29361,
+    "name": "Александр С.",
+    "games": 57
+   },
+   {
+    "player_id": 48340,
+    "name": "Юлия М.",
+    "games": 55
+   },
+   {
+    "player_id": 2888,
+    "name": "Айдар Б.",
+    "games": 54
+   },
+   {
+    "player_id": 72331,
+    "name": "Дмитрий С.",
+    "games": 52
+   },
+   {
+    "player_id": 15811,
+    "name": "Владислав К.",
+    "games": 46
+   },
+   {
+    "player_id": 4576,
+    "name": "Дмитрий Б.",
+    "games": 44
+   },
+   {
+    "player_id": 15964,
+    "name": "Дарья К.",
+    "games": 43
+   },
+   {
+    "player_id": 23020,
+    "name": "Наталия Н.",
+    "games": 39
+   },
+   {
+    "player_id": 14122,
+    "name": "Юлия К.",
+    "games": 39
+   },
+   {
+    "player_id": 33620,
+    "name": "Руслан Х.",
+    "games": 38
+   },
+   {
+    "player_id": 2421,
+    "name": "Ася С.",
+    "games": 37
+   },
+   {
+    "player_id": 12119,
+    "name": "Дмитрий И.",
+    "games": 36
+   },
+   {
+    "player_id": 34365,
+    "name": "Владимир Ц.",
+    "games": 33
+   },
+   {
+    "player_id": 33806,
+    "name": "Татьяна Х.",
+    "games": 31
+   },
+   {
+    "player_id": 34846,
+    "name": "Антон Ч.",
+    "games": 30
+   },
+   {
+    "player_id": 23367,
+    "name": "Борис О.",
+    "games": 29
+   },
+   {
+    "player_id": 31630,
+    "name": "Анастасия Т.",
+    "games": 28
+   },
+   {
+    "player_id": 42511,
+    "name": "Николай Н.",
+    "games": 28
+   },
+   {
+    "player_id": 32458,
+    "name": "Игорь Т.",
+    "games": 28
+   },
+   {
+    "player_id": 19541,
+    "name": "Михаил М.",
+    "games": 26
+   },
+   {
+    "player_id": 6651,
+    "name": "Вячеслав Г.",
+    "games": 26
+   },
+   {
+    "player_id": 14812,
+    "name": "Алексей К.",
+    "games": 25
+   },
+   {
+    "player_id": 78358,
+    "name": "Владислав Т.",
+    "games": 25
+   },
+   {
+    "player_id": 1894,
+    "name": "Александр А.",
+    "games": 24
+   },
+   {
+    "player_id": 25882,
+    "name": "Максим П.",
+    "games": 23
+   },
+   {
+    "player_id": 3207,
+    "name": "Ольга Б.",
+    "games": 23
+   },
+   {
+    "player_id": 20461,
+    "name": "Анастасия М.",
+    "games": 22
+   },
+   {
+    "player_id": 6212,
+    "name": "Юрий В.",
+    "games": 21
+   },
+   {
+    "player_id": 12318,
+    "name": "Никита И.",
+    "games": 21
+   },
+   {
+    "player_id": 36120,
+    "name": "Серафим Ш.",
+    "games": 20
+   },
+   {
+    "player_id": 36754,
+    "name": "Анастасия Ш.",
+    "games": 19
+   },
+   {
+    "player_id": 24290,
+    "name": "Мария П.",
+    "games": 18
+   },
+   {
+    "player_id": 28689,
+    "name": "Инна С.",
+    "games": 18
+   },
+   {
+    "player_id": 16837,
+    "name": "Наталья К.",
+    "games": 18
+   },
+   {
+    "player_id": 20998,
+    "name": "Денис М.",
+    "games": 17
+   },
+   {
+    "player_id": 28513,
+    "name": "Владимир С.",
+    "games": 17
+   },
+   {
+    "player_id": 17296,
+    "name": "Виталий К.",
+    "games": 17
+   },
+   {
+    "player_id": 90915,
+    "name": "Вадим Я.",
+    "games": 17
+   },
+   {
+    "player_id": 13689,
+    "name": "Дмитрий К.",
+    "games": 16
+   },
+   {
+    "player_id": 13196,
+    "name": "Евгений К.",
+    "games": 16
+   },
+   {
+    "player_id": 48916,
+    "name": "Николай В.",
+    "games": 16
+   },
+   {
+    "player_id": 23967,
+    "name": "Галина П.",
+    "games": 16
+   },
+   {
+    "player_id": 56000,
+    "name": "Евгений К.",
+    "games": 16
+   },
+   {
+    "player_id": 34936,
+    "name": "Кирилл Ч.",
+    "games": 16
+   },
+   {
+    "player_id": 95884,
+    "name": "Ирина П.",
+    "games": 16
+   },
+   {
+    "player_id": 278273,
+    "name": "Наталия Е.",
+    "games": 16
+   },
+   {
+    "player_id": 9582,
+    "name": "Олег Д.",
+    "games": 15
+   },
+   {
+    "player_id": 32979,
+    "name": "Виталий Ф.",
+    "games": 15
+   },
+   {
+    "player_id": 30652,
+    "name": "Светлана С.",
+    "games": 15
+   },
+   {
+    "player_id": 3083,
+    "name": "Дмитрий Б.",
+    "games": 15
+   },
+   {
+    "player_id": 80593,
+    "name": "Алексей Ш.",
+    "games": 15
+   },
+   {
+    "player_id": 30236,
+    "name": "Данила С.",
+    "games": 15
+   },
+   {
+    "player_id": 136830,
+    "name": "Михаил М.",
+    "games": 15
+   },
+   {
+    "player_id": 3438,
+    "name": "Игорь Б.",
+    "games": 14
+   },
+   {
+    "player_id": 21314,
+    "name": "Андрей М.",
+    "games": 14
+   },
+   {
+    "player_id": 174293,
+    "name": "Татьяна М.",
+    "games": 14
+   },
+   {
+    "player_id": 20612,
+    "name": "Валентин М.",
+    "games": 13
+   },
+   {
+    "player_id": 1585,
+    "name": "Юлия А.",
+    "games": 13
+   },
+   {
+    "player_id": 21091,
+    "name": "Сергей М.",
+    "games": 13
+   },
+   {
+    "player_id": 21346,
+    "name": "Мария М.",
+    "games": 13
+   },
+   {
+    "player_id": 22325,
+    "name": "Михаил Н.",
+    "games": 13
+   },
+   {
+    "player_id": 29800,
+    "name": "Антон С.",
+    "games": 12
+   },
+   {
+    "player_id": 38458,
+    "name": "Екатерина Л.",
+    "games": 12
+   },
+   {
+    "player_id": 32901,
+    "name": "Наиль Ф.",
+    "games": 12
+   },
+   {
+    "player_id": 101518,
+    "name": "Евгений М.",
+    "games": 12
+   },
+   {
+    "player_id": 8868,
+    "name": "Сергей Д.",
+    "games": 11
+   },
+   {
+    "player_id": 22799,
+    "name": "Сергей Н.",
+    "games": 11
+   },
+   {
+    "player_id": 15727,
+    "name": "Александр К.",
+    "games": 11
+   },
+   {
+    "player_id": 34909,
+    "name": "Ирина Ч.",
+    "games": 11
+   },
+   {
+    "player_id": 10586,
+    "name": "Павел Е.",
+    "games": 11
+   },
+   {
+    "player_id": 13398,
+    "name": "Денис К.",
+    "games": 11
+   },
+   {
+    "player_id": 20691,
+    "name": "Станислав М.",
+    "games": 11
+   },
+   {
+    "player_id": 61400,
+    "name": "Алексей А.",
+    "games": 11
+   },
+   {
+    "player_id": 19411,
+    "name": "Станислав М.",
+    "games": 11
+   },
+   {
+    "player_id": 94166,
+    "name": "Егор Д.",
+    "games": 11
+   },
+   {
+    "player_id": 17039,
+    "name": "Юрий К.",
+    "games": 10
+   },
+   {
+    "player_id": 1305,
+    "name": "Владимир А.",
+    "games": 10
+   },
+   {
+    "player_id": 10664,
+    "name": "Анна Е.",
+    "games": 10
+   },
+   {
+    "player_id": 1468,
+    "name": "Ким А.",
+    "games": 10
+   },
+   {
+    "player_id": 2935,
+    "name": "Анатолий Б.",
+    "games": 9
+   },
+   {
+    "player_id": 18935,
+    "name": "Дмитрий Л.",
+    "games": 9
+   },
+   {
+    "player_id": 33239,
+    "name": "Софья О.",
+    "games": 9
+   },
+   {
+    "player_id": 1739,
+    "name": "Анна А.",
+    "games": 9
+   },
+   {
+    "player_id": 95359,
+    "name": "Дарья Г.",
+    "games": 9
+   },
+   {
+    "player_id": 54910,
+    "name": "Антон П.",
+    "games": 9
+   },
+   {
+    "player_id": 231645,
+    "name": "Михаил Г.",
+    "games": 9
+   },
+   {
+    "player_id": 24813,
+    "name": "Андрей П.",
+    "games": 9
+   },
+   {
+    "player_id": 30597,
+    "name": "Павел С.",
+    "games": 8
+   },
+   {
+    "player_id": 29767,
+    "name": "Павел С.",
+    "games": 8
+   },
+   {
+    "player_id": 25589,
+    "name": "Алексей П.",
+    "games": 8
+   },
+   {
+    "player_id": 36372,
+    "name": "Юлия Ш.",
+    "games": 8
+   },
+   {
+    "player_id": 26101,
+    "name": "Алексей П.",
+    "games": 8
+   },
+   {
+    "player_id": 120326,
+    "name": "Анна Л.",
+    "games": 8
+   },
+   {
+    "player_id": 29458,
+    "name": "Дмитрий С.",
+    "games": 7
+   },
+   {
+    "player_id": 20090,
+    "name": "Даниил М.",
+    "games": 7
+   },
+   {
+    "player_id": 30475,
+    "name": "Владимир С.",
+    "games": 7
+   },
+   {
+    "player_id": 10660,
+    "name": "Сергей Е.",
+    "games": 7
+   },
+   {
+    "player_id": 10822,
+    "name": "Кирилл Ж.",
+    "games": 7
+   },
+   {
+    "player_id": 4852,
+    "name": "Дмитрий В.",
+    "games": 7
+   },
+   {
+    "player_id": 36898,
+    "name": "Леонид Э.",
+    "games": 7
+   },
+   {
+    "player_id": 16901,
+    "name": "Гай К.",
+    "games": 7
+   },
+   {
+    "player_id": 24384,
+    "name": "Евгений П.",
+    "games": 7
+   },
+   {
+    "player_id": 86775,
+    "name": "Рузель Х.",
+    "games": 7
+   },
+   {
+    "player_id": 126620,
+    "name": "Алексей Д.",
+    "games": 7
+   },
+   {
+    "player_id": 123681,
+    "name": "Галина К.",
+    "games": 7
+   },
+   {
+    "player_id": 26818,
+    "name": "Анастасия Р.",
+    "games": 7
+   },
+   {
+    "player_id": 16120,
+    "name": "Ярослав К.",
+    "games": 6
+   },
+   {
+    "player_id": 27622,
+    "name": "Николай Р.",
+    "games": 6
+   },
+   {
+    "player_id": 30352,
+    "name": "Иван С.",
+    "games": 6
+   },
+   {
+    "player_id": 21956,
+    "name": "Тимур М.",
+    "games": 6
+   },
+   {
+    "player_id": 33624,
+    "name": "Ренат Х.",
+    "games": 6
+   },
+   {
+    "player_id": 29981,
+    "name": "Андрей С.",
+    "games": 6
+   },
+   {
+    "player_id": 13968,
+    "name": "Лев К.",
+    "games": 6
+   },
+   {
+    "player_id": 35330,
+    "name": "Алёна П.",
+    "games": 6
+   },
+   {
+    "player_id": 3812,
+    "name": "Михаил Б.",
+    "games": 6
+   },
+   {
+    "player_id": 27177,
+    "name": "Вероника Р.",
+    "games": 6
+   },
+   {
+    "player_id": 39254,
+    "name": "Артём К.",
+    "games": 6
+   },
+   {
+    "player_id": 30357,
+    "name": "Дмитрий С.",
+    "games": 6
+   },
+   {
+    "player_id": 19632,
+    "name": "Максим Ш.",
+    "games": 6
+   },
+   {
+    "player_id": 505,
+    "name": "Иделия А.",
+    "games": 6
+   },
+   {
+    "player_id": 33509,
+    "name": "Иван Ф.",
+    "games": 6
+   },
+   {
+    "player_id": 88078,
+    "name": "Ирина А.",
+    "games": 6
+   },
+   {
+    "player_id": 62299,
+    "name": "Даниил У.",
+    "games": 6
+   },
+   {
+    "player_id": 17104,
+    "name": "Александр К.",
+    "games": 6
+   },
+   {
+    "player_id": 34508,
+    "name": "Александр Ц.",
+    "games": 6
+   },
+   {
+    "player_id": 89287,
+    "name": "Алексей С.",
+    "games": 6
+   },
+   {
+    "player_id": 904,
+    "name": "Максим А.",
+    "games": 6
+   },
+   {
+    "player_id": 72211,
+    "name": "Мария П.",
+    "games": 6
+   },
+   {
+    "player_id": 269265,
+    "name": "Лев Е.",
+    "games": 6
+   },
+   {
+    "player_id": 2005,
+    "name": "Пётр Б.",
+    "games": 5
+   },
+   {
+    "player_id": 22935,
+    "name": "Илья Н.",
+    "games": 5
+   },
+   {
+    "player_id": 15456,
+    "name": "Сергей К.",
+    "games": 5
+   },
+   {
+    "player_id": 75320,
+    "name": "Галина Д.",
+    "games": 5
+   },
+   {
+    "player_id": 17806,
+    "name": "Владимир Л.",
+    "games": 5
+   },
+   {
+    "player_id": 74413,
+    "name": "Елизавета В.",
+    "games": 5
+   },
+   {
+    "player_id": 15051,
+    "name": "Георгий К.",
+    "games": 5
+   },
+   {
+    "player_id": 6965,
+    "name": "Полина Г.",
+    "games": 5
+   },
+   {
+    "player_id": 18332,
+    "name": "Александр Л.",
+    "games": 5
+   },
+   {
+    "player_id": 74382,
+    "name": "Михаил Н.",
+    "games": 5
+   },
+   {
+    "player_id": 37761,
+    "name": "Дмитрий С.",
+    "games": 5
+   },
+   {
+    "player_id": 34647,
+    "name": "Алексей Ч.",
+    "games": 5
+   },
+   {
+    "player_id": 29973,
+    "name": "Павел С.",
+    "games": 5
+   },
+   {
+    "player_id": 56486,
+    "name": "Райганат К.",
+    "games": 5
+   },
+   {
+    "player_id": 15746,
+    "name": "Михаил К.",
+    "games": 5
+   },
+   {
+    "player_id": 18871,
+    "name": "Иван Л.",
+    "games": 5
+   },
+   {
+    "player_id": 22482,
+    "name": "Роман Н.",
+    "games": 4
+   },
+   {
+    "player_id": 29297,
+    "name": "Игорь С.",
+    "games": 4
+   },
+   {
+    "player_id": 29591,
+    "name": "Антон С.",
+    "games": 4
+   },
+   {
+    "player_id": 26089,
+    "name": "Ирина П.",
+    "games": 4
+   },
+   {
+    "player_id": 9299,
+    "name": "Отабек Д.",
+    "games": 4
+   },
+   {
+    "player_id": 27852,
+    "name": "Ян С.",
+    "games": 4
+   },
+   {
+    "player_id": 45763,
+    "name": "Сергей К.",
+    "games": 4
+   },
+   {
+    "player_id": 26705,
+    "name": "Ганишер Р.",
+    "games": 4
+   },
+   {
+    "player_id": 48843,
+    "name": "Муроджон Х.",
+    "games": 4
+   },
+   {
+    "player_id": 44823,
+    "name": "Владимир Ц.",
+    "games": 4
+   },
+   {
+    "player_id": 26859,
+    "name": "Борис Р.",
+    "games": 4
+   },
+   {
+    "player_id": 29399,
+    "name": "Александр С.",
+    "games": 4
+   },
+   {
+    "player_id": 4121,
+    "name": "Антон Б.",
+    "games": 4
+   },
+   {
+    "player_id": 12904,
+    "name": "Ленар К.",
+    "games": 4
+   },
+   {
+    "player_id": 56840,
+    "name": "Алексей Ш.",
+    "games": 4
+   },
+   {
+    "player_id": 30879,
+    "name": "Андрей С.",
+    "games": 4
+   },
+   {
+    "player_id": 20001,
+    "name": "Александр М.",
+    "games": 4
+   },
+   {
+    "player_id": 43356,
+    "name": "Сергей В.",
+    "games": 4
+   },
+   {
+    "player_id": 27240,
+    "name": "Анастасия Р.",
+    "games": 4
+   },
+   {
+    "player_id": 74001,
+    "name": "Игорь М.",
+    "games": 4
+   },
+   {
+    "player_id": 156613,
+    "name": "Наталия З.",
+    "games": 4
+   },
+   {
+    "player_id": 59793,
+    "name": "Андрей М.",
+    "games": 4
+   },
+   {
+    "player_id": 1043,
+    "name": "Алексей А.",
+    "games": 4
+   },
+   {
+    "player_id": 20121,
+    "name": "Андрей М.",
+    "games": 3
+   },
+   {
+    "player_id": 19931,
+    "name": "Екатерина М.",
+    "games": 3
+   },
+   {
+    "player_id": 11201,
+    "name": "Татьяна З.",
+    "games": 3
+   },
+   {
+    "player_id": 15226,
+    "name": "Мария К.",
+    "games": 3
+   },
+   {
+    "player_id": 2939,
+    "name": "Дмитрий Б.",
+    "games": 3
+   },
+   {
+    "player_id": 5195,
+    "name": "Анатолий В.",
+    "games": 3
+   },
+   {
+    "player_id": 36673,
+    "name": "Андрей Ш.",
+    "games": 3
+   },
+   {
+    "player_id": 5990,
+    "name": "Андрей В.",
+    "games": 3
+   },
+   {
+    "player_id": 30579,
+    "name": "Герман С.",
+    "games": 3
+   },
+   {
+    "player_id": 27989,
+    "name": "Александр С.",
+    "games": 3
+   },
+   {
+    "player_id": 14016,
+    "name": "Евгения К.",
+    "games": 3
+   },
+   {
+    "player_id": 11013,
+    "name": "Ирина Ж.",
+    "games": 3
+   },
+   {
+    "player_id": 28745,
+    "name": "Максим С.",
+    "games": 3
+   },
+   {
+    "player_id": 32516,
+    "name": "Мария У.",
+    "games": 3
+   },
+   {
+    "player_id": 18009,
+    "name": "Екатерина Л.",
+    "games": 3
+   },
+   {
+    "player_id": 39431,
+    "name": "Анастасия Б.",
+    "games": 3
+   },
+   {
+    "player_id": 9660,
+    "name": "Сергей Д.",
+    "games": 3
+   },
+   {
+    "player_id": 27043,
+    "name": "Михаил Р.",
+    "games": 3
+   },
+   {
+    "player_id": 4426,
+    "name": "Галина Б.",
+    "games": 3
+   },
+   {
+    "player_id": 31190,
+    "name": "Илья Т.",
+    "games": 3
+   },
+   {
+    "player_id": 32777,
+    "name": "Павел У.",
+    "games": 3
+   },
+   {
+    "player_id": 33197,
+    "name": "Алексей Ф.",
+    "games": 3
+   },
+   {
+    "player_id": 12770,
+    "name": "Илья И.",
+    "games": 3
+   },
+   {
+    "player_id": 39370,
+    "name": "Сергей П.",
+    "games": 3
+   },
+   {
+    "player_id": 18036,
+    "name": "Михаил Л.",
+    "games": 3
+   },
+   {
+    "player_id": 31056,
+    "name": "Тимур С.",
+    "games": 3
+   },
+   {
+    "player_id": 39265,
+    "name": "Алёна Р.",
+    "games": 3
+   },
+   {
+    "player_id": 46339,
+    "name": "Антон В.",
+    "games": 3
+   },
+   {
+    "player_id": 1387,
+    "name": "Георгий А.",
+    "games": 3
+   },
+   {
+    "player_id": 70750,
+    "name": "Денис Г.",
+    "games": 3
+   },
+   {
+    "player_id": 7008,
+    "name": "Алексей Г.",
+    "games": 3
+   },
+   {
+    "player_id": 59140,
+    "name": "Борис Б.",
+    "games": 3
+   },
+   {
+    "player_id": 80897,
+    "name": "Дмитрий С.",
+    "games": 3
+   },
+   {
+    "player_id": 58939,
+    "name": "Дарья Л.",
+    "games": 3
+   },
+   {
+    "player_id": 3762,
+    "name": "Тимофей Б.",
+    "games": 3
+   },
+   {
+    "player_id": 29943,
+    "name": "Ирина С.",
+    "games": 3
+   },
+   {
+    "player_id": 24341,
+    "name": "Даниил П.",
+    "games": 3
+   },
+   {
+    "player_id": 26988,
+    "name": "Дмитрий Р.",
+    "games": 3
+   },
+   {
+    "player_id": 53711,
+    "name": "Денис Б.",
+    "games": 3
+   },
+   {
+    "player_id": 9801,
+    "name": "Егор Д.",
+    "games": 3
+   },
+   {
+    "player_id": 53689,
+    "name": "Антон Т.",
+    "games": 3
+   },
+   {
+    "player_id": 18540,
+    "name": "Константин Л.",
+    "games": 3
+   },
+   {
+    "player_id": 92003,
+    "name": "Джессика Л.",
+    "games": 3
+   },
+   {
+    "player_id": 31493,
+    "name": "Сергей Т.",
+    "games": 3
+   },
+   {
+    "player_id": 116331,
+    "name": "Сергей Г.",
+    "games": 3
+   },
+   {
+    "player_id": 202336,
+    "name": "Пётр М.",
+    "games": 3
+   },
+   {
+    "player_id": 80591,
+    "name": "Константин К.",
+    "games": 3
+   },
+   {
+    "player_id": 195993,
+    "name": "Оксана Л.",
+    "games": 3
+   },
+   {
+    "player_id": 57018,
+    "name": "Владимир Ч.",
+    "games": 3
+   },
+   {
+    "player_id": 11324,
+    "name": "Юлия З.",
+    "games": 3
+   },
+   {
+    "player_id": 101083,
+    "name": "Максим Я.",
+    "games": 3
+   },
+   {
+    "player_id": 173230,
+    "name": "Дмитрий К.",
+    "games": 3
+   },
+   {
+    "player_id": 173568,
+    "name": "Татьяна З.",
+    "games": 3
+   },
+   {
+    "player_id": 238962,
+    "name": "Максим К.",
+    "games": 3
+   },
+   {
+    "player_id": 24850,
+    "name": "Александр П.",
+    "games": 3
+   },
+   {
+    "player_id": 73159,
+    "name": "Ирина Ч.",
+    "games": 3
+   },
+   {
+    "player_id": 25586,
+    "name": "Александр П.",
+    "games": 2
+   },
+   {
+    "player_id": 3787,
+    "name": "Алексей Б.",
+    "games": 2
+   },
+   {
+    "player_id": 1482,
+    "name": "Виктор А.",
+    "games": 2
+   },
+   {
+    "player_id": 17795,
+    "name": "Александр Л.",
+    "games": 2
+   },
+   {
+    "player_id": 3327,
+    "name": "Светлана Б.",
+    "games": 2
+   },
+   {
+    "player_id": 35477,
+    "name": "Владимир Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 34219,
+    "name": "Олег Х.",
+    "games": 2
+   },
+   {
+    "player_id": 1603,
+    "name": "Лариса А.",
+    "games": 2
+   },
+   {
+    "player_id": 21487,
+    "name": "Борис М.",
+    "games": 2
+   },
+   {
+    "player_id": 6208,
+    "name": "Евгений В.",
+    "games": 2
+   },
+   {
+    "player_id": 16731,
+    "name": "Владимир К.",
+    "games": 2
+   },
+   {
+    "player_id": 19915,
+    "name": "Александр М.",
+    "games": 2
+   },
+   {
+    "player_id": 19797,
+    "name": "Дениза М.",
+    "games": 2
+   },
+   {
+    "player_id": 20207,
+    "name": "Михаил М.",
+    "games": 2
+   },
+   {
+    "player_id": 7281,
+    "name": "Вячеслав Г.",
+    "games": 2
+   },
+   {
+    "player_id": 1145,
+    "name": "Екатерина А.",
+    "games": 2
+   },
+   {
+    "player_id": 27159,
+    "name": "Алексей Р.",
+    "games": 2
+   },
+   {
+    "player_id": 24239,
+    "name": "Анна П.",
+    "games": 2
+   },
+   {
+    "player_id": 11196,
+    "name": "Андрей З.",
+    "games": 2
+   },
+   {
+    "player_id": 10213,
+    "name": "Всеволод Е.",
+    "games": 2
+   },
+   {
+    "player_id": 80,
+    "name": "Виктор А.",
+    "games": 2
+   },
+   {
+    "player_id": 28426,
+    "name": "Иван С.",
+    "games": 2
+   },
+   {
+    "player_id": 26465,
+    "name": "Елизавета Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 36568,
+    "name": "Андрей Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 15526,
+    "name": "Елена К.",
+    "games": 2
+   },
+   {
+    "player_id": 4246,
+    "name": "Владимир Б.",
+    "games": 2
+   },
+   {
+    "player_id": 10332,
+    "name": "Ольга Е.",
+    "games": 2
+   },
+   {
+    "player_id": 27515,
+    "name": "Тимур Р.",
+    "games": 2
+   },
+   {
+    "player_id": 32628,
+    "name": "Мустафа У.",
+    "games": 2
+   },
+   {
+    "player_id": 20420,
+    "name": "Владимир М.",
+    "games": 2
+   },
+   {
+    "player_id": 21633,
+    "name": "Феликс М.",
+    "games": 2
+   },
+   {
+    "player_id": 14756,
+    "name": "Елена К.",
+    "games": 2
+   },
+   {
+    "player_id": 101834,
+    "name": "Вера Т.",
+    "games": 2
+   },
+   {
+    "player_id": 24603,
+    "name": "Роман П.",
+    "games": 2
+   },
+   {
+    "player_id": 29613,
+    "name": "Дмитрий С.",
+    "games": 2
+   },
+   {
+    "player_id": 60553,
+    "name": "Денис К.",
+    "games": 2
+   },
+   {
+    "player_id": 44126,
+    "name": "Григорий Р.",
+    "games": 2
+   },
+   {
+    "player_id": 4762,
+    "name": "Евгений Б.",
+    "games": 2
+   },
+   {
+    "player_id": 10083,
+    "name": "Дмитрий Д.",
+    "games": 2
+   },
+   {
+    "player_id": 32379,
+    "name": "Марина Т.",
+    "games": 2
+   },
+   {
+    "player_id": 93482,
+    "name": "Юлия Б.",
+    "games": 2
+   },
+   {
+    "player_id": 3096,
+    "name": "Иван Б.",
+    "games": 2
+   },
+   {
+    "player_id": 932,
+    "name": "Григорий А.",
+    "games": 2
+   },
+   {
+    "player_id": 90988,
+    "name": "Ян К.",
+    "games": 2
+   },
+   {
+    "player_id": 3925,
+    "name": "Павел Б.",
+    "games": 2
+   },
+   {
+    "player_id": 66828,
+    "name": "Никита Б.",
+    "games": 2
+   },
+   {
+    "player_id": 31941,
+    "name": "Денис Т.",
+    "games": 2
+   },
+   {
+    "player_id": 12557,
+    "name": "Диана И.",
+    "games": 2
+   },
+   {
+    "player_id": 80594,
+    "name": "Николай М.",
+    "games": 2
+   },
+   {
+    "player_id": 4894,
+    "name": "Эльмир В.",
+    "games": 2
+   },
+   {
+    "player_id": 40635,
+    "name": "Александра Б.",
+    "games": 2
+   },
+   {
+    "player_id": 41351,
+    "name": "Роман А.",
+    "games": 2
+   },
+   {
+    "player_id": 14302,
+    "name": "Владимир К.",
+    "games": 2
+   },
+   {
+    "player_id": 41350,
+    "name": "Виктория Р.",
+    "games": 2
+   },
+   {
+    "player_id": 21649,
+    "name": "Максим М.",
+    "games": 2
+   },
+   {
+    "player_id": 15472,
+    "name": "Евгений К.",
+    "games": 2
+   },
+   {
+    "player_id": 56587,
+    "name": "Олег О.",
+    "games": 2
+   },
+   {
+    "player_id": 3159,
+    "name": "Илья Б.",
+    "games": 2
+   },
+   {
+    "player_id": 225823,
+    "name": "Ксения К.",
+    "games": 2
+   },
+   {
+    "player_id": 32266,
+    "name": "Анна Т.",
+    "games": 2
+   },
+   {
+    "player_id": 13857,
+    "name": "Ксения К.",
+    "games": 2
+   },
+   {
+    "player_id": 37836,
+    "name": "Александр Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 46348,
+    "name": "Олег Б.",
+    "games": 2
+   },
+   {
+    "player_id": 97091,
+    "name": "Ирина А.",
+    "games": 2
+   },
+   {
+    "player_id": 31848,
+    "name": "Александр Т.",
+    "games": 2
+   },
+   {
+    "player_id": 31184,
+    "name": "Эльман Т.",
+    "games": 2
+   },
+   {
+    "player_id": 16332,
+    "name": "Николай К.",
+    "games": 2
+   },
+   {
+    "player_id": 16537,
+    "name": "Татьяна К.",
+    "games": 2
+   },
+   {
+    "player_id": 3922,
+    "name": "Мирон Б.",
+    "games": 2
+   },
+   {
+    "player_id": 29599,
+    "name": "Виктор С.",
+    "games": 2
+   },
+   {
+    "player_id": 83428,
+    "name": "Александр Б.",
+    "games": 2
+   },
+   {
+    "player_id": 132797,
+    "name": "Михаил К.",
+    "games": 2
+   },
+   {
+    "player_id": 86792,
+    "name": "Кирилл С.",
+    "games": 2
+   },
+   {
+    "player_id": 99361,
+    "name": "Евгений А.",
+    "games": 2
+   },
+   {
+    "player_id": 104370,
+    "name": "Динар С.",
+    "games": 2
+   },
+   {
+    "player_id": 35889,
+    "name": "Игорь Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 38168,
+    "name": "Максим К.",
+    "games": 2
+   },
+   {
+    "player_id": 269507,
+    "name": "Иван К.",
+    "games": 2
+   },
+   {
+    "player_id": 116577,
+    "name": "Ольга Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 24543,
+    "name": "Евгений П.",
+    "games": 2
+   },
+   {
+    "player_id": 72332,
+    "name": "Андрей Е.",
+    "games": 2
+   },
+   {
+    "player_id": 274989,
+    "name": "Евгений Б.",
+    "games": 2
+   },
+   {
+    "player_id": 23075,
+    "name": "Павел Н.",
+    "games": 2
+   },
+   {
+    "player_id": 20814,
+    "name": "Денис М.",
+    "games": 2
+   },
+   {
+    "player_id": 32919,
+    "name": "Булат Ф.",
+    "games": 2
+   },
+   {
+    "player_id": 124924,
+    "name": "Ольга В.",
+    "games": 2
+   },
+   {
+    "player_id": 9678,
+    "name": "Семён Д.",
+    "games": 2
+   },
+   {
+    "player_id": 24639,
+    "name": "Александр П.",
+    "games": 2
+   },
+   {
+    "player_id": 42837,
+    "name": "Рачья Г.",
+    "games": 2
+   },
+   {
+    "player_id": 32298,
+    "name": "Глеб Т.",
+    "games": 2
+   },
+   {
+    "player_id": 133610,
+    "name": "Максим Б.",
+    "games": 2
+   },
+   {
+    "player_id": 105826,
+    "name": "Михаил Т.",
+    "games": 2
+   },
+   {
+    "player_id": 278464,
+    "name": "Анастасия К.",
+    "games": 2
+   },
+   {
+    "player_id": 70653,
+    "name": "Феофан И.",
+    "games": 2
+   },
+   {
+    "player_id": 58714,
+    "name": "Георгий М.",
+    "games": 2
+   },
+   {
+    "player_id": 34328,
+    "name": "Михаил Ц.",
+    "games": 2
+   },
+   {
+    "player_id": 1068,
+    "name": "Павел А.",
+    "games": 2
+   },
+   {
+    "player_id": 94164,
+    "name": "Никита П.",
+    "games": 2
+   },
+   {
+    "player_id": 34605,
+    "name": "Дмитрий Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 8448,
+    "name": "Мария Г.",
+    "games": 1
+   },
+   {
+    "player_id": 19027,
+    "name": "Лев Л.",
+    "games": 1
+   },
+   {
+    "player_id": 34899,
+    "name": "Александр Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 14511,
+    "name": "Ирина К.",
+    "games": 1
+   },
+   {
+    "player_id": 26798,
+    "name": "Анна Р.",
+    "games": 1
+   },
+   {
+    "player_id": 36984,
+    "name": "Ирина Ю.",
+    "games": 1
+   },
+   {
+    "player_id": 37610,
+    "name": "Наталья И.",
+    "games": 1
+   },
+   {
+    "player_id": 22389,
+    "name": "Владислав Н.",
+    "games": 1
+   },
+   {
+    "player_id": 14065,
+    "name": "Александр К.",
+    "games": 1
+   },
+   {
+    "player_id": 22965,
+    "name": "Светлана Н.",
+    "games": 1
+   },
+   {
+    "player_id": 13551,
+    "name": "Вадим К.",
+    "games": 1
+   },
+   {
+    "player_id": 15442,
+    "name": "Дмитрий К.",
+    "games": 1
+   },
+   {
+    "player_id": 18001,
+    "name": "Николай Л.",
+    "games": 1
+   },
+   {
+    "player_id": 30123,
+    "name": "Денис С.",
+    "games": 1
+   },
+   {
+    "player_id": 30187,
+    "name": "Елена С.",
+    "games": 1
+   },
+   {
+    "player_id": 10375,
+    "name": "Евгений Е.",
+    "games": 1
+   },
+   {
+    "player_id": 23716,
+    "name": "Анастасия О.",
+    "games": 1
+   },
+   {
+    "player_id": 37335,
+    "name": "Юрий Я.",
+    "games": 1
+   },
+   {
+    "player_id": 29201,
+    "name": "Евгения С.",
+    "games": 1
+   },
+   {
+    "player_id": 2943,
+    "name": "Маргарита Б.",
+    "games": 1
+   },
+   {
+    "player_id": 22530,
+    "name": "Екатерина Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 16250,
+    "name": "Богдан К.",
+    "games": 1
+   },
+   {
+    "player_id": 16695,
+    "name": "Дмитрий К.",
+    "games": 1
+   },
+   {
+    "player_id": 9061,
+    "name": "Евгений Д.",
+    "games": 1
+   },
+   {
+    "player_id": 376,
+    "name": "Ольга А.",
+    "games": 1
+   },
+   {
+    "player_id": 2642,
+    "name": "Руслан Б.",
+    "games": 1
+   },
+   {
+    "player_id": 8697,
+    "name": "Мария К.",
+    "games": 1
+   },
+   {
+    "player_id": 18543,
+    "name": "Александр Л.",
+    "games": 1
+   },
+   {
+    "player_id": 37629,
+    "name": "Юлия К.",
+    "games": 1
+   },
+   {
+    "player_id": 23509,
+    "name": "Вадим О.",
+    "games": 1
+   },
+   {
+    "player_id": 15160,
+    "name": "Михаил К.",
+    "games": 1
+   },
+   {
+    "player_id": 24899,
+    "name": "Кирилл П.",
+    "games": 1
+   },
+   {
+    "player_id": 19623,
+    "name": "Алёна М.",
+    "games": 1
+   },
+   {
+    "player_id": 34784,
+    "name": "Сергей Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 4063,
+    "name": "Дмитрий Б.",
+    "games": 1
+   },
+   {
+    "player_id": 27009,
+    "name": "Александр Р.",
+    "games": 1
+   },
+   {
+    "player_id": 31355,
+    "name": "Антон Т.",
+    "games": 1
+   },
+   {
+    "player_id": 18286,
+    "name": "Яков Л.",
+    "games": 1
+   },
+   {
+    "player_id": 16865,
+    "name": "Светлана К.",
+    "games": 1
+   },
+   {
+    "player_id": 34335,
+    "name": "Роман Ц.",
+    "games": 1
+   },
+   {
+    "player_id": 25971,
+    "name": "Алексей П.",
+    "games": 1
+   },
+   {
+    "player_id": 31171,
+    "name": "Дарья Б.",
+    "games": 1
+   },
+   {
+    "player_id": 5862,
+    "name": "Сергей В.",
+    "games": 1
+   },
+   {
+    "player_id": 12401,
+    "name": "Егор И.",
+    "games": 1
+   },
+   {
+    "player_id": 19060,
+    "name": "Александр Л.",
+    "games": 1
+   },
+   {
+    "player_id": 18252,
+    "name": "Руслан Л.",
+    "games": 1
+   },
+   {
+    "player_id": 9826,
+    "name": "Сергей Д.",
+    "games": 1
+   },
+   {
+    "player_id": 3645,
+    "name": "Кирилл Б.",
+    "games": 1
+   },
+   {
+    "player_id": 37646,
+    "name": "Андрей К.",
+    "games": 1
+   },
+   {
+    "player_id": 82798,
+    "name": "Алексей Ж.",
+    "games": 1
+   },
+   {
+    "player_id": 95470,
+    "name": "Андрей З.",
+    "games": 1
+   },
+   {
+    "player_id": 96311,
+    "name": "Лора М.",
+    "games": 1
+   },
+   {
+    "player_id": 69491,
+    "name": "Станислав М.",
+    "games": 1
+   },
+   {
+    "player_id": 69501,
+    "name": "Андрей С.",
+    "games": 1
+   },
+   {
+    "player_id": 69492,
+    "name": "Алексей В.",
+    "games": 1
+   },
+   {
+    "player_id": 37142,
+    "name": "Азизбек Ю.",
+    "games": 1
+   },
+   {
+    "player_id": 29655,
+    "name": "Ярослав С.",
+    "games": 1
+   },
+   {
+    "player_id": 16067,
+    "name": "Борис К.",
+    "games": 1
+   },
+   {
+    "player_id": 10763,
+    "name": "Иван Ж.",
+    "games": 1
+   },
+   {
+    "player_id": 19711,
+    "name": "Расим М.",
+    "games": 1
+   },
+   {
+    "player_id": 9462,
+    "name": "Ольга Д.",
+    "games": 1
+   },
+   {
+    "player_id": 22242,
+    "name": "Ксения Н.",
+    "games": 1
+   },
+   {
+    "player_id": 23234,
+    "name": "Валерий О.",
+    "games": 1
+   },
+   {
+    "player_id": 74545,
+    "name": "Марина Г.",
+    "games": 1
+   },
+   {
+    "player_id": 97285,
+    "name": "Леонид Г.",
+    "games": 1
+   },
+   {
+    "player_id": 67901,
+    "name": "Елена Х.",
+    "games": 1
+   },
+   {
+    "player_id": 15196,
+    "name": "Светлана О.",
+    "games": 1
+   },
+   {
+    "player_id": 12148,
+    "name": "Илья И.",
+    "games": 1
+   },
+   {
+    "player_id": 39390,
+    "name": "Елена З.",
+    "games": 1
+   },
+   {
+    "player_id": 13523,
+    "name": "Игорь К.",
+    "games": 1
+   },
+   {
+    "player_id": 34761,
+    "name": "Евгений Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 66735,
+    "name": "Наталья К.",
+    "games": 1
+   },
+   {
+    "player_id": 66736,
+    "name": "Антон Г.",
+    "games": 1
+   },
+   {
+    "player_id": 23594,
+    "name": "Борис О.",
+    "games": 1
+   },
+   {
+    "player_id": 67090,
+    "name": "Сергей О.",
+    "games": 1
+   },
+   {
+    "player_id": 16329,
+    "name": "Ксения Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 35385,
+    "name": "Эдуард Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 24006,
+    "name": "Дмитрий П.",
+    "games": 1
+   },
+   {
+    "player_id": 23079,
+    "name": "Мария Н.",
+    "games": 1
+   },
+   {
+    "player_id": 54897,
+    "name": "Динара А.",
+    "games": 1
+   },
+   {
+    "player_id": 66802,
+    "name": "Галина Н.",
+    "games": 1
+   },
+   {
+    "player_id": 22886,
+    "name": "Рустам Н.",
+    "games": 1
+   },
+   {
+    "player_id": 487,
+    "name": "Игорь А.",
+    "games": 1
+   },
+   {
+    "player_id": 535,
+    "name": "Алексей А.",
+    "games": 1
+   },
+   {
+    "player_id": 26173,
+    "name": "Алексей П.",
+    "games": 1
+   },
+   {
+    "player_id": 5261,
+    "name": "Оксана В.",
+    "games": 1
+   },
+   {
+    "player_id": 95356,
+    "name": "Сергей Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 9857,
+    "name": "Алексей Д.",
+    "games": 1
+   },
+   {
+    "player_id": 85216,
+    "name": "Елизавета М.",
+    "games": 1
+   },
+   {
+    "player_id": 124237,
+    "name": "Алёна Б.",
+    "games": 1
+   },
+   {
+    "player_id": 149858,
+    "name": "Илья К.",
+    "games": 1
+   },
+   {
+    "player_id": 143076,
+    "name": "Анна Т.",
+    "games": 1
+   },
+   {
+    "player_id": 21428,
+    "name": "Вадим М.",
+    "games": 1
+   },
+   {
+    "player_id": 109884,
+    "name": "Татьяна Г.",
+    "games": 1
+   },
+   {
+    "player_id": 109678,
+    "name": "Екатерина Л.",
+    "games": 1
+   },
+   {
+    "player_id": 37865,
+    "name": "Филипп Т.",
+    "games": 1
+   },
+   {
+    "player_id": 21026,
+    "name": "Евгений М.",
+    "games": 1
+   },
+   {
+    "player_id": 33188,
+    "name": "Олег Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 33119,
+    "name": "Павел Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 198255,
+    "name": "Дмитрий П.",
+    "games": 1
+   },
+   {
+    "player_id": 21079,
+    "name": "Илья М.",
+    "games": 1
+   },
+   {
+    "player_id": 89344,
+    "name": "Денис С.",
+    "games": 1
+   },
+   {
+    "player_id": 103638,
+    "name": "Людмила Е.",
+    "games": 1
+   },
+   {
+    "player_id": 696,
+    "name": "Максим А.",
+    "games": 1
+   },
+   {
+    "player_id": 34173,
+    "name": "Никита Х.",
+    "games": 1
+   },
+   {
+    "player_id": 211267,
+    "name": "Ульяна Б.",
+    "games": 1
+   },
+   {
+    "player_id": 10695,
+    "name": "Иван Е.",
+    "games": 1
+   },
+   {
+    "player_id": 26911,
+    "name": "Александр Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 31038,
+    "name": "Владимир С.",
+    "games": 1
+   },
+   {
+    "player_id": 24490,
+    "name": "Юлия Б.",
+    "games": 1
+   },
+   {
+    "player_id": 17780,
+    "name": "Эвита С.",
+    "games": 1
+   },
+   {
+    "player_id": 28440,
+    "name": "Екатерина С.",
+    "games": 1
+   },
+   {
+    "player_id": 33293,
+    "name": "Игорь Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 21580,
+    "name": "Михаил М.",
+    "games": 1
+   },
+   {
+    "player_id": 42945,
+    "name": "Никита И.",
+    "games": 1
+   },
+   {
+    "player_id": 152701,
+    "name": "Игорь М.",
+    "games": 1
+   },
+   {
+    "player_id": 86795,
+    "name": "Павел К.",
+    "games": 1
+   },
+   {
+    "player_id": 33331,
+    "name": "Дарья Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 64623,
+    "name": "Гурген Е.",
+    "games": 1
+   },
+   {
+    "player_id": 137496,
+    "name": "Руслан А.",
+    "games": 1
+   },
+   {
+    "player_id": 88819,
+    "name": "Николай К.",
+    "games": 1
+   },
+   {
+    "player_id": 16581,
+    "name": "Андрей К.",
+    "games": 1
+   },
+   {
+    "player_id": 95484,
+    "name": "Александра Н.",
+    "games": 1
+   },
+   {
+    "player_id": 267223,
+    "name": "Диляра Х.",
+    "games": 1
+   },
+   {
+    "player_id": 47436,
+    "name": "Георгий К.",
+    "games": 1
+   },
+   {
+    "player_id": 71365,
+    "name": "Вадим Т.",
+    "games": 1
+   },
+   {
+    "player_id": 13638,
+    "name": "Михаил К.",
+    "games": 1
+   },
+   {
+    "player_id": 96330,
+    "name": "Наталья К.",
+    "games": 1
+   },
+   {
+    "player_id": 128188,
+    "name": "Джахан Г.",
+    "games": 1
+   },
+   {
+    "player_id": 138155,
+    "name": "Ростислав В.",
+    "games": 1
+   },
+   {
+    "player_id": 139595,
+    "name": "Алексей М.",
+    "games": 1
+   },
+   {
+    "player_id": 95676,
+    "name": "Валерий Г.",
+    "games": 1
+   },
+   {
+    "player_id": 5342,
+    "name": "Никита В.",
+    "games": 1
+   },
+   {
+    "player_id": 170233,
+    "name": "Евгения Х.",
+    "games": 1
+   },
+   {
+    "player_id": 38196,
+    "name": "Артём М.",
+    "games": 1
+   },
+   {
+    "player_id": 10651,
+    "name": "Евгений Е.",
+    "games": 1
+   },
+   {
+    "player_id": 182169,
+    "name": "Даниил Б.",
+    "games": 1
+   },
+   {
+    "player_id": 122589,
+    "name": "Арсений Г.",
+    "games": 1
+   },
+   {
+    "player_id": 64619,
+    "name": "Ваге М.",
+    "games": 1
+   },
+   {
+    "player_id": 34644,
+    "name": "Надежда Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 68892,
+    "name": "Денис Т.",
+    "games": 1
+   },
+   {
+    "player_id": 70497,
+    "name": "Александр Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 92947,
+    "name": "Артур К.",
+    "games": 1
+   },
+   {
+    "player_id": 110866,
+    "name": "Илья Б.",
+    "games": 1
+   },
+   {
+    "player_id": 148771,
+    "name": "Юлия Ю.",
+    "games": 1
+   },
+   {
+    "player_id": 183089,
+    "name": "Тимофей И.",
+    "games": 1
+   },
+   {
+    "player_id": 23988,
+    "name": "Виктория П.",
+    "games": 1
+   },
+   {
+    "player_id": 36592,
+    "name": "Алексей Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 124582,
+    "name": "Александр К.",
+    "games": 1
+   },
+   {
+    "player_id": 3843,
+    "name": "Светлана Б.",
+    "games": 1
+   },
+   {
+    "player_id": 17568,
+    "name": "Максим К.",
+    "games": 1
+   },
+   {
+    "player_id": 25759,
+    "name": "Надежда П.",
+    "games": 1
+   },
+   {
+    "player_id": 37276,
+    "name": "Наталья Я.",
+    "games": 1
+   },
+   {
+    "player_id": 37117,
+    "name": "Екатерина Ю.",
+    "games": 1
+   },
+   {
+    "player_id": 22046,
+    "name": "Андрей М.",
+    "games": 1
+   },
+   {
+    "player_id": 67879,
+    "name": "Александр Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 30990,
+    "name": "Пётр С.",
+    "games": 1
+   },
+   {
+    "player_id": 96325,
+    "name": "Андрей Т.",
+    "games": 1
+   },
+   {
+    "player_id": 12474,
+    "name": "Константин И.",
+    "games": 1
+   },
+   {
+    "player_id": 49740,
+    "name": "Вадим А.",
+    "games": 1
+   },
+   {
+    "player_id": 49741,
+    "name": "Леонид Т.",
+    "games": 1
+   },
+   {
+    "player_id": 10345,
+    "name": "Раиса Е.",
+    "games": 1
+   },
+   {
+    "player_id": 2694,
+    "name": "Игорь Б.",
+    "games": 1
+   },
+   {
+    "player_id": 23099,
+    "name": "Лиана Н.",
+    "games": 1
+   },
+   {
+    "player_id": 26546,
+    "name": "Марк Р.",
+    "games": 1
+   },
+   {
+    "player_id": 11877,
+    "name": "Ирина З.",
+    "games": 1
+   },
+   {
+    "player_id": 12409,
+    "name": "Алина С.",
+    "games": 1
+   },
+   {
+    "player_id": 30654,
+    "name": "Дмитрий С.",
+    "games": 1
+   },
+   {
+    "player_id": 31861,
+    "name": "Павел Т.",
+    "games": 1
+   },
+   {
+    "player_id": 4763,
+    "name": "Михаил Б.",
+    "games": 1
+   },
+   {
+    "player_id": 61120,
+    "name": "Артём Г.",
+    "games": 1
+   },
+   {
+    "player_id": 271502,
+    "name": "Вадим Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 22920,
+    "name": "Андрей Н.",
+    "games": 1
+   },
+   {
+    "player_id": 121253,
+    "name": "Вера Г.",
+    "games": 1
+   },
+   {
+    "player_id": 4064,
+    "name": "Алексей Б.",
+    "games": 1
+   },
+   {
+    "player_id": 175104,
+    "name": "Марат Н.",
+    "games": 1
+   },
+   {
+    "player_id": 29043,
+    "name": "Елена С.",
+    "games": 1
+   },
+   {
+    "player_id": 78389,
+    "name": "Демьян М.",
+    "games": 1
+   },
+   {
+    "player_id": 30291,
+    "name": "Кирилл С.",
+    "games": 1
+   },
+   {
+    "player_id": 129305,
+    "name": "Надежда П.",
+    "games": 1
+   },
+   {
+    "player_id": 90952,
+    "name": "Алексей С.",
+    "games": 1
+   },
+   {
+    "player_id": 176,
+    "name": "Сергей А.",
+    "games": 1
+   },
+   {
+    "player_id": 12915,
+    "name": "Айк К.",
+    "games": 1
+   },
+   {
+    "player_id": 40447,
+    "name": "Ярослав К.",
+    "games": 1
+   },
+   {
+    "player_id": 30371,
+    "name": "Юрий С.",
+    "games": 1
+   },
+   {
+    "player_id": 333929,
+    "name": "Маргарита А.",
+    "games": 1
+   },
+   {
+    "player_id": 6357,
+    "name": "Денис Э.",
+    "games": 1
+   },
+   {
+    "player_id": 219891,
+    "name": "Юрий Я.",
+    "games": 1
+   },
+   {
+    "player_id": 29328,
+    "name": "Евгений С.",
+    "games": 1
+   },
+   {
+    "player_id": 116757,
+    "name": "Анна Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 241346,
+    "name": "Анастасия Т.",
+    "games": 1
+   },
+   {
+    "player_id": 124785,
+    "name": "Александр З.",
+    "games": 1
+   },
+   {
+    "player_id": 3577,
+    "name": "Максим Б.",
+    "games": 1
+   },
+   {
+    "player_id": 96304,
+    "name": "Алексей Т.",
+    "games": 1
+   },
+   {
+    "player_id": 101397,
+    "name": "Владислав К.",
+    "games": 1
+   },
+   {
+    "player_id": 110327,
+    "name": "Александр С.",
+    "games": 1
+   },
+   {
+    "player_id": 110328,
+    "name": "Елена Г.",
+    "games": 1
+   },
+   {
+    "player_id": 115790,
+    "name": "Дмитрий Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 117567,
+    "name": "Елена Т.",
+    "games": 1
+   },
+   {
+    "player_id": 28302,
+    "name": "Валерий С.",
+    "games": 1
+   },
+   {
+    "player_id": 19428,
+    "name": "Николай М.",
+    "games": 1
+   },
+   {
+    "player_id": 62070,
+    "name": "Анастасия Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 3423,
+    "name": "Юлия П.",
+    "games": 1
+   },
+   {
+    "player_id": 3608,
+    "name": "Дмитрий Б.",
+    "games": 1
+   },
+   {
+    "player_id": 80759,
+    "name": "Турал Т.",
+    "games": 1
+   },
+   {
+    "player_id": 5701,
+    "name": "Дмитрий В.",
+    "games": 1
+   },
+   {
+    "player_id": 2910,
+    "name": "Екатерина Б.",
+    "games": 1
+   },
+   {
+    "player_id": 19585,
+    "name": "Григорий М.",
+    "games": 1
+   },
+   {
+    "player_id": 37691,
+    "name": "Иван М.",
+    "games": 1
+   },
+   {
+    "player_id": 61094,
+    "name": "Арутюн А.",
+    "games": 1
+   },
+   {
+    "player_id": 70136,
+    "name": "Дина Я.",
+    "games": 1
+   },
+   {
+    "player_id": 25121,
+    "name": "Дмитрий П.",
+    "games": 1
+   },
+   {
+    "player_id": 45344,
+    "name": "Надежда Н.",
+    "games": 1
+   },
+   {
+    "player_id": 116424,
+    "name": "Арина Д.",
+    "games": 1
+   },
+   {
+    "player_id": 119877,
+    "name": "Светлана С.",
+    "games": 1
+   },
+   {
+    "player_id": 327406,
+    "name": "Ольга П.",
+    "games": 1
+   },
+   {
+    "player_id": 173280,
+    "name": "Анна С.",
+    "games": 1
+   },
+   {
+    "player_id": 88487,
+    "name": "Дмитрий И.",
+    "games": 1
+   },
+   {
+    "player_id": 174076,
+    "name": "Никита Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 1513,
+    "name": "Людмила Г.",
+    "games": 1
+   }
+  ]
+ },
+ {
+  "player_id": 30152,
+  "date_from": "1990-01-01",
+  "date_to": "2026-01-01",
+  "tournament_types": "lan_sync",
+  "player_name": "Артём С.",
+  "teammates": [
+   {
+    "player_id": 28751,
+    "name": "Иван С.",
+    "games": 304
+   },
+   {
+    "player_id": 27822,
+    "name": "Михаил С.",
+    "games": 297
+   },
+   {
+    "player_id": 4270,
+    "name": "Александра Б.",
+    "games": 272
+   },
+   {
+    "player_id": 27403,
+    "name": "Максим Р.",
+    "games": 254
+   },
+   {
+    "player_id": 19599,
+    "name": "Павел М.",
+    "games": 160
+   },
+   {
+    "player_id": 23178,
+    "name": "Елизавета О.",
+    "games": 158
+   },
+   {
+    "player_id": 30270,
+    "name": "Сергей С.",
+    "games": 134
+   },
+   {
+    "player_id": 87210,
+    "name": "Елизавета Д.",
+    "games": 119
+   },
+   {
+    "player_id": 39244,
+    "name": "Павел А.",
+    "games": 115
+   },
+   {
+    "player_id": 78101,
+    "name": "Али Б.",
+    "games": 110
+   },
+   {
+    "player_id": 6482,
+    "name": "Ким Г.",
+    "games": 101
+   },
+   {
+    "player_id": 14904,
+    "name": "Марина А.",
+    "games": 98
+   },
+   {
+    "player_id": 46976,
+    "name": "Мансур З.",
+    "games": 90
+   },
+   {
+    "player_id": 4637,
+    "name": "Антон Б.",
+    "games": 89
+   },
+   {
+    "player_id": 25724,
+    "name": "Юрий П.",
+    "games": 85
+   },
+   {
+    "player_id": 34476,
+    "name": "Роман Ц.",
+    "games": 80
+   },
+   {
+    "player_id": 9785,
+    "name": "Владислав Д.",
+    "games": 76
+   },
+   {
+    "player_id": 23737,
+    "name": "Андрей О.",
+    "games": 71
+   },
+   {
+    "player_id": 88067,
+    "name": "Алиса Т.",
+    "games": 71
+   },
+   {
+    "player_id": 148624,
+    "name": "Дамир М.",
+    "games": 66
+   },
+   {
+    "player_id": 5328,
+    "name": "Дмитрий В.",
+    "games": 57
+   },
+   {
+    "player_id": 29361,
+    "name": "Александр С.",
+    "games": 57
+   },
+   {
+    "player_id": 13782,
+    "name": "Тимур К.",
+    "games": 56
+   },
+   {
+    "player_id": 63529,
+    "name": "Дмитрий Т.",
+    "games": 56
+   },
+   {
+    "player_id": 31231,
+    "name": "Александр Т.",
+    "games": 56
+   },
+   {
+    "player_id": 48340,
+    "name": "Юлия М.",
+    "games": 49
+   },
+   {
+    "player_id": 2888,
+    "name": "Айдар Б.",
+    "games": 45
+   },
+   {
+    "player_id": 72331,
+    "name": "Дмитрий С.",
+    "games": 45
+   },
+   {
+    "player_id": 4576,
+    "name": "Дмитрий Б.",
+    "games": 44
+   },
+   {
+    "player_id": 15964,
+    "name": "Дарья К.",
+    "games": 43
+   },
+   {
+    "player_id": 15811,
+    "name": "Владислав К.",
+    "games": 42
+   },
+   {
+    "player_id": 23020,
+    "name": "Наталия Н.",
+    "games": 39
+   },
+   {
+    "player_id": 14122,
+    "name": "Юлия К.",
+    "games": 39
+   },
+   {
+    "player_id": 12119,
+    "name": "Дмитрий И.",
+    "games": 33
+   },
+   {
+    "player_id": 34365,
+    "name": "Владимир Ц.",
+    "games": 31
+   },
+   {
+    "player_id": 33806,
+    "name": "Татьяна Х.",
+    "games": 31
+   },
+   {
+    "player_id": 34846,
+    "name": "Антон Ч.",
+    "games": 29
+   },
+   {
+    "player_id": 2421,
+    "name": "Ася С.",
+    "games": 29
+   },
+   {
+    "player_id": 33620,
+    "name": "Руслан Х.",
+    "games": 29
+   },
+   {
+    "player_id": 31630,
+    "name": "Анастасия Т.",
+    "games": 28
+   },
+   {
+    "player_id": 42511,
+    "name": "Николай Н.",
+    "games": 28
+   },
+   {
+    "player_id": 23367,
+    "name": "Борис О.",
+    "games": 27
+   },
+   {
+    "player_id": 6651,
+    "name": "Вячеслав Г.",
+    "games": 26
+   },
+   {
+    "player_id": 32458,
+    "name": "Игорь Т.",
+    "games": 26
+   },
+   {
+    "player_id": 14812,
+    "name": "Алексей К.",
+    "games": 25
+   },
+   {
+    "player_id": 19541,
+    "name": "Михаил М.",
+    "games": 24
+   },
+   {
+    "player_id": 3207,
+    "name": "Ольга Б.",
+    "games": 23
+   },
+   {
+    "player_id": 25882,
+    "name": "Максим П.",
+    "games": 22
+   },
+   {
+    "player_id": 78358,
+    "name": "Владислав Т.",
+    "games": 22
+   },
+   {
+    "player_id": 6212,
+    "name": "Юрий В.",
+    "games": 21
+   },
+   {
+    "player_id": 20461,
+    "name": "Анастасия М.",
+    "games": 21
+   },
+   {
+    "player_id": 12318,
+    "name": "Никита И.",
+    "games": 21
+   },
+   {
+    "player_id": 1894,
+    "name": "Александр А.",
+    "games": 20
+   },
+   {
+    "player_id": 36754,
+    "name": "Анастасия Ш.",
+    "games": 19
+   },
+   {
+    "player_id": 36120,
+    "name": "Серафим Ш.",
+    "games": 18
+   },
+   {
+    "player_id": 16837,
+    "name": "Наталья К.",
+    "games": 18
+   },
+   {
+    "player_id": 20998,
+    "name": "Денис М.",
+    "games": 17
+   },
+   {
+    "player_id": 24290,
+    "name": "Мария П.",
+    "games": 17
+   },
+   {
+    "player_id": 28689,
+    "name": "Инна С.",
+    "games": 17
+   },
+   {
+    "player_id": 13196,
+    "name": "Евгений К.",
+    "games": 16
+   },
+   {
+    "player_id": 48916,
+    "name": "Николай В.",
+    "games": 16
+   },
+   {
+    "player_id": 17296,
+    "name": "Виталий К.",
+    "games": 16
+   },
+   {
+    "player_id": 34936,
+    "name": "Кирилл Ч.",
+    "games": 16
+   },
+   {
+    "player_id": 278273,
+    "name": "Наталия Е.",
+    "games": 16
+   },
+   {
+    "player_id": 9582,
+    "name": "Олег Д.",
+    "games": 15
+   },
+   {
+    "player_id": 32979,
+    "name": "Виталий Ф.",
+    "games": 15
+   },
+   {
+    "player_id": 30652,
+    "name": "Светлана С.",
+    "games": 15
+   },
+   {
+    "player_id": 23967,
+    "name": "Галина П.",
+    "games": 15
+   },
+   {
+    "player_id": 3083,
+    "name": "Дмитрий Б.",
+    "games": 15
+   },
+   {
+    "player_id": 56000,
+    "name": "Евгений К.",
+    "games": 15
+   },
+   {
+    "player_id": 30236,
+    "name": "Данила С.",
+    "games": 15
+   },
+   {
+    "player_id": 28513,
+    "name": "Владимир С.",
+    "games": 14
+   },
+   {
+    "player_id": 3438,
+    "name": "Игорь Б.",
+    "games": 14
+   },
+   {
+    "player_id": 174293,
+    "name": "Татьяна М.",
+    "games": 14
+   },
+   {
+    "player_id": 20612,
+    "name": "Валентин М.",
+    "games": 13
+   },
+   {
+    "player_id": 1585,
+    "name": "Юлия А.",
+    "games": 13
+   },
+   {
+    "player_id": 21091,
+    "name": "Сергей М.",
+    "games": 13
+   },
+   {
+    "player_id": 21314,
+    "name": "Андрей М.",
+    "games": 13
+   },
+   {
+    "player_id": 22325,
+    "name": "Михаил Н.",
+    "games": 13
+   },
+   {
+    "player_id": 136830,
+    "name": "Михаил М.",
+    "games": 13
+   },
+   {
+    "player_id": 29800,
+    "name": "Антон С.",
+    "games": 12
+   },
+   {
+    "player_id": 21346,
+    "name": "Мария М.",
+    "games": 12
+   },
+   {
+    "player_id": 90915,
+    "name": "Вадим Я.",
+    "games": 12
+   },
+   {
+    "player_id": 101518,
+    "name": "Евгений М.",
+    "games": 12
+   },
+   {
+    "player_id": 8868,
+    "name": "Сергей Д.",
+    "games": 11
+   },
+   {
+    "player_id": 13689,
+    "name": "Дмитрий К.",
+    "games": 11
+   },
+   {
+    "player_id": 15727,
+    "name": "Александр К.",
+    "games": 11
+   },
+   {
+    "player_id": 34909,
+    "name": "Ирина Ч.",
+    "games": 11
+   },
+   {
+    "player_id": 10586,
+    "name": "Павел Е.",
+    "games": 11
+   },
+   {
+    "player_id": 38458,
+    "name": "Екатерина Л.",
+    "games": 11
+   },
+   {
+    "player_id": 13398,
+    "name": "Денис К.",
+    "games": 11
+   },
+   {
+    "player_id": 32901,
+    "name": "Наиль Ф.",
+    "games": 11
+   },
+   {
+    "player_id": 20691,
+    "name": "Станислав М.",
+    "games": 11
+   },
+   {
+    "player_id": 80593,
+    "name": "Алексей Ш.",
+    "games": 11
+   },
+   {
+    "player_id": 17039,
+    "name": "Юрий К.",
+    "games": 10
+   },
+   {
+    "player_id": 1305,
+    "name": "Владимир А.",
+    "games": 10
+   },
+   {
+    "player_id": 10664,
+    "name": "Анна Е.",
+    "games": 10
+   },
+   {
+    "player_id": 1468,
+    "name": "Ким А.",
+    "games": 10
+   },
+   {
+    "player_id": 19411,
+    "name": "Станислав М.",
+    "games": 10
+   },
+   {
+    "player_id": 95884,
+    "name": "Ирина П.",
+    "games": 10
+   },
+   {
+    "player_id": 94166,
+    "name": "Егор Д.",
+    "games": 10
+   },
+   {
+    "player_id": 2935,
+    "name": "Анатолий Б.",
+    "games": 9
+   },
+   {
+    "player_id": 18935,
+    "name": "Дмитрий Л.",
+    "games": 9
+   },
+   {
+    "player_id": 1739,
+    "name": "Анна А.",
+    "games": 9
+   },
+   {
+    "player_id": 61400,
+    "name": "Алексей А.",
+    "games": 9
+   },
+   {
+    "player_id": 30597,
+    "name": "Павел С.",
+    "games": 8
+   },
+   {
+    "player_id": 22799,
+    "name": "Сергей Н.",
+    "games": 8
+   },
+   {
+    "player_id": 33239,
+    "name": "Софья О.",
+    "games": 8
+   },
+   {
+    "player_id": 29767,
+    "name": "Павел С.",
+    "games": 8
+   },
+   {
+    "player_id": 25589,
+    "name": "Алексей П.",
+    "games": 8
+   },
+   {
+    "player_id": 36372,
+    "name": "Юлия Ш.",
+    "games": 8
+   },
+   {
+    "player_id": 231645,
+    "name": "Михаил Г.",
+    "games": 8
+   },
+   {
+    "player_id": 24813,
+    "name": "Андрей П.",
+    "games": 8
+   },
+   {
+    "player_id": 20090,
+    "name": "Даниил М.",
+    "games": 7
+   },
+   {
+    "player_id": 10822,
+    "name": "Кирилл Ж.",
+    "games": 7
+   },
+   {
+    "player_id": 36898,
+    "name": "Леонид Э.",
+    "games": 7
+   },
+   {
+    "player_id": 16901,
+    "name": "Гай К.",
+    "games": 7
+   },
+   {
+    "player_id": 86775,
+    "name": "Рузель Х.",
+    "games": 7
+   },
+   {
+    "player_id": 95359,
+    "name": "Дарья Г.",
+    "games": 7
+   },
+   {
+    "player_id": 29458,
+    "name": "Дмитрий С.",
+    "games": 6
+   },
+   {
+    "player_id": 16120,
+    "name": "Ярослав К.",
+    "games": 6
+   },
+   {
+    "player_id": 27622,
+    "name": "Николай Р.",
+    "games": 6
+   },
+   {
+    "player_id": 30475,
+    "name": "Владимир С.",
+    "games": 6
+   },
+   {
+    "player_id": 30352,
+    "name": "Иван С.",
+    "games": 6
+   },
+   {
+    "player_id": 21956,
+    "name": "Тимур М.",
+    "games": 6
+   },
+   {
+    "player_id": 33624,
+    "name": "Ренат Х.",
+    "games": 6
+   },
+   {
+    "player_id": 10660,
+    "name": "Сергей Е.",
+    "games": 6
+   },
+   {
+    "player_id": 29981,
+    "name": "Андрей С.",
+    "games": 6
+   },
+   {
+    "player_id": 13968,
+    "name": "Лев К.",
+    "games": 6
+   },
+   {
+    "player_id": 35330,
+    "name": "Алёна П.",
+    "games": 6
+   },
+   {
+    "player_id": 3812,
+    "name": "Михаил Б.",
+    "games": 6
+   },
+   {
+    "player_id": 27177,
+    "name": "Вероника Р.",
+    "games": 6
+   },
+   {
+    "player_id": 39254,
+    "name": "Артём К.",
+    "games": 6
+   },
+   {
+    "player_id": 19632,
+    "name": "Максим Ш.",
+    "games": 6
+   },
+   {
+    "player_id": 24384,
+    "name": "Евгений П.",
+    "games": 6
+   },
+   {
+    "player_id": 62299,
+    "name": "Даниил У.",
+    "games": 6
+   },
+   {
+    "player_id": 34508,
+    "name": "Александр Ц.",
+    "games": 6
+   },
+   {
+    "player_id": 89287,
+    "name": "Алексей С.",
+    "games": 6
+   },
+   {
+    "player_id": 126620,
+    "name": "Алексей Д.",
+    "games": 6
+   },
+   {
+    "player_id": 26101,
+    "name": "Алексей П.",
+    "games": 6
+   },
+   {
+    "player_id": 269265,
+    "name": "Лев Е.",
+    "games": 6
+   },
+   {
+    "player_id": 26818,
+    "name": "Анастасия Р.",
+    "games": 6
+   },
+   {
+    "player_id": 120326,
+    "name": "Анна Л.",
+    "games": 6
+   },
+   {
+    "player_id": 2005,
+    "name": "Пётр Б.",
+    "games": 5
+   },
+   {
+    "player_id": 22935,
+    "name": "Илья Н.",
+    "games": 5
+   },
+   {
+    "player_id": 15456,
+    "name": "Сергей К.",
+    "games": 5
+   },
+   {
+    "player_id": 4852,
+    "name": "Дмитрий В.",
+    "games": 5
+   },
+   {
+    "player_id": 75320,
+    "name": "Галина Д.",
+    "games": 5
+   },
+   {
+    "player_id": 17806,
+    "name": "Владимир Л.",
+    "games": 5
+   },
+   {
+    "player_id": 74413,
+    "name": "Елизавета В.",
+    "games": 5
+   },
+   {
+    "player_id": 15051,
+    "name": "Георгий К.",
+    "games": 5
+   },
+   {
+    "player_id": 6965,
+    "name": "Полина Г.",
+    "games": 5
+   },
+   {
+    "player_id": 30357,
+    "name": "Дмитрий С.",
+    "games": 5
+   },
+   {
+    "player_id": 18332,
+    "name": "Александр Л.",
+    "games": 5
+   },
+   {
+    "player_id": 74382,
+    "name": "Михаил Н.",
+    "games": 5
+   },
+   {
+    "player_id": 88078,
+    "name": "Ирина А.",
+    "games": 5
+   },
+   {
+    "player_id": 29973,
+    "name": "Павел С.",
+    "games": 5
+   },
+   {
+    "player_id": 56486,
+    "name": "Райганат К.",
+    "games": 5
+   },
+   {
+    "player_id": 15746,
+    "name": "Михаил К.",
+    "games": 5
+   },
+   {
+    "player_id": 18871,
+    "name": "Иван Л.",
+    "games": 5
+   },
+   {
+    "player_id": 22482,
+    "name": "Роман Н.",
+    "games": 4
+   },
+   {
+    "player_id": 29297,
+    "name": "Игорь С.",
+    "games": 4
+   },
+   {
+    "player_id": 29591,
+    "name": "Антон С.",
+    "games": 4
+   },
+   {
+    "player_id": 26089,
+    "name": "Ирина П.",
+    "games": 4
+   },
+   {
+    "player_id": 9299,
+    "name": "Отабек Д.",
+    "games": 4
+   },
+   {
+    "player_id": 27852,
+    "name": "Ян С.",
+    "games": 4
+   },
+   {
+    "player_id": 45763,
+    "name": "Сергей К.",
+    "games": 4
+   },
+   {
+    "player_id": 26705,
+    "name": "Ганишер Р.",
+    "games": 4
+   },
+   {
+    "player_id": 48843,
+    "name": "Муроджон Х.",
+    "games": 4
+   },
+   {
+    "player_id": 44823,
+    "name": "Владимир Ц.",
+    "games": 4
+   },
+   {
+    "player_id": 26859,
+    "name": "Борис Р.",
+    "games": 4
+   },
+   {
+    "player_id": 29399,
+    "name": "Александр С.",
+    "games": 4
+   },
+   {
+    "player_id": 4121,
+    "name": "Антон Б.",
+    "games": 4
+   },
+   {
+    "player_id": 12904,
+    "name": "Ленар К.",
+    "games": 4
+   },
+   {
+    "player_id": 56840,
+    "name": "Алексей Ш.",
+    "games": 4
+   },
+   {
+    "player_id": 30879,
+    "name": "Андрей С.",
+    "games": 4
+   },
+   {
+    "player_id": 20001,
+    "name": "Александр М.",
+    "games": 4
+   },
+   {
+    "player_id": 43356,
+    "name": "Сергей В.",
+    "games": 4
+   },
+   {
+    "player_id": 27240,
+    "name": "Анастасия Р.",
+    "games": 4
+   },
+   {
+    "player_id": 904,
+    "name": "Максим А.",
+    "games": 4
+   },
+   {
+    "player_id": 123681,
+    "name": "Галина К.",
+    "games": 4
+   },
+   {
+    "player_id": 156613,
+    "name": "Наталия З.",
+    "games": 4
+   },
+   {
+    "player_id": 59793,
+    "name": "Андрей М.",
+    "games": 4
+   },
+   {
+    "player_id": 1043,
+    "name": "Алексей А.",
+    "games": 4
+   },
+   {
+    "player_id": 20121,
+    "name": "Андрей М.",
+    "games": 3
+   },
+   {
+    "player_id": 19931,
+    "name": "Екатерина М.",
+    "games": 3
+   },
+   {
+    "player_id": 11201,
+    "name": "Татьяна З.",
+    "games": 3
+   },
+   {
+    "player_id": 15226,
+    "name": "Мария К.",
+    "games": 3
+   },
+   {
+    "player_id": 2939,
+    "name": "Дмитрий Б.",
+    "games": 3
+   },
+   {
+    "player_id": 36673,
+    "name": "Андрей Ш.",
+    "games": 3
+   },
+   {
+    "player_id": 5990,
+    "name": "Андрей В.",
+    "games": 3
+   },
+   {
+    "player_id": 30579,
+    "name": "Герман С.",
+    "games": 3
+   },
+   {
+    "player_id": 27989,
+    "name": "Александр С.",
+    "games": 3
+   },
+   {
+    "player_id": 14016,
+    "name": "Евгения К.",
+    "games": 3
+   },
+   {
+    "player_id": 11013,
+    "name": "Ирина Ж.",
+    "games": 3
+   },
+   {
+    "player_id": 28745,
+    "name": "Максим С.",
+    "games": 3
+   },
+   {
+    "player_id": 32516,
+    "name": "Мария У.",
+    "games": 3
+   },
+   {
+    "player_id": 18009,
+    "name": "Екатерина Л.",
+    "games": 3
+   },
+   {
+    "player_id": 9660,
+    "name": "Сергей Д.",
+    "games": 3
+   },
+   {
+    "player_id": 27043,
+    "name": "Михаил Р.",
+    "games": 3
+   },
+   {
+    "player_id": 4426,
+    "name": "Галина Б.",
+    "games": 3
+   },
+   {
+    "player_id": 31190,
+    "name": "Илья Т.",
+    "games": 3
+   },
+   {
+    "player_id": 32777,
+    "name": "Павел У.",
+    "games": 3
+   },
+   {
+    "player_id": 33197,
+    "name": "Алексей Ф.",
+    "games": 3
+   },
+   {
+    "player_id": 12770,
+    "name": "Илья И.",
+    "games": 3
+   },
+   {
+    "player_id": 505,
+    "name": "Иделия А.",
+    "games": 3
+   },
+   {
+    "player_id": 33509,
+    "name": "Иван Ф.",
+    "games": 3
+   },
+   {
+    "player_id": 39370,
+    "name": "Сергей П.",
+    "games": 3
+   },
+   {
+    "player_id": 18036,
+    "name": "Михаил Л.",
+    "games": 3
+   },
+   {
+    "player_id": 31056,
+    "name": "Тимур С.",
+    "games": 3
+   },
+   {
+    "player_id": 1387,
+    "name": "Георгий А.",
+    "games": 3
+   },
+   {
+    "player_id": 70750,
+    "name": "Денис Г.",
+    "games": 3
+   },
+   {
+    "player_id": 7008,
+    "name": "Алексей Г.",
+    "games": 3
+   },
+   {
+    "player_id": 59140,
+    "name": "Борис Б.",
+    "games": 3
+   },
+   {
+    "player_id": 58939,
+    "name": "Дарья Л.",
+    "games": 3
+   },
+   {
+    "player_id": 3762,
+    "name": "Тимофей Б.",
+    "games": 3
+   },
+   {
+    "player_id": 54910,
+    "name": "Антон П.",
+    "games": 3
+   },
+   {
+    "player_id": 37761,
+    "name": "Дмитрий С.",
+    "games": 3
+   },
+   {
+    "player_id": 24341,
+    "name": "Даниил П.",
+    "games": 3
+   },
+   {
+    "player_id": 34647,
+    "name": "Алексей Ч.",
+    "games": 3
+   },
+   {
+    "player_id": 17104,
+    "name": "Александр К.",
+    "games": 3
+   },
+   {
+    "player_id": 53711,
+    "name": "Денис Б.",
+    "games": 3
+   },
+   {
+    "player_id": 9801,
+    "name": "Егор Д.",
+    "games": 3
+   },
+   {
+    "player_id": 53689,
+    "name": "Антон Т.",
+    "games": 3
+   },
+   {
+    "player_id": 92003,
+    "name": "Джессика Л.",
+    "games": 3
+   },
+   {
+    "player_id": 31493,
+    "name": "Сергей Т.",
+    "games": 3
+   },
+   {
+    "player_id": 116331,
+    "name": "Сергей Г.",
+    "games": 3
+   },
+   {
+    "player_id": 202336,
+    "name": "Пётр М.",
+    "games": 3
+   },
+   {
+    "player_id": 11324,
+    "name": "Юлия З.",
+    "games": 3
+   },
+   {
+    "player_id": 101083,
+    "name": "Максим Я.",
+    "games": 3
+   },
+   {
+    "player_id": 173230,
+    "name": "Дмитрий К.",
+    "games": 3
+   },
+   {
+    "player_id": 173568,
+    "name": "Татьяна З.",
+    "games": 3
+   },
+   {
+    "player_id": 238962,
+    "name": "Максим К.",
+    "games": 3
+   },
+   {
+    "player_id": 24850,
+    "name": "Александр П.",
+    "games": 3
+   },
+   {
+    "player_id": 73159,
+    "name": "Ирина Ч.",
+    "games": 3
+   },
+   {
+    "player_id": 25586,
+    "name": "Александр П.",
+    "games": 2
+   },
+   {
+    "player_id": 3787,
+    "name": "Алексей Б.",
+    "games": 2
+   },
+   {
+    "player_id": 1482,
+    "name": "Виктор А.",
+    "games": 2
+   },
+   {
+    "player_id": 17795,
+    "name": "Александр Л.",
+    "games": 2
+   },
+   {
+    "player_id": 3327,
+    "name": "Светлана Б.",
+    "games": 2
+   },
+   {
+    "player_id": 35477,
+    "name": "Владимир Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 34219,
+    "name": "Олег Х.",
+    "games": 2
+   },
+   {
+    "player_id": 5195,
+    "name": "Анатолий В.",
+    "games": 2
+   },
+   {
+    "player_id": 1603,
+    "name": "Лариса А.",
+    "games": 2
+   },
+   {
+    "player_id": 21487,
+    "name": "Борис М.",
+    "games": 2
+   },
+   {
+    "player_id": 6208,
+    "name": "Евгений В.",
+    "games": 2
+   },
+   {
+    "player_id": 16731,
+    "name": "Владимир К.",
+    "games": 2
+   },
+   {
+    "player_id": 19915,
+    "name": "Александр М.",
+    "games": 2
+   },
+   {
+    "player_id": 19797,
+    "name": "Дениза М.",
+    "games": 2
+   },
+   {
+    "player_id": 20207,
+    "name": "Михаил М.",
+    "games": 2
+   },
+   {
+    "player_id": 7281,
+    "name": "Вячеслав Г.",
+    "games": 2
+   },
+   {
+    "player_id": 1145,
+    "name": "Екатерина А.",
+    "games": 2
+   },
+   {
+    "player_id": 27159,
+    "name": "Алексей Р.",
+    "games": 2
+   },
+   {
+    "player_id": 24239,
+    "name": "Анна П.",
+    "games": 2
+   },
+   {
+    "player_id": 11196,
+    "name": "Андрей З.",
+    "games": 2
+   },
+   {
+    "player_id": 10213,
+    "name": "Всеволод Е.",
+    "games": 2
+   },
+   {
+    "player_id": 80,
+    "name": "Виктор А.",
+    "games": 2
+   },
+   {
+    "player_id": 28426,
+    "name": "Иван С.",
+    "games": 2
+   },
+   {
+    "player_id": 26465,
+    "name": "Елизавета Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 36568,
+    "name": "Андрей Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 15526,
+    "name": "Елена К.",
+    "games": 2
+   },
+   {
+    "player_id": 4246,
+    "name": "Владимир Б.",
+    "games": 2
+   },
+   {
+    "player_id": 10332,
+    "name": "Ольга Е.",
+    "games": 2
+   },
+   {
+    "player_id": 27515,
+    "name": "Тимур Р.",
+    "games": 2
+   },
+   {
+    "player_id": 32628,
+    "name": "Мустафа У.",
+    "games": 2
+   },
+   {
+    "player_id": 20420,
+    "name": "Владимир М.",
+    "games": 2
+   },
+   {
+    "player_id": 21633,
+    "name": "Феликс М.",
+    "games": 2
+   },
+   {
+    "player_id": 14756,
+    "name": "Елена К.",
+    "games": 2
+   },
+   {
+    "player_id": 101834,
+    "name": "Вера Т.",
+    "games": 2
+   },
+   {
+    "player_id": 24603,
+    "name": "Роман П.",
+    "games": 2
+   },
+   {
+    "player_id": 29613,
+    "name": "Дмитрий С.",
+    "games": 2
+   },
+   {
+    "player_id": 60553,
+    "name": "Денис К.",
+    "games": 2
+   },
+   {
+    "player_id": 44126,
+    "name": "Григорий Р.",
+    "games": 2
+   },
+   {
+    "player_id": 4762,
+    "name": "Евгений Б.",
+    "games": 2
+   },
+   {
+    "player_id": 10083,
+    "name": "Дмитрий Д.",
+    "games": 2
+   },
+   {
+    "player_id": 32379,
+    "name": "Марина Т.",
+    "games": 2
+   },
+   {
+    "player_id": 93482,
+    "name": "Юлия Б.",
+    "games": 2
+   },
+   {
+    "player_id": 3096,
+    "name": "Иван Б.",
+    "games": 2
+   },
+   {
+    "player_id": 39265,
+    "name": "Алёна Р.",
+    "games": 2
+   },
+   {
+    "player_id": 932,
+    "name": "Григорий А.",
+    "games": 2
+   },
+   {
+    "player_id": 90988,
+    "name": "Ян К.",
+    "games": 2
+   },
+   {
+    "player_id": 3925,
+    "name": "Павел Б.",
+    "games": 2
+   },
+   {
+    "player_id": 66828,
+    "name": "Никита Б.",
+    "games": 2
+   },
+   {
+    "player_id": 31941,
+    "name": "Денис Т.",
+    "games": 2
+   },
+   {
+    "player_id": 80897,
+    "name": "Дмитрий С.",
+    "games": 2
+   },
+   {
+    "player_id": 12557,
+    "name": "Диана И.",
+    "games": 2
+   },
+   {
+    "player_id": 80594,
+    "name": "Николай М.",
+    "games": 2
+   },
+   {
+    "player_id": 4894,
+    "name": "Эльмир В.",
+    "games": 2
+   },
+   {
+    "player_id": 40635,
+    "name": "Александра Б.",
+    "games": 2
+   },
+   {
+    "player_id": 41351,
+    "name": "Роман А.",
+    "games": 2
+   },
+   {
+    "player_id": 14302,
+    "name": "Владимир К.",
+    "games": 2
+   },
+   {
+    "player_id": 41350,
+    "name": "Виктория Р.",
+    "games": 2
+   },
+   {
+    "player_id": 29943,
+    "name": "Ирина С.",
+    "games": 2
+   },
+   {
+    "player_id": 21649,
+    "name": "Максим М.",
+    "games": 2
+   },
+   {
+    "player_id": 26988,
+    "name": "Дмитрий Р.",
+    "games": 2
+   },
+   {
+    "player_id": 15472,
+    "name": "Евгений К.",
+    "games": 2
+   },
+   {
+    "player_id": 56587,
+    "name": "Олег О.",
+    "games": 2
+   },
+   {
+    "player_id": 3159,
+    "name": "Илья Б.",
+    "games": 2
+   },
+   {
+    "player_id": 16332,
+    "name": "Николай К.",
+    "games": 2
+   },
+   {
+    "player_id": 29599,
+    "name": "Виктор С.",
+    "games": 2
+   },
+   {
+    "player_id": 83428,
+    "name": "Александр Б.",
+    "games": 2
+   },
+   {
+    "player_id": 132797,
+    "name": "Михаил К.",
+    "games": 2
+   },
+   {
+    "player_id": 86792,
+    "name": "Кирилл С.",
+    "games": 2
+   },
+   {
+    "player_id": 35889,
+    "name": "Игорь Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 38168,
+    "name": "Максим К.",
+    "games": 2
+   },
+   {
+    "player_id": 116577,
+    "name": "Ольга Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 24543,
+    "name": "Евгений П.",
+    "games": 2
+   },
+   {
+    "player_id": 72332,
+    "name": "Андрей Е.",
+    "games": 2
+   },
+   {
+    "player_id": 274989,
+    "name": "Евгений Б.",
+    "games": 2
+   },
+   {
+    "player_id": 72211,
+    "name": "Мария П.",
+    "games": 2
+   },
+   {
+    "player_id": 23075,
+    "name": "Павел Н.",
+    "games": 2
+   },
+   {
+    "player_id": 20814,
+    "name": "Денис М.",
+    "games": 2
+   },
+   {
+    "player_id": 32919,
+    "name": "Булат Ф.",
+    "games": 2
+   },
+   {
+    "player_id": 124924,
+    "name": "Ольга В.",
+    "games": 2
+   },
+   {
+    "player_id": 9678,
+    "name": "Семён Д.",
+    "games": 2
+   },
+   {
+    "player_id": 24639,
+    "name": "Александр П.",
+    "games": 2
+   },
+   {
+    "player_id": 42837,
+    "name": "Рачья Г.",
+    "games": 2
+   },
+   {
+    "player_id": 32298,
+    "name": "Глеб Т.",
+    "games": 2
+   },
+   {
+    "player_id": 133610,
+    "name": "Максим Б.",
+    "games": 2
+   },
+   {
+    "player_id": 105826,
+    "name": "Михаил Т.",
+    "games": 2
+   },
+   {
+    "player_id": 278464,
+    "name": "Анастасия К.",
+    "games": 2
+   },
+   {
+    "player_id": 70653,
+    "name": "Феофан И.",
+    "games": 2
+   },
+   {
+    "player_id": 58714,
+    "name": "Георгий М.",
+    "games": 2
+   },
+   {
+    "player_id": 34328,
+    "name": "Михаил Ц.",
+    "games": 2
+   },
+   {
+    "player_id": 1068,
+    "name": "Павел А.",
+    "games": 2
+   },
+   {
+    "player_id": 94164,
+    "name": "Никита П.",
+    "games": 2
+   },
+   {
+    "player_id": 34605,
+    "name": "Дмитрий Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 8448,
+    "name": "Мария Г.",
+    "games": 1
+   },
+   {
+    "player_id": 19027,
+    "name": "Лев Л.",
+    "games": 1
+   },
+   {
+    "player_id": 34899,
+    "name": "Александр Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 14511,
+    "name": "Ирина К.",
+    "games": 1
+   },
+   {
+    "player_id": 26798,
+    "name": "Анна Р.",
+    "games": 1
+   },
+   {
+    "player_id": 36984,
+    "name": "Ирина Ю.",
+    "games": 1
+   },
+   {
+    "player_id": 37610,
+    "name": "Наталья И.",
+    "games": 1
+   },
+   {
+    "player_id": 22389,
+    "name": "Владислав Н.",
+    "games": 1
+   },
+   {
+    "player_id": 14065,
+    "name": "Александр К.",
+    "games": 1
+   },
+   {
+    "player_id": 22965,
+    "name": "Светлана Н.",
+    "games": 1
+   },
+   {
+    "player_id": 13551,
+    "name": "Вадим К.",
+    "games": 1
+   },
+   {
+    "player_id": 15442,
+    "name": "Дмитрий К.",
+    "games": 1
+   },
+   {
+    "player_id": 18001,
+    "name": "Николай Л.",
+    "games": 1
+   },
+   {
+    "player_id": 30123,
+    "name": "Денис С.",
+    "games": 1
+   },
+   {
+    "player_id": 30187,
+    "name": "Елена С.",
+    "games": 1
+   },
+   {
+    "player_id": 10375,
+    "name": "Евгений Е.",
+    "games": 1
+   },
+   {
+    "player_id": 23716,
+    "name": "Анастасия О.",
+    "games": 1
+   },
+   {
+    "player_id": 37335,
+    "name": "Юрий Я.",
+    "games": 1
+   },
+   {
+    "player_id": 29201,
+    "name": "Евгения С.",
+    "games": 1
+   },
+   {
+    "player_id": 2943,
+    "name": "Маргарита Б.",
+    "games": 1
+   },
+   {
+    "player_id": 22530,
+    "name": "Екатерина Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 16250,
+    "name": "Богдан К.",
+    "games": 1
+   },
+   {
+    "player_id": 16695,
+    "name": "Дмитрий К.",
+    "games": 1
+   },
+   {
+    "player_id": 9061,
+    "name": "Евгений Д.",
+    "games": 1
+   },
+   {
+    "player_id": 376,
+    "name": "Ольга А.",
+    "games": 1
+   },
+   {
+    "player_id": 2642,
+    "name": "Руслан Б.",
+    "games": 1
+   },
+   {
+    "player_id": 8697,
+    "name": "Мария К.",
+    "games": 1
+   },
+   {
+    "player_id": 18543,
+    "name": "Александр Л.",
+    "games": 1
+   },
+   {
+    "player_id": 37629,
+    "name": "Юлия К.",
+    "games": 1
+   },
+   {
+    "player_id": 23509,
+    "name": "Вадим О.",
+    "games": 1
+   },
+   {
+    "player_id": 15160,
+    "name": "Михаил К.",
+    "games": 1
+   },
+   {
+    "player_id": 24899,
+    "name": "Кирилл П.",
+    "games": 1
+   },
+   {
+    "player_id": 19623,
+    "name": "Алёна М.",
+    "games": 1
+   },
+   {
+    "player_id": 34784,
+    "name": "Сергей Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 4063,
+    "name": "Дмитрий Б.",
+    "games": 1
+   },
+   {
+    "player_id": 27009,
+    "name": "Александр Р.",
+    "games": 1
+   },
+   {
+    "player_id": 31355,
+    "name": "Антон Т.",
+    "games": 1
+   },
+   {
+    "player_id": 18286,
+    "name": "Яков Л.",
+    "games": 1
+   },
+   {
+    "player_id": 16865,
+    "name": "Светлана К.",
+    "games": 1
+   },
+   {
+    "player_id": 34335,
+    "name": "Роман Ц.",
+    "games": 1
+   },
+   {
+    "player_id": 25971,
+    "name": "Алексей П.",
+    "games": 1
+   },
+   {
+    "player_id": 31171,
+    "name": "Дарья Б.",
+    "games": 1
+   },
+   {
+    "player_id": 5862,
+    "name": "Сергей В.",
+    "games": 1
+   },
+   {
+    "player_id": 12401,
+    "name": "Егор И.",
+    "games": 1
+   },
+   {
+    "player_id": 19060,
+    "name": "Александр Л.",
+    "games": 1
+   },
+   {
+    "player_id": 39431,
+    "name": "Анастасия Б.",
+    "games": 1
+   },
+   {
+    "player_id": 18252,
+    "name": "Руслан Л.",
+    "games": 1
+   },
+   {
+    "player_id": 9826,
+    "name": "Сергей Д.",
+    "games": 1
+   },
+   {
+    "player_id": 3645,
+    "name": "Кирилл Б.",
+    "games": 1
+   },
+   {
+    "player_id": 37646,
+    "name": "Андрей К.",
+    "games": 1
+   },
+   {
+    "player_id": 82798,
+    "name": "Алексей Ж.",
+    "games": 1
+   },
+   {
+    "player_id": 95470,
+    "name": "Андрей З.",
+    "games": 1
+   },
+   {
+    "player_id": 96311,
+    "name": "Лора М.",
+    "games": 1
+   },
+   {
+    "player_id": 69491,
+    "name": "Станислав М.",
+    "games": 1
+   },
+   {
+    "player_id": 69501,
+    "name": "Андрей С.",
+    "games": 1
+   },
+   {
+    "player_id": 69492,
+    "name": "Алексей В.",
+    "games": 1
+   },
+   {
+    "player_id": 37142,
+    "name": "Азизбек Ю.",
+    "games": 1
+   },
+   {
+    "player_id": 29655,
+    "name": "Ярослав С.",
+    "games": 1
+   },
+   {
+    "player_id": 16067,
+    "name": "Борис К.",
+    "games": 1
+   },
+   {
+    "player_id": 10763,
+    "name": "Иван Ж.",
+    "games": 1
+   },
+   {
+    "player_id": 19711,
+    "name": "Расим М.",
+    "games": 1
+   },
+   {
+    "player_id": 9462,
+    "name": "Ольга Д.",
+    "games": 1
+   },
+   {
+    "player_id": 22242,
+    "name": "Ксения Н.",
+    "games": 1
+   },
+   {
+    "player_id": 23234,
+    "name": "Валерий О.",
+    "games": 1
+   },
+   {
+    "player_id": 74545,
+    "name": "Марина Г.",
+    "games": 1
+   },
+   {
+    "player_id": 97285,
+    "name": "Леонид Г.",
+    "games": 1
+   },
+   {
+    "player_id": 67901,
+    "name": "Елена Х.",
+    "games": 1
+   },
+   {
+    "player_id": 15196,
+    "name": "Светлана О.",
+    "games": 1
+   },
+   {
+    "player_id": 12148,
+    "name": "Илья И.",
+    "games": 1
+   },
+   {
+    "player_id": 39390,
+    "name": "Елена З.",
+    "games": 1
+   },
+   {
+    "player_id": 13523,
+    "name": "Игорь К.",
+    "games": 1
+   },
+   {
+    "player_id": 34761,
+    "name": "Евгений Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 66735,
+    "name": "Наталья К.",
+    "games": 1
+   },
+   {
+    "player_id": 66736,
+    "name": "Антон Г.",
+    "games": 1
+   },
+   {
+    "player_id": 46339,
+    "name": "Антон В.",
+    "games": 1
+   },
+   {
+    "player_id": 23594,
+    "name": "Борис О.",
+    "games": 1
+   },
+   {
+    "player_id": 67090,
+    "name": "Сергей О.",
+    "games": 1
+   },
+   {
+    "player_id": 16329,
+    "name": "Ксения Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 35385,
+    "name": "Эдуард Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 24006,
+    "name": "Дмитрий П.",
+    "games": 1
+   },
+   {
+    "player_id": 23079,
+    "name": "Мария Н.",
+    "games": 1
+   },
+   {
+    "player_id": 54897,
+    "name": "Динара А.",
+    "games": 1
+   },
+   {
+    "player_id": 66802,
+    "name": "Галина Н.",
+    "games": 1
+   },
+   {
+    "player_id": 22886,
+    "name": "Рустам Н.",
+    "games": 1
+   },
+   {
+    "player_id": 487,
+    "name": "Игорь А.",
+    "games": 1
+   },
+   {
+    "player_id": 535,
+    "name": "Алексей А.",
+    "games": 1
+   },
+   {
+    "player_id": 26173,
+    "name": "Алексей П.",
+    "games": 1
+   },
+   {
+    "player_id": 5261,
+    "name": "Оксана В.",
+    "games": 1
+   },
+   {
+    "player_id": 95356,
+    "name": "Сергей Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 9857,
+    "name": "Алексей Д.",
+    "games": 1
+   },
+   {
+    "player_id": 85216,
+    "name": "Елизавета М.",
+    "games": 1
+   },
+   {
+    "player_id": 124237,
+    "name": "Алёна Б.",
+    "games": 1
+   },
+   {
+    "player_id": 149858,
+    "name": "Илья К.",
+    "games": 1
+   },
+   {
+    "player_id": 143076,
+    "name": "Анна Т.",
+    "games": 1
+   },
+   {
+    "player_id": 21428,
+    "name": "Вадим М.",
+    "games": 1
+   },
+   {
+    "player_id": 109884,
+    "name": "Татьяна Г.",
+    "games": 1
+   },
+   {
+    "player_id": 109678,
+    "name": "Екатерина Л.",
+    "games": 1
+   },
+   {
+    "player_id": 37865,
+    "name": "Филипп Т.",
+    "games": 1
+   },
+   {
+    "player_id": 21026,
+    "name": "Евгений М.",
+    "games": 1
+   },
+   {
+    "player_id": 33188,
+    "name": "Олег Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 33119,
+    "name": "Павел Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 198255,
+    "name": "Дмитрий П.",
+    "games": 1
+   },
+   {
+    "player_id": 21079,
+    "name": "Илья М.",
+    "games": 1
+   },
+   {
+    "player_id": 89344,
+    "name": "Денис С.",
+    "games": 1
+   },
+   {
+    "player_id": 103638,
+    "name": "Людмила Е.",
+    "games": 1
+   },
+   {
+    "player_id": 696,
+    "name": "Максим А.",
+    "games": 1
+   },
+   {
+    "player_id": 34173,
+    "name": "Никита Х.",
+    "games": 1
+   },
+   {
+    "player_id": 211267,
+    "name": "Ульяна Б.",
+    "games": 1
+   },
+   {
+    "player_id": 10695,
+    "name": "Иван Е.",
+    "games": 1
+   },
+   {
+    "player_id": 26911,
+    "name": "Александр Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 31038,
+    "name": "Владимир С.",
+    "games": 1
+   },
+   {
+    "player_id": 24490,
+    "name": "Юлия Б.",
+    "games": 1
+   },
+   {
+    "player_id": 17780,
+    "name": "Эвита С.",
+    "games": 1
+   },
+   {
+    "player_id": 86795,
+    "name": "Павел К.",
+    "games": 1
+   },
+   {
+    "player_id": 33331,
+    "name": "Дарья Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 64623,
+    "name": "Гурген Е.",
+    "games": 1
+   },
+   {
+    "player_id": 31184,
+    "name": "Эльман Т.",
+    "games": 1
+   },
+   {
+    "player_id": 137496,
+    "name": "Руслан А.",
+    "games": 1
+   },
+   {
+    "player_id": 88819,
+    "name": "Николай К.",
+    "games": 1
+   },
+   {
+    "player_id": 16537,
+    "name": "Татьяна К.",
+    "games": 1
+   },
+   {
+    "player_id": 3922,
+    "name": "Мирон Б.",
+    "games": 1
+   },
+   {
+    "player_id": 16581,
+    "name": "Андрей К.",
+    "games": 1
+   },
+   {
+    "player_id": 95484,
+    "name": "Александра Н.",
+    "games": 1
+   },
+   {
+    "player_id": 47436,
+    "name": "Георгий К.",
+    "games": 1
+   },
+   {
+    "player_id": 96330,
+    "name": "Наталья К.",
+    "games": 1
+   },
+   {
+    "player_id": 269507,
+    "name": "Иван К.",
+    "games": 1
+   },
+   {
+    "player_id": 138155,
+    "name": "Ростислав В.",
+    "games": 1
+   },
+   {
+    "player_id": 139595,
+    "name": "Алексей М.",
+    "games": 1
+   },
+   {
+    "player_id": 5342,
+    "name": "Никита В.",
+    "games": 1
+   },
+   {
+    "player_id": 170233,
+    "name": "Евгения Х.",
+    "games": 1
+   },
+   {
+    "player_id": 57018,
+    "name": "Владимир Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 38196,
+    "name": "Артём М.",
+    "games": 1
+   },
+   {
+    "player_id": 10651,
+    "name": "Евгений Е.",
+    "games": 1
+   },
+   {
+    "player_id": 182169,
+    "name": "Даниил Б.",
+    "games": 1
+   },
+   {
+    "player_id": 122589,
+    "name": "Арсений Г.",
+    "games": 1
+   },
+   {
+    "player_id": 64619,
+    "name": "Ваге М.",
+    "games": 1
+   },
+   {
+    "player_id": 34644,
+    "name": "Надежда Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 68892,
+    "name": "Денис Т.",
+    "games": 1
+   },
+   {
+    "player_id": 70497,
+    "name": "Александр Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 92947,
+    "name": "Артур К.",
+    "games": 1
+   },
+   {
+    "player_id": 110866,
+    "name": "Илья Б.",
+    "games": 1
+   },
+   {
+    "player_id": 148771,
+    "name": "Юлия Ю.",
+    "games": 1
+   },
+   {
+    "player_id": 46348,
+    "name": "Олег Б.",
+    "games": 1
+   },
+   {
+    "player_id": 183089,
+    "name": "Тимофей И.",
+    "games": 1
+   },
+   {
+    "player_id": 23988,
+    "name": "Виктория П.",
+    "games": 1
+   },
+   {
+    "player_id": 36592,
+    "name": "Алексей Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 124582,
+    "name": "Александр К.",
+    "games": 1
+   },
+   {
+    "player_id": 225823,
+    "name": "Ксения К.",
+    "games": 1
+   },
+   {
+    "player_id": 97091,
+    "name": "Ирина А.",
+    "games": 1
+   },
+   {
+    "player_id": 31848,
+    "name": "Александр Т.",
+    "games": 1
+   },
+   {
+    "player_id": 3843,
+    "name": "Светлана Б.",
+    "games": 1
+   },
+   {
+    "player_id": 17568,
+    "name": "Максим К.",
+    "games": 1
+   },
+   {
+    "player_id": 25759,
+    "name": "Надежда П.",
+    "games": 1
+   },
+   {
+    "player_id": 37276,
+    "name": "Наталья Я.",
+    "games": 1
+   },
+   {
+    "player_id": 37117,
+    "name": "Екатерина Ю.",
+    "games": 1
+   },
+   {
+    "player_id": 22046,
+    "name": "Андрей М.",
+    "games": 1
+   },
+   {
+    "player_id": 67879,
+    "name": "Александр Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 30990,
+    "name": "Пётр С.",
+    "games": 1
+   },
+   {
+    "player_id": 96325,
+    "name": "Андрей Т.",
+    "games": 1
+   },
+   {
+    "player_id": 12474,
+    "name": "Константин И.",
+    "games": 1
+   },
+   {
+    "player_id": 49740,
+    "name": "Вадим А.",
+    "games": 1
+   },
+   {
+    "player_id": 49741,
+    "name": "Леонид Т.",
+    "games": 1
+   },
+   {
+    "player_id": 10345,
+    "name": "Раиса Е.",
+    "games": 1
+   },
+   {
+    "player_id": 2694,
+    "name": "Игорь Б.",
+    "games": 1
+   },
+   {
+    "player_id": 23099,
+    "name": "Лиана Н.",
+    "games": 1
+   },
+   {
+    "player_id": 26546,
+    "name": "Марк Р.",
+    "games": 1
+   },
+   {
+    "player_id": 11877,
+    "name": "Ирина З.",
+    "games": 1
+   },
+   {
+    "player_id": 12409,
+    "name": "Алина С.",
+    "games": 1
+   },
+   {
+    "player_id": 30654,
+    "name": "Дмитрий С.",
+    "games": 1
+   },
+   {
+    "player_id": 31861,
+    "name": "Павел Т.",
+    "games": 1
+   },
+   {
+    "player_id": 4763,
+    "name": "Михаил Б.",
+    "games": 1
+   },
+   {
+    "player_id": 61120,
+    "name": "Артём Г.",
+    "games": 1
+   },
+   {
+    "player_id": 271502,
+    "name": "Вадим Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 22920,
+    "name": "Андрей Н.",
+    "games": 1
+   },
+   {
+    "player_id": 121253,
+    "name": "Вера Г.",
+    "games": 1
+   },
+   {
+    "player_id": 4064,
+    "name": "Алексей Б.",
+    "games": 1
+   },
+   {
+    "player_id": 175104,
+    "name": "Марат Н.",
+    "games": 1
+   },
+   {
+    "player_id": 29043,
+    "name": "Елена С.",
+    "games": 1
+   },
+   {
+    "player_id": 78389,
+    "name": "Демьян М.",
+    "games": 1
+   },
+   {
+    "player_id": 30291,
+    "name": "Кирилл С.",
+    "games": 1
+   },
+   {
+    "player_id": 129305,
+    "name": "Надежда П.",
+    "games": 1
+   },
+   {
+    "player_id": 90952,
+    "name": "Алексей С.",
+    "games": 1
+   },
+   {
+    "player_id": 176,
+    "name": "Сергей А.",
+    "games": 1
+   },
+   {
+    "player_id": 12915,
+    "name": "Айк К.",
+    "games": 1
+   },
+   {
+    "player_id": 74001,
+    "name": "Игорь М.",
+    "games": 1
+   },
+   {
+    "player_id": 40447,
+    "name": "Ярослав К.",
+    "games": 1
+   },
+   {
+    "player_id": 30371,
+    "name": "Юрий С.",
+    "games": 1
+   },
+   {
+    "player_id": 333929,
+    "name": "Маргарита А.",
+    "games": 1
+   },
+   {
+    "player_id": 6357,
+    "name": "Денис Э.",
+    "games": 1
+   },
+   {
+    "player_id": 219891,
+    "name": "Юрий Я.",
+    "games": 1
+   },
+   {
+    "player_id": 29328,
+    "name": "Евгений С.",
+    "games": 1
+   },
+   {
+    "player_id": 116757,
+    "name": "Анна Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 241346,
+    "name": "Анастасия Т.",
+    "games": 1
+   },
+   {
+    "player_id": 124785,
+    "name": "Александр З.",
+    "games": 1
+   },
+   {
+    "player_id": 3577,
+    "name": "Максим Б.",
+    "games": 1
+   },
+   {
+    "player_id": 96304,
+    "name": "Алексей Т.",
+    "games": 1
+   },
+   {
+    "player_id": 101397,
+    "name": "Владислав К.",
+    "games": 1
+   },
+   {
+    "player_id": 110327,
+    "name": "Александр С.",
+    "games": 1
+   },
+   {
+    "player_id": 110328,
+    "name": "Елена Г.",
+    "games": 1
+   },
+   {
+    "player_id": 115790,
+    "name": "Дмитрий Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 117567,
+    "name": "Елена Т.",
+    "games": 1
+   },
+   {
+    "player_id": 195993,
+    "name": "Оксана Л.",
+    "games": 1
+   },
+   {
+    "player_id": 19428,
+    "name": "Николай М.",
+    "games": 1
+   },
+   {
+    "player_id": 62070,
+    "name": "Анастасия Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 3423,
+    "name": "Юлия П.",
+    "games": 1
+   },
+   {
+    "player_id": 3608,
+    "name": "Дмитрий Б.",
+    "games": 1
+   },
+   {
+    "player_id": 80759,
+    "name": "Турал Т.",
+    "games": 1
+   },
+   {
+    "player_id": 5701,
+    "name": "Дмитрий В.",
+    "games": 1
+   },
+   {
+    "player_id": 2910,
+    "name": "Екатерина Б.",
+    "games": 1
+   },
+   {
+    "player_id": 19585,
+    "name": "Григорий М.",
+    "games": 1
+   },
+   {
+    "player_id": 37691,
+    "name": "Иван М.",
+    "games": 1
+   },
+   {
+    "player_id": 80591,
+    "name": "Константин К.",
+    "games": 1
+   },
+   {
+    "player_id": 61094,
+    "name": "Арутюн А.",
+    "games": 1
+   },
+   {
+    "player_id": 70136,
+    "name": "Дина Я.",
+    "games": 1
+   },
+   {
+    "player_id": 25121,
+    "name": "Дмитрий П.",
+    "games": 1
+   },
+   {
+    "player_id": 45344,
+    "name": "Надежда Н.",
+    "games": 1
+   },
+   {
+    "player_id": 116424,
+    "name": "Арина Д.",
+    "games": 1
+   },
+   {
+    "player_id": 327406,
+    "name": "Ольга П.",
+    "games": 1
+   },
+   {
+    "player_id": 173280,
+    "name": "Анна С.",
+    "games": 1
+   },
+   {
+    "player_id": 88487,
+    "name": "Дмитрий И.",
+    "games": 1
+   },
+   {
+    "player_id": 174076,
+    "name": "Никита Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 1513,
+    "name": "Людмила Г.",
+    "games": 1
+   }
+  ]
+ },
+ {
+  "player_id": 30152,
+  "date_from": "1990-01-01",
+  "date_to": "2026-01-01",
+  "tournament_types": "online_async",
+  "player_name": "Артём С.",
+  "teammates": [
+   {
+    "player_id": 28751,
+    "name": "Иван С.",
+    "games": 21
+   },
+   {
+    "player_id": 27403,
+    "name": "Максим Р.",
+    "games": 21
+   },
+   {
+    "player_id": 4270,
+    "name": "Александра Б.",
+    "games": 21
+   },
+   {
+    "player_id": 27822,
+    "name": "Михаил С.",
+    "games": 19
+   },
+   {
+    "player_id": 30270,
+    "name": "Сергей С.",
+    "games": 17
+   },
+   {
+    "player_id": 5328,
+    "name": "Дмитрий В.",
+    "games": 10
+   },
+   {
+    "player_id": 33620,
+    "name": "Руслан Х.",
+    "games": 9
+   },
+   {
+    "player_id": 2888,
+    "name": "Айдар Б.",
+    "games": 9
+   },
+   {
+    "player_id": 2421,
+    "name": "Ася С.",
+    "games": 8
+   },
+   {
+    "player_id": 72331,
+    "name": "Дмитрий С.",
+    "games": 7
+   },
+   {
+    "player_id": 95884,
+    "name": "Ирина П.",
+    "games": 6
+   },
+   {
+    "player_id": 63529,
+    "name": "Дмитрий Т.",
+    "games": 6
+   },
+   {
+    "player_id": 48340,
+    "name": "Юлия М.",
+    "games": 6
+   },
+   {
+    "player_id": 54910,
+    "name": "Антон П.",
+    "games": 6
+   },
+   {
+    "player_id": 148624,
+    "name": "Дамир М.",
+    "games": 5
+   },
+   {
+    "player_id": 90915,
+    "name": "Вадим Я.",
+    "games": 5
+   },
+   {
+    "player_id": 13689,
+    "name": "Дмитрий К.",
+    "games": 5
+   },
+   {
+    "player_id": 80593,
+    "name": "Алексей Ш.",
+    "games": 4
+   },
+   {
+    "player_id": 72211,
+    "name": "Мария П.",
+    "games": 4
+   },
+   {
+    "player_id": 15811,
+    "name": "Владислав К.",
+    "games": 4
+   },
+   {
+    "player_id": 1894,
+    "name": "Александр А.",
+    "games": 4
+   },
+   {
+    "player_id": 17104,
+    "name": "Александр К.",
+    "games": 3
+   },
+   {
+    "player_id": 19599,
+    "name": "Павел М.",
+    "games": 3
+   },
+   {
+    "player_id": 28513,
+    "name": "Владимир С.",
+    "games": 3
+   },
+   {
+    "player_id": 12119,
+    "name": "Дмитрий И.",
+    "games": 3
+   },
+   {
+    "player_id": 18540,
+    "name": "Константин Л.",
+    "games": 3
+   },
+   {
+    "player_id": 74001,
+    "name": "Игорь М.",
+    "games": 3
+   },
+   {
+    "player_id": 505,
+    "name": "Иделия А.",
+    "games": 3
+   },
+   {
+    "player_id": 33509,
+    "name": "Иван Ф.",
+    "games": 3
+   },
+   {
+    "player_id": 123681,
+    "name": "Галина К.",
+    "games": 3
+   },
+   {
+    "player_id": 78358,
+    "name": "Владислав Т.",
+    "games": 3
+   },
+   {
+    "player_id": 22799,
+    "name": "Сергей Н.",
+    "games": 3
+   },
+   {
+    "player_id": 23178,
+    "name": "Елизавета О.",
+    "games": 2
+   },
+   {
+    "player_id": 13782,
+    "name": "Тимур К.",
+    "games": 2
+   },
+   {
+    "player_id": 4852,
+    "name": "Дмитрий В.",
+    "games": 2
+   },
+   {
+    "player_id": 32458,
+    "name": "Игорь Т.",
+    "games": 2
+   },
+   {
+    "player_id": 904,
+    "name": "Максим А.",
+    "games": 2
+   },
+   {
+    "player_id": 95359,
+    "name": "Дарья Г.",
+    "games": 2
+   },
+   {
+    "player_id": 23367,
+    "name": "Борис О.",
+    "games": 2
+   },
+   {
+    "player_id": 61400,
+    "name": "Алексей А.",
+    "games": 2
+   },
+   {
+    "player_id": 32266,
+    "name": "Анна Т.",
+    "games": 2
+   },
+   {
+    "player_id": 13857,
+    "name": "Ксения К.",
+    "games": 2
+   },
+   {
+    "player_id": 46339,
+    "name": "Антон В.",
+    "games": 2
+   },
+   {
+    "player_id": 37836,
+    "name": "Александр Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 36120,
+    "name": "Серафим Ш.",
+    "games": 2
+   },
+   {
+    "player_id": 39431,
+    "name": "Анастасия Б.",
+    "games": 2
+   },
+   {
+    "player_id": 34476,
+    "name": "Роман Ц.",
+    "games": 2
+   },
+   {
+    "player_id": 46976,
+    "name": "Мансур З.",
+    "games": 2
+   },
+   {
+    "player_id": 99361,
+    "name": "Евгений А.",
+    "games": 2
+   },
+   {
+    "player_id": 104370,
+    "name": "Динар С.",
+    "games": 2
+   },
+   {
+    "player_id": 136830,
+    "name": "Михаил М.",
+    "games": 2
+   },
+   {
+    "player_id": 37761,
+    "name": "Дмитрий С.",
+    "games": 2
+   },
+   {
+    "player_id": 80591,
+    "name": "Константин К.",
+    "games": 2
+   },
+   {
+    "player_id": 34647,
+    "name": "Алексей Ч.",
+    "games": 2
+   },
+   {
+    "player_id": 26101,
+    "name": "Алексей П.",
+    "games": 2
+   },
+   {
+    "player_id": 195993,
+    "name": "Оксана Л.",
+    "games": 2
+   },
+   {
+    "player_id": 57018,
+    "name": "Владимир Ч.",
+    "games": 2
+   },
+   {
+    "player_id": 31231,
+    "name": "Александр Т.",
+    "games": 2
+   },
+   {
+    "player_id": 120326,
+    "name": "Анна Л.",
+    "games": 2
+   },
+   {
+    "player_id": 19541,
+    "name": "Михаил М.",
+    "games": 2
+   },
+   {
+    "player_id": 34365,
+    "name": "Владимир Ц.",
+    "games": 2
+   },
+   {
+    "player_id": 88067,
+    "name": "Алиса Т.",
+    "games": 2
+   },
+   {
+    "player_id": 78101,
+    "name": "Али Б.",
+    "games": 2
+   },
+   {
+    "player_id": 30357,
+    "name": "Дмитрий С.",
+    "games": 1
+   },
+   {
+    "player_id": 39265,
+    "name": "Алёна Р.",
+    "games": 1
+   },
+   {
+    "player_id": 80897,
+    "name": "Дмитрий С.",
+    "games": 1
+   },
+   {
+    "player_id": 28440,
+    "name": "Екатерина С.",
+    "games": 1
+   },
+   {
+    "player_id": 33293,
+    "name": "Игорь Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 9785,
+    "name": "Владислав Д.",
+    "games": 1
+   },
+   {
+    "player_id": 21580,
+    "name": "Михаил М.",
+    "games": 1
+   },
+   {
+    "player_id": 225823,
+    "name": "Ксения К.",
+    "games": 1
+   },
+   {
+    "player_id": 33239,
+    "name": "Софья О.",
+    "games": 1
+   },
+   {
+    "player_id": 29943,
+    "name": "Ирина С.",
+    "games": 1
+   },
+   {
+    "player_id": 42945,
+    "name": "Никита И.",
+    "games": 1
+   },
+   {
+    "player_id": 152701,
+    "name": "Игорь М.",
+    "games": 1
+   },
+   {
+    "player_id": 21346,
+    "name": "Мария М.",
+    "games": 1
+   },
+   {
+    "player_id": 46348,
+    "name": "Олег Б.",
+    "games": 1
+   },
+   {
+    "player_id": 34846,
+    "name": "Антон Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 25882,
+    "name": "Максим П.",
+    "games": 1
+   },
+   {
+    "player_id": 30475,
+    "name": "Владимир С.",
+    "games": 1
+   },
+   {
+    "player_id": 24384,
+    "name": "Евгений П.",
+    "games": 1
+   },
+   {
+    "player_id": 19411,
+    "name": "Станислав М.",
+    "games": 1
+   },
+   {
+    "player_id": 24290,
+    "name": "Мария П.",
+    "games": 1
+   },
+   {
+    "player_id": 5195,
+    "name": "Анатолий В.",
+    "games": 1
+   },
+   {
+    "player_id": 88078,
+    "name": "Ирина А.",
+    "games": 1
+   },
+   {
+    "player_id": 6482,
+    "name": "Ким Г.",
+    "games": 1
+   },
+   {
+    "player_id": 23737,
+    "name": "Андрей О.",
+    "games": 1
+   },
+   {
+    "player_id": 38458,
+    "name": "Екатерина Л.",
+    "games": 1
+   },
+   {
+    "player_id": 97091,
+    "name": "Ирина А.",
+    "games": 1
+   },
+   {
+    "player_id": 31848,
+    "name": "Александр Т.",
+    "games": 1
+   },
+   {
+    "player_id": 267223,
+    "name": "Диляра Х.",
+    "games": 1
+   },
+   {
+    "player_id": 10660,
+    "name": "Сергей Е.",
+    "games": 1
+   },
+   {
+    "player_id": 71365,
+    "name": "Вадим Т.",
+    "games": 1
+   },
+   {
+    "player_id": 13638,
+    "name": "Михаил К.",
+    "games": 1
+   },
+   {
+    "player_id": 128188,
+    "name": "Джахан Г.",
+    "games": 1
+   },
+   {
+    "player_id": 269507,
+    "name": "Иван К.",
+    "games": 1
+   },
+   {
+    "player_id": 17296,
+    "name": "Виталий К.",
+    "games": 1
+   },
+   {
+    "player_id": 56000,
+    "name": "Евгений К.",
+    "games": 1
+   },
+   {
+    "player_id": 26988,
+    "name": "Дмитрий Р.",
+    "games": 1
+   },
+   {
+    "player_id": 95676,
+    "name": "Валерий Г.",
+    "games": 1
+   },
+   {
+    "player_id": 231645,
+    "name": "Михаил Г.",
+    "games": 1
+   },
+   {
+    "player_id": 21314,
+    "name": "Андрей М.",
+    "games": 1
+   },
+   {
+    "player_id": 24813,
+    "name": "Андрей П.",
+    "games": 1
+   },
+   {
+    "player_id": 26818,
+    "name": "Анастасия Р.",
+    "games": 1
+   },
+   {
+    "player_id": 94166,
+    "name": "Егор Д.",
+    "games": 1
+   },
+   {
+    "player_id": 31184,
+    "name": "Эльман Т.",
+    "games": 1
+   },
+   {
+    "player_id": 28689,
+    "name": "Инна С.",
+    "games": 1
+   },
+   {
+    "player_id": 32901,
+    "name": "Наиль Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 3922,
+    "name": "Мирон Б.",
+    "games": 1
+   },
+   {
+    "player_id": 16537,
+    "name": "Татьяна К.",
+    "games": 1
+   },
+   {
+    "player_id": 20461,
+    "name": "Анастасия М.",
+    "games": 1
+   },
+   {
+    "player_id": 29458,
+    "name": "Дмитрий С.",
+    "games": 1
+   },
+   {
+    "player_id": 28302,
+    "name": "Валерий С.",
+    "games": 1
+   },
+   {
+    "player_id": 23967,
+    "name": "Галина П.",
+    "games": 1
+   },
+   {
+    "player_id": 119877,
+    "name": "Светлана С.",
+    "games": 1
+   },
+   {
+    "player_id": 126620,
+    "name": "Алексей Д.",
+    "games": 1
+   },
+   {
+    "player_id": 87210,
+    "name": "Елизавета Д.",
+    "games": 1
+   },
+   {
+    "player_id": 4637,
+    "name": "Антон Б.",
+    "games": 1
+   },
+   {
+    "player_id": 39244,
+    "name": "Павел А.",
+    "games": 1
+   }
+  ]
+ },
+ {
+  "player_id": 30152,
+  "date_from": "2018-01-01",
+  "date_to": "2019-01-01",
+  "tournament_types": "all_tournaments",
+  "player_name": "Артём С.",
+  "teammates": [
+   {
+    "player_id": 28751,
+    "name": "Иван С.",
+    "games": 49
+   },
+   {
+    "player_id": 4270,
+    "name": "Александра Б.",
+    "games": 45
+   },
+   {
+    "player_id": 27822,
+    "name": "Михаил С.",
+    "games": 42
+   },
+   {
+    "player_id": 27403,
+    "name": "Максим Р.",
+    "games": 39
+   },
+   {
+    "player_id": 30270,
+    "name": "Сергей С.",
+    "games": 29
+   },
+   {
+    "player_id": 34365,
+    "name": "Владимир Ц.",
+    "games": 7
+   },
+   {
+    "player_id": 23178,
+    "name": "Елизавета О.",
+    "games": 7
+   },
+   {
+    "player_id": 6482,
+    "name": "Ким Г.",
+    "games": 7
+   },
+   {
+    "player_id": 17296,
+    "name": "Виталий К.",
+    "games": 7
+   },
+   {
+    "player_id": 23737,
+    "name": "Андрей О.",
+    "games": 5
+   },
+   {
+    "player_id": 15811,
+    "name": "Владислав К.",
+    "games": 4
+   },
+   {
+    "player_id": 23020,
+    "name": "Наталия Н.",
+    "games": 4
+   },
+   {
+    "player_id": 34846,
+    "name": "Антон Ч.",
+    "games": 4
+   },
+   {
+    "player_id": 2421,
+    "name": "Ася С.",
+    "games": 3
+   },
+   {
+    "player_id": 10664,
+    "name": "Анна Е.",
+    "games": 3
+   },
+   {
+    "player_id": 3762,
+    "name": "Тимофей Б.",
+    "games": 3
+   },
+   {
+    "player_id": 56000,
+    "name": "Евгений К.",
+    "games": 3
+   },
+   {
+    "player_id": 33620,
+    "name": "Руслан Х.",
+    "games": 3
+   },
+   {
+    "player_id": 32901,
+    "name": "Наиль Ф.",
+    "games": 2
+   },
+   {
+    "player_id": 58939,
+    "name": "Дарья Л.",
+    "games": 2
+   },
+   {
+    "player_id": 13782,
+    "name": "Тимур К.",
+    "games": 2
+   },
+   {
+    "player_id": 5328,
+    "name": "Дмитрий В.",
+    "games": 2
+   },
+   {
+    "player_id": 20691,
+    "name": "Станислав М.",
+    "games": 2
+   },
+   {
+    "player_id": 74382,
+    "name": "Михаил Н.",
+    "games": 2
+   },
+   {
+    "player_id": 95359,
+    "name": "Дарья Г.",
+    "games": 2
+   },
+   {
+    "player_id": 4894,
+    "name": "Эльмир В.",
+    "games": 2
+   },
+   {
+    "player_id": 38458,
+    "name": "Екатерина Л.",
+    "games": 2
+   },
+   {
+    "player_id": 40635,
+    "name": "Александра Б.",
+    "games": 2
+   },
+   {
+    "player_id": 30652,
+    "name": "Светлана С.",
+    "games": 2
+   },
+   {
+    "player_id": 20461,
+    "name": "Анастасия М.",
+    "games": 2
+   },
+   {
+    "player_id": 39244,
+    "name": "Павел А.",
+    "games": 2
+   },
+   {
+    "player_id": 19411,
+    "name": "Станислав М.",
+    "games": 1
+   },
+   {
+    "player_id": 24384,
+    "name": "Евгений П.",
+    "games": 1
+   },
+   {
+    "player_id": 31630,
+    "name": "Анастасия Т.",
+    "games": 1
+   },
+   {
+    "player_id": 4121,
+    "name": "Антон Б.",
+    "games": 1
+   },
+   {
+    "player_id": 85216,
+    "name": "Елизавета М.",
+    "games": 1
+   },
+   {
+    "player_id": 124237,
+    "name": "Алёна Б.",
+    "games": 1
+   },
+   {
+    "player_id": 43356,
+    "name": "Сергей В.",
+    "games": 1
+   },
+   {
+    "player_id": 149858,
+    "name": "Илья К.",
+    "games": 1
+   },
+   {
+    "player_id": 62299,
+    "name": "Даниил У.",
+    "games": 1
+   },
+   {
+    "player_id": 86775,
+    "name": "Рузель Х.",
+    "games": 1
+   },
+   {
+    "player_id": 27240,
+    "name": "Анастасия Р.",
+    "games": 1
+   },
+   {
+    "player_id": 30879,
+    "name": "Андрей С.",
+    "games": 1
+   },
+   {
+    "player_id": 80593,
+    "name": "Алексей Ш.",
+    "games": 1
+   },
+   {
+    "player_id": 1468,
+    "name": "Ким А.",
+    "games": 1
+   },
+   {
+    "player_id": 2005,
+    "name": "Пётр Б.",
+    "games": 1
+   },
+   {
+    "player_id": 42511,
+    "name": "Николай Н.",
+    "games": 1
+   },
+   {
+    "player_id": 54910,
+    "name": "Антон П.",
+    "games": 1
+   },
+   {
+    "player_id": 34909,
+    "name": "Ирина Ч.",
+    "games": 1
+   },
+   {
+    "player_id": 21091,
+    "name": "Сергей М.",
+    "games": 1
+   },
+   {
+    "player_id": 21428,
+    "name": "Вадим М.",
+    "games": 1
+   },
+   {
+    "player_id": 7008,
+    "name": "Алексей Г.",
+    "games": 1
+   },
+   {
+    "player_id": 10822,
+    "name": "Кирилл Ж.",
+    "games": 1
+   },
+   {
+    "player_id": 24543,
+    "name": "Евгений П.",
+    "games": 1
+   },
+   {
+    "player_id": 38196,
+    "name": "Артём М.",
+    "games": 1
+   },
+   {
+    "player_id": 31848,
+    "name": "Александр Т.",
+    "games": 1
+   },
+   {
+    "player_id": 39254,
+    "name": "Артём К.",
+    "games": 1
+   },
+   {
+    "player_id": 33509,
+    "name": "Иван Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 32919,
+    "name": "Булат Ф.",
+    "games": 1
+   },
+   {
+    "player_id": 20814,
+    "name": "Денис М.",
+    "games": 1
+   }
+  ]
+ },
+ {
+  "player_id": 1,
+  "date_from": "1990-01-01",
+  "date_to": "2026-01-01",
+  "tournament_types": "all_tournaments",
+  "player_name": "Алексей А.",
+  "teammates": [
+   {
+    "player_id": 472,
+    "name": "Артём А.",
+    "games": 1
+   },
+   {
+    "player_id": 2551,
+    "name": "Дарина Б.",
+    "games": 1
+   },
+   {
+    "player_id": 3841,
+    "name": "Владимир Б.",
+    "games": 1
+   },
+   {
+    "player_id": 5616,
+    "name": "Игорь В.",
+    "games": 1
+   },
+   {
+    "player_id": 9292,
+    "name": "Дмитрий Д.",
+    "games": 1
+   },
+   {
+    "player_id": 17213,
+    "name": "Александра К.",
+    "games": 1
+   },
+   {
+    "player_id": 18541,
+    "name": "Алексей Л.",
+    "games": 1
+   }
+  ]
+ },
+ {
+  "player_id": 99999999,
+  "date_from": "1990-01-01",
+  "date_to": "2026-01-01",
+  "tournament_types": "all_tournaments",
+  "player_name": "Игрок не найден",
+  "teammates": []
+ }
+]

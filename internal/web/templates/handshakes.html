@@ -1,0 +1,19 @@
+{{define "title"}}N рукопожатий{{end}}
+{{define "content"}}
+<h1>N рукопожатий</h1>
+<form action="/handshakes" method="post">
+<label for="player_id1">ID игрока 1</label><input name="player_id1" placeholder="12345" value="{{.PlayerID1}}">
+<label for="player_id2">ID игрока 2</label><input name="player_id2" placeholder="67890" value="{{.PlayerID2}}">
+<input type="submit" value="Рассчитать">
+</form>
+{{with .Result}}
+<h2>Кратчайший путь между игроками <a href="https://rating.chgk.info/player/{{.First.PlayerID}}">{{.First.PlayerID}}</a>, <a href="{{.First.StatsLink}}">{{.First.Name}}</a> и <a href="https://rating.chgk.info/player/{{.Second.PlayerID}}">{{.Second.PlayerID}}</a>, <a href="{{.Second.StatsLink}}">{{.Second.Name}}</a></h2>
+{{if .Same}}<p>Это один и тот же игрок</p>
+{{else if .Direct}}<p>Игроки соединены напрямую</p>
+{{else if .Intermediates}}<ol>
+{{range .Intermediates}}<li><a href="https://rating.chgk.info/player/{{.PlayerID}}">{{.PlayerID}}</a>, <a href="{{.StatsLink}}">{{.Name}}</a></li>
+{{end}}</ol>
+{{else}}<p>Путь не найден</p>
+{{end}}
+{{end}}
+{{end}}

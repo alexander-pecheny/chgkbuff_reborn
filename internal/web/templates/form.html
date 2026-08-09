@@ -1,0 +1,11 @@
+{{define "form"}}
+<form action="/" method="post">
+<label for="player_id">Ваш ID</label><input name="player_id" placeholder="12345" value="{{.Form.PlayerID}}">
+<label for="date_from">С даты</label><input name="date_from" placeholder="1990-02-28" value="{{.Form.DateFrom}}">
+<label for="date_to">По дату</label><input name="date_to" placeholder="2024-02-28" value="{{.Form.DateTo}}">
+<div><input id="all_tournaments" type="radio" name="tournament_types" value="all_tournaments" {{if eq .Form.Types "all_tournaments"}}checked{{end}}><label for="all_tournaments">Все турниры</label></div>
+<div><input id="lan_sync" type="radio" name="tournament_types" value="lan_sync" {{if eq .Form.Types "lan_sync"}}checked{{end}}><label for="lan_sync">Очники и синхроны</label></div>
+<div><input id="online_async" type="radio" name="tournament_types" value="online_async" {{if eq .Form.Types "online_async"}}checked{{end}}><label for="online_async">Онлайны и асинхроны</label></div>
+<input type="submit" value="Рассчитать">
+</form>
+{{end}}

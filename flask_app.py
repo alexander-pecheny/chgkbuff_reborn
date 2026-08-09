@@ -13,8 +13,6 @@ from collections import Counter, defaultdict
 from functools import wraps
 from typing import NamedTuple
 
-import dill
-import networkx as nx
 from config import Config
 from flask import (
     Flask,
@@ -31,7 +29,6 @@ UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
 DIR = os.path.dirname(os.path.abspath(__file__))
 DB_LOC = os.path.join(DIR, "buff.db")
 GRAPH_DB_LOC = os.path.join(DIR, "graph.db")
-GRAPH_PATH = os.path.join(DIR, "graph.pickle")
 TRUEDL_COEFF_PAIRS = [
     (10, 1.61),
     (25, 1.52),
@@ -130,18 +127,6 @@ def db_has_player(player_id, graph_db_path):
     ).fetchone()
     conn.close()
     return result is not None
-
-
-class GraphContainer:
-    def __init__(self):
-        self.g = None
-
-    def load_graph(self, path):
-        with open(path, "rb") as f:
-            self.g = dill.load(f)
-
-
-gc = GraphContainer()
 
 
 class Formatter(logging.Formatter):

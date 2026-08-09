@@ -1,0 +1,12 @@
+{{define "title"}}С кем вы играли чаще всего?{{end}}
+{{define "content"}}
+<h1>С кем вы играли чаще всего?</h1>
+{{template "form" .}}
+{{with .Stats}}
+<h2>Статистика игрока <a href="https://rating.chgk.info/player/{{.PlayerID}}">{{.PlayerID}}</a>, <a href="{{.SelfLink}}">{{.PlayerName}}</a> с {{.DateFrom}} по {{.DateTo}} ({{.Types}})</h2>
+<p>По клику на ID игрока открывается его страничка на турнирном сайте, на имя-фамилию — его статистика на buff, по клику на количество игр — страничка с вашими совместными играми.</p>
+<ol>
+{{range .Rows}}<li><a href="https://rating.chgk.info/player/{{.PlayerID}}">{{.PlayerID}}</a>, <a href="{{.StatsLink}}">{{.Name}}</a> — <a href="{{.TogetherLink}}">{{.Games}}</a></li>
+{{end}}</ol>
+{{end}}
+{{end}}

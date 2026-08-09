@@ -1,0 +1,12 @@
+{{define "title"}}{{.Name}}{{end}}
+{{define "content"}}
+<h1><a href="https://rating.chgk.info/tournament/{{.ID}}">{{.ID}}</a> {{.Name}}</h1>
+<p>{{.Date}}</p>
+{{with .TrueDL}}<p>TrueDL: {{.Overall}}, по турам: {{.ByTour}}</p>{{end}}
+<p>Всего вопросов: <abbr title="0% взятых" tabindex="0">⚰️</abbr> — {{index .Questions 0}}, <abbr title="1–20% взятых" tabindex="0">👹</abbr> — {{index .Questions 1}}, <abbr title="21–40% взятых" tabindex="0">😥</abbr> — {{index .Questions 2}}, <abbr title="41–60% взятых" tabindex="0">🙂</abbr> — {{index .Questions 3}}, <abbr title="61–80% взятых" tabindex="0">👶</abbr> — {{index .Questions 4}}, <abbr title="81–100% взятых" tabindex="0">🐣</abbr> — {{index .Questions 5}}.{{with .Discarded}} Снято: {{.}}.{{end}}</p>
+<table class="results">
+<colgroup><col class="team"><col class="number"><col class="number"><col class="number"><col class="category"><col class="category"><col class="category"><col class="category"><col class="category"></colgroup>
+<tr><td>Команда</td><td>Рейтинг</td><td>Взято</td><td>Ср. рейт</td><td>👹</td><td>😥</td><td>🙂</td><td>👶</td><td>🐣</td></tr>
+{{range .Teams}}<tr><td><a href="https://rating.chgk.info/teams/{{.TeamID}}">{{.TeamName}}</a></td><td>{{.Rating}}</td><td>{{.Taken}}</td><td>{{.AvgRating}}</td>{{range .ByCategory}}<td>{{.}}</td>{{end}}</tr>
+{{end}}</table>
+{{end}}

@@ -1,0 +1,18 @@
+{{define "layout"}}<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{block "title" .}}Buff{{end}}</title>
+    <link rel="stylesheet" href="/static/water.css">
+    <link rel="stylesheet" href="/static/buff.css">
+</head>
+<body>
+<header>
+<small><a href="/">с кем вы играли чаще всего?</a> · <a href="/handshakes">N рукопожатий</a> · <a href="/tournaments">турниры</a></small>
+</header>
+{{range .Errors}}<p class="message red">{{.}}</p>{{end}}
+{{template "content" .}}
+{{with .LastUpdate}}<p><small>Последнее обновление базы: {{.}}</small></p>{{end}}
+</body>
+</html>{{end}}

@@ -1,0 +1,48 @@
+[
+ {
+  "id1": 30152,
+  "id2": 13782,
+  "outcome": "direct",
+  "hops": 1,
+  "intermediates": []
+ },
+ {
+  "id1": 1,
+  "id2": 30152,
+  "outcome": "path",
+  "hops": 4,
+  "intermediates": [
+   18541,
+   11095,
+   34605
+  ]
+ },
+ {
+  "id1": 1355,
+  "id2": 341457,
+  "outcome": "no_path",
+  "hops": null,
+  "intermediates": []
+ },
+ {
+  "id1": 2084,
+  "id2": 341436,
+  "outcome": "no_path",
+  "hops": null,
+  "intermediates": []
+ },
+ {
+  "id1": 30152,
+  "id2": 30152,
+  "outcome": "self",
+  "hops": 0,
+  "intermediates": []
+ },
+ {
+  "id1": 30152,
+  "id2": 99999999,
+  "outcome": "unknown_player",
+  "hops": null,
+  "intermediates": []
+ }
+]

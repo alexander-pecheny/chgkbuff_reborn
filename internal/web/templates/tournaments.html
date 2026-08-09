@@ -1,0 +1,57 @@
+{{define "title"}}Турниры{{end}}
+{{define "content"}}
+<div class="narrow">
+<h1>Турниры</h1>
+{{template "pagination" .}}
+<div class="filters">
+<div><input type="text" id="nameFilter" placeholder="Фильтр по названию" oninput="filterTournaments()"></div>
+<div>
+<label><input type="checkbox" class="kindFilter" value="obychny" checked onchange="filterTournaments()"> обычный</label>
+<label><input type="checkbox" class="kindFilter" value="synchron" checked onchange="filterTournaments()"> синхрон</label>
+<label><input type="checkbox" class="kindFilter" value="asynchron" checked onchange="filterTournaments()"> асинхрон</label>
+</div>
+<div><label><input type="checkbox" id="resultsFilter" onchange="filterTournaments()"> только с результатами</label></div>
+</div>
+</div>
+<div class="wide">
+<table class="listing" id="tournaments">
+<colgroup><col class="id"><col class="name"><col class="date"><col class="date"><col class="kind"><col class="editors"></colgroup>
+<thead><tr><th>ID</th><th>Название турнира</th><th>Начало</th><th>Окончание</th><th>Тип</th><th>Редакторы</th></tr></thead>
+<tbody>
+{{range .Rows}}<tr data-kind="{{.Bucket}}" data-results="{{.HasResults}}">
+<td><a href="https://rating.chgk.info/tournament/{{.ID}}">{{.ID}}</a></td>
+<td>{{if .HasResults}}<a href="/tournament/{{.ID}}">{{.Name}}</a>{{else}}{{.Name}}{{end}}</td>
+<td>{{.DateStart}}</td>
+<td>{{.DateEnd}}</td>
+<td>{{.Type}}</td>
+<td class="editors">{{range $i, $e := .Editors}}{{if $i}}, {{end}}<a href="https://rating.chgk.info/player/{{$e.PlayerID}}">{{$e.Name}}</a>{{else}}-{{end}}</td>
+</tr>
+{{end}}</tbody>
+</table>
+</div>
+<div class="narrow">
+{{template "pagination" .}}
+</div>
+<script>
+function filterTournaments() {
+    const name = document.getElementById('nameFilter').value.toLowerCase();
+    const onlyWithResults = document.getElementById('resultsFilter').checked;
+    const kinds = new Set(Array.from(document.querySelectorAll('.kindFilter:checked'), box => box.value));
+    for (const row of document.querySelectorAll('#tournaments tbody tr')) {
+        const matchesName = row.cells[1].textContent.toLowerCase().includes(name);
+        const matchesKind = kinds.has(row.dataset.kind);
+        const matchesResults = !onlyWithResults || row.dataset.results === 'true';
+        row.style.display = matchesName && matchesKind && matchesResults ? '' : 'none';
+    }
+}
+</script>
+{{end}}
+
+{{define "pagination"}}
+<p>
+{{if eq .Page 0}}<a href="/tournaments?page=1">раньше →</a>
+{{else}}<a href="/tournaments?page={{.PreviousPage}}">← позже</a> {{.Page}} из {{.TotalPages}}
+{{if lt .Page .TotalPages}}<a href="/tournaments?page={{.NextPage}}">раньше →</a>{{end}}
+{{end}}
+</p>
+{{end}}

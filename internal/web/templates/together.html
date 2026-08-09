@@ -1,0 +1,9 @@
+{{define "title"}}Совместные игры{{end}}
+{{define "content"}}
+<h1>С кем вы играли чаще всего?</h1>
+{{template "form" .}}
+<h2>Совместные игры игроков <a href="https://rating.chgk.info/player/{{.First.PlayerID}}">{{.First.PlayerID}}</a>, <a href="{{.First.StatsLink}}">{{.First.Name}}</a> и <a href="https://rating.chgk.info/player/{{.Second.PlayerID}}">{{.Second.PlayerID}}</a>, <a href="{{.Second.StatsLink}}">{{.Second.Name}}</a> с {{.DateFrom}} по {{.DateTo}} ({{.Types}})</h2>
+<ol>
+{{range .Tournaments}}<li><a href="https://rating.chgk.info/tournament/{{.ID}}">{{.ID}}</a> <a href="/tournament/{{.ID}}">{{.Name}}</a> <small>({{.Dates}}, {{.Type}})</small></li>
+{{end}}</ol>
+{{end}}

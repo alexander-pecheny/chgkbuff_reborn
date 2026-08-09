@@ -12,27 +12,40 @@
 
 Использован CSS из проекта [water.css](https://github.com/kognise/water.css) (fun fact: авторке проекта на момент создания было что-то типа 14 лет!)
 
+## Из чего состоит
+
+Веб-сервер написан на Go (`cmd/buff`), обновление базы — на Python (`update_db.py`, `create_graph.py`): оно ходит по апи раз в сутки, памяти ему не жалко, а поведение апи оно знает во всех подробностях. Почему так — в [docs/adr](docs/adr).
+
+`create_graph.py` собирает `graph.bin` — упакованные списки соседей для поиска рукопожатий, сервер отображает этот файл в память и не держит граф в куче.
+
+Термины предметной области — в [CONTEXT.md](CONTEXT.md).
+
 ## Как поднять самостоятельно
 
-0\. Установить зависимости: `pip install requests dill networkx flask uwsgi`
+0\. Установить зависимости для обновлятора: `pip install requests`
 
-1\. Скопировать `config_example.py` в `config.py`, указать настоящее секретное значение (например, через `python -c 'import uuid; print(uuid.uuid4())'`)
+1\. Разово запустить `update_db.py`, дождаться, пока он выкачает всю базу с нуля (это занимает порядка 5–6 часов), затем `create_graph.py`
 
-2\. Разово запустить `db_updater.py`, дождаться, пока он выкачает всю базу с нуля (это занимает порядка 5–6 часов)
+2\. Собрать сервер и положить его на сервер:
+
+```
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o buff ./cmd/buff
+scp buff {{server}}:{{path/to/buff}}/buff
+```
+
+Бинарник статический, шаблоны и стили лежат внутри него — на сервере не нужны ни Go, ни Python для веба.
 
 3\. Создать `/etc/systemd/system/buff.service`, заменив значения в `{{}}` на нужные:
 
 ```
 [Unit]
-Description=uWSGI instance to serve buff
+Description=Buff
 After=network.target
 
 [Service]
 User=ap
-Group=www-data
 WorkingDirectory={{path/to/buff}}
-Environment="PATH={{path/to/python/bin}}"
-ExecStart={{path/to/python/bin}}/uwsgi --ini app.ini
+ExecStart={{path/to/buff}}/buff -dir {{path/to/buff}} -addr 127.0.0.1:8080
 Restart=on-failure
 RestartSec=5s
 
@@ -44,29 +57,26 @@ WantedBy=multi-user.target
 
 4\. Настроить, чтобы DNS вашего сайта `your.domain.com` смотрел на IP сервера.
 
-5\. Создать конфиг в `/etc/nginx/sites-available/buff`:
+5\. Добавить в `Caddyfile`:
 
 ```
-server {
-    server_name {{your.domain.com}} {{your.domain.com}};
-
-    location / {
-        include uwsgi_params;
-        uwsgi_pass unix:{{path/to/buff}}/app.sock;
-    }
-
-    listen 80;
+your.domain.com {
+    reverse_proxy 127.0.0.1:8080
 }
 ```
 
-Засимлинкать конфиг в `/etc/nginx/sites-enabled`: `sudo ln -s /etc/nginx/sites-available/buff /etc/nginx/sites-enabled`
+Перезагрузить конфиг: `sudo systemctl reload caddy`. Сертификат Caddy получит сам.
 
-Перезапустить nginx: `sudo systemctl restart nginx`
+6\. Настроить еженочное обновление базы: `crontab -e` и добавляем строчку
 
-6\. Запустить certbot: `sudo certbot --nginx -d {{your.domain.com}}`
+```
+5 1 * * * cd {{path/to/buff}} && python update_db.py && python create_graph.py && sudo systemctl restart buff
+```
 
-Снова перезапустить nginx: `sudo systemctl restart nginx`
+Рестарт обязателен: сервер держит `graph.bin` отображённым в память и не увидит новый файл сам.
 
-После этого сервис должен быть доступен по `https://your.domain.com`
+## Разработка
 
-7\. Настроить еженочное обновление базы: `crontab -e` и добавляем строчку `5 1 * * * {{path/to/python}} {{path/to/buff}}/update_db.py`
+Тесты сверяют ответы Go-версии с тем, что отвечал Flask: `go test ./...`. Ожидания лежат в `testdata/` и снимаются с работающего Flask-приложения через `gen_fixtures.py`. Тесты, которым нужны `buff.db` или `graph.bin`, пропускаются, если этих файлов нет.
+
+`flask_app.py` — уходящая реализация веба, она остаётся до переключения продакшена на Go.

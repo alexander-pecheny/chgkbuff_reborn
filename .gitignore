@@ -1,0 +1,18 @@
+# Everything here is rebuilt from the rating site or from a Go build
+*.db
+*.db.bak
+*.sqlite
+*.pickle
+graph.bin
+/buff
+*.log
+*.log.1
+config.py
+
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# AppleDouble junk from copying the tree between filesystems
+._*

@@ -1,0 +1,3310 @@
+[
+ {
+  "tournament_id": 12107,
+  "categories": {
+   "coffin": 2,
+   "a": 11,
+   "b": 16,
+   "c": 23,
+   "d": 22,
+   "e": 16
+  },
+  "truedl": 5.2,
+  "truedl_by_tour": "1 — 4.6, 2 — 5.4, 3 — 5.2, 4 — 4.4, 5 — 5.1, 6 — 6.7",
+  "teams": [
+   {
+    "team_id": 414,
+    "rating": 1747,
+    "taken": 69,
+    "avg_rating": 25.32,
+    "by_category": [
+     4,
+     12,
+     18,
+     20,
+     15
+    ]
+   },
+   {
+    "team_id": 71595,
+    "rating": 1630,
+    "taken": 68,
+    "avg_rating": 23.97,
+    "by_category": [
+     4,
+     10,
+     17,
+     21,
+     16
+    ]
+   },
+   {
+    "team_id": 86405,
+    "rating": 1540,
+    "taken": 67,
+    "avg_rating": 22.99,
+    "by_category": [
+     1,
+     9,
+     20,
+     21,
+     16
+    ]
+   },
+   {
+    "team_id": 75592,
+    "rating": 1609,
+    "taken": 66,
+    "avg_rating": 24.38,
+    "by_category": [
+     5,
+     7,
+     19,
+     20,
+     15
+    ]
+   },
+   {
+    "team_id": 4109,
+    "rating": 1498,
+    "taken": 64,
+    "avg_rating": 23.41,
+    "by_category": [
+     2,
+     11,
+     15,
+     21,
+     15
+    ]
+   },
+   {
+    "team_id": 45470,
+    "rating": 1580,
+    "taken": 63,
+    "avg_rating": 25.08,
+    "by_category": [
+     6,
+     9,
+     15,
+     18,
+     15
+    ]
+   },
+   {
+    "team_id": 45174,
+    "rating": 1489,
+    "taken": 63,
+    "avg_rating": 23.63,
+    "by_category": [
+     4,
+     7,
+     16,
+     20,
+     16
+    ]
+   },
+   {
+    "team_id": 46356,
+    "rating": 1425,
+    "taken": 62,
+    "avg_rating": 22.98,
+    "by_category": [
+     3,
+     7,
+     17,
+     19,
+     16
+    ]
+   },
+   {
+    "team_id": 43002,
+    "rating": 1450,
+    "taken": 61,
+    "avg_rating": 23.77,
+    "by_category": [
+     3,
+     8,
+     16,
+     19,
+     15
+    ]
+   },
+   {
+    "team_id": 70530,
+    "rating": 1329,
+    "taken": 61,
+    "avg_rating": 21.79,
+    "by_category": [
+     1,
+     7,
+     17,
+     20,
+     16
+    ]
+   },
+   {
+    "team_id": 91254,
+    "rating": 1321,
+    "taken": 58,
+    "avg_rating": 22.78,
+    "by_category": [
+     0,
+     9,
+     17,
+     17,
+     15
+    ]
+   },
+   {
+    "team_id": 83662,
+    "rating": 1263,
+    "taken": 58,
+    "avg_rating": 21.78,
+    "by_category": [
+     1,
+     7,
+     16,
+     19,
+     15
+    ]
+   },
+   {
+    "team_id": 43521,
+    "rating": 1304,
+    "taken": 57,
+    "avg_rating": 22.88,
+    "by_category": [
+     0,
+     9,
+     17,
+     15,
+     16
+    ]
+   },
+   {
+    "team_id": 55336,
+    "rating": 1292,
+    "taken": 57,
+    "avg_rating": 22.67,
+    "by_category": [
+     2,
+     8,
+     14,
+     18,
+     15
+    ]
+   },
+   {
+    "team_id": 46550,
+    "rating": 1268,
+    "taken": 56,
+    "avg_rating": 22.64,
+    "by_category": [
+     2,
+     8,
+     14,
+     17,
+     15
+    ]
+   },
+   {
+    "team_id": 6451,
+    "rating": 1163,
+    "taken": 56,
+    "avg_rating": 20.77,
+    "by_category": [
+     1,
+     5,
+     15,
+     19,
+     16
+    ]
+   },
+   {
+    "team_id": 65697,
+    "rating": 1131,
+    "taken": 56,
+    "avg_rating": 20.2,
+    "by_category": [
+     1,
+     2,
+     16,
+     22,
+     15
+    ]
+   },
+   {
+    "team_id": 50319,
+    "rating": 1216,
+    "taken": 55,
+    "avg_rating": 22.11,
+    "by_category": [
+     3,
+     5,
+     13,
+     19,
+     15
+    ]
+   },
+   {
+    "team_id": 58029,
+    "rating": 1132,
+    "taken": 55,
+    "avg_rating": 20.58,
+    "by_category": [
+     2,
+     4,
+     14,
+     19,
+     16
+    ]
+   },
+   {
+    "team_id": 44107,
+    "rating": 1073,
+    "taken": 54,
+    "avg_rating": 19.87,
+    "by_category": [
+     0,
+     3,
+     17,
+     18,
+     16
+    ]
+   },
+   {
+    "team_id": 5379,
+    "rating": 1121,
+    "taken": 52,
+    "avg_rating": 21.56,
+    "by_category": [
+     2,
+     4,
+     14,
+     16,
+     16
+    ]
+   },
+   {
+    "team_id": 3630,
+    "rating": 1078,
+    "taken": 51,
+    "avg_rating": 21.14,
+    "by_category": [
+     0,
+     6,
+     15,
+     15,
+     15
+    ]
+   },
+   {
+    "team_id": 100146,
+    "rating": 1060,
+    "taken": 51,
+    "avg_rating": 20.78,
+    "by_category": [
+     1,
+     4,
+     14,
+     18,
+     14
+    ]
+   },
+   {
+    "team_id": 6055,
+    "rating": 1037,
+    "taken": 49,
+    "avg_rating": 21.16,
+    "by_category": [
+     1,
+     5,
+     13,
+     15,
+     15
+    ]
+   },
+   {
+    "team_id": 55668,
+    "rating": 1025,
+    "taken": 48,
+    "avg_rating": 21.35,
+    "by_category": [
+     0,
+     8,
+     11,
+     15,
+     14
+    ]
+   },
+   {
+    "team_id": 53904,
+    "rating": 1012,
+    "taken": 48,
+    "avg_rating": 21.08,
+    "by_category": [
+     2,
+     6,
+     8,
+     17,
+     15
+    ]
+   },
+   {
+    "team_id": 46022,
+    "rating": 998,
+    "taken": 48,
+    "avg_rating": 20.79,
+    "by_category": [
+     0,
+     5,
+     13,
+     15,
+     15
+    ]
+   },
+   {
+    "team_id": 58562,
+    "rating": 915,
+    "taken": 48,
+    "avg_rating": 19.06,
+    "by_category": [
+     0,
+     2,
+     13,
+     19,
+     14
+    ]
+   },
+   {
+    "team_id": 336,
+    "rating": 1008,
+    "taken": 47,
+    "avg_rating": 21.45,
+    "by_category": [
+     4,
+     4,
+     8,
+     16,
+     15
+    ]
+   },
+   {
+    "team_id": 59305,
+    "rating": 973,
+    "taken": 47,
+    "avg_rating": 20.7,
+    "by_category": [
+     1,
+     5,
+     13,
+     14,
+     14
+    ]
+   },
+   {
+    "team_id": 50088,
+    "rating": 967,
+    "taken": 47,
+    "avg_rating": 20.57,
+    "by_category": [
+     0,
+     5,
+     14,
+     13,
+     15
+    ]
+   },
+   {
+    "team_id": 81683,
+    "rating": 962,
+    "taken": 47,
+    "avg_rating": 20.47,
+    "by_category": [
+     0,
+     5,
+     13,
+     13,
+     16
+    ]
+   },
+   {
+    "team_id": 54517,
+    "rating": 946,
+    "taken": 47,
+    "avg_rating": 20.13,
+    "by_category": [
+     1,
+     3,
+     14,
+     14,
+     15
+    ]
+   },
+   {
+    "team_id": 5668,
+    "rating": 885,
+    "taken": 46,
+    "avg_rating": 19.24,
+    "by_category": [
+     1,
+     3,
+     10,
+     16,
+     16
+    ]
+   },
+   {
+    "team_id": 2345,
+    "rating": 857,
+    "taken": 46,
+    "avg_rating": 18.63,
+    "by_category": [
+     0,
+     3,
+     10,
+     17,
+     16
+    ]
+   },
+   {
+    "team_id": 37731,
+    "rating": 854,
+    "taken": 45,
+    "avg_rating": 18.98,
+    "by_category": [
+     0,
+     5,
+     8,
+     16,
+     16
+    ]
+   },
+   {
+    "team_id": 38164,
+    "rating": 914,
+    "taken": 44,
+    "avg_rating": 20.77,
+    "by_category": [
+     0,
+     5,
+     13,
+     12,
+     14
+    ]
+   },
+   {
+    "team_id": 575,
+    "rating": 819,
+    "taken": 44,
+    "avg_rating": 18.61,
+    "by_category": [
+     1,
+     3,
+     7,
+     18,
+     15
+    ]
+   },
+   {
+    "team_id": 44104,
+    "rating": 867,
+    "taken": 43,
+    "avg_rating": 20.16,
+    "by_category": [
+     0,
+     3,
+     14,
+     12,
+     14
+    ]
+   },
+   {
+    "team_id": 5093,
+    "rating": 868,
+    "taken": 42,
+    "avg_rating": 20.67,
+    "by_category": [
+     0,
+     7,
+     6,
+     15,
+     14
+    ]
+   },
+   {
+    "team_id": 353,
+    "rating": 793,
+    "taken": 42,
+    "avg_rating": 18.88,
+    "by_category": [
+     0,
+     3,
+     10,
+     14,
+     15
+    ]
+   },
+   {
+    "team_id": 95143,
+    "rating": 772,
+    "taken": 41,
+    "avg_rating": 18.83,
+    "by_category": [
+     1,
+     2,
+     10,
+     13,
+     15
+    ]
+   },
+   {
+    "team_id": 62806,
+    "rating": 844,
+    "taken": 40,
+    "avg_rating": 21.1,
+    "by_category": [
+     2,
+     5,
+     8,
+     11,
+     14
+    ]
+   },
+   {
+    "team_id": 92787,
+    "rating": 761,
+    "taken": 40,
+    "avg_rating": 19.02,
+    "by_category": [
+     0,
+     4,
+     9,
+     14,
+     13
+    ]
+   },
+   {
+    "team_id": 61160,
+    "rating": 752,
+    "taken": 39,
+    "avg_rating": 19.28,
+    "by_category": [
+     0,
+     4,
+     10,
+     11,
+     14
+    ]
+   },
+   {
+    "team_id": 45541,
+    "rating": 735,
+    "taken": 39,
+    "avg_rating": 18.85,
+    "by_category": [
+     1,
+     2,
+     8,
+     14,
+     14
+    ]
+   },
+   {
+    "team_id": 294,
+    "rating": 734,
+    "taken": 38,
+    "avg_rating": 19.32,
+    "by_category": [
+     0,
+     4,
+     6,
+     16,
+     12
+    ]
+   },
+   {
+    "team_id": 7894,
+    "rating": 712,
+    "taken": 38,
+    "avg_rating": 18.74,
+    "by_category": [
+     2,
+     0,
+     9,
+     14,
+     13
+    ]
+   },
+   {
+    "team_id": 79821,
+    "rating": 657,
+    "taken": 37,
+    "avg_rating": 17.76,
+    "by_category": [
+     1,
+     2,
+     7,
+     13,
+     14
+    ]
+   },
+   {
+    "team_id": 42997,
+    "rating": 662,
+    "taken": 36,
+    "avg_rating": 18.39,
+    "by_category": [
+     0,
+     4,
+     7,
+     12,
+     13
+    ]
+   },
+   {
+    "team_id": 26750,
+    "rating": 653,
+    "taken": 36,
+    "avg_rating": 18.14,
+    "by_category": [
+     1,
+     3,
+     5,
+     13,
+     14
+    ]
+   },
+   {
+    "team_id": 29548,
+    "rating": 632,
+    "taken": 35,
+    "avg_rating": 18.06,
+    "by_category": [
+     0,
+     3,
+     5,
+     15,
+     12
+    ]
+   },
+   {
+    "team_id": 5611,
+    "rating": 620,
+    "taken": 35,
+    "avg_rating": 17.71,
+    "by_category": [
+     0,
+     2,
+     7,
+     15,
+     11
+    ]
+   },
+   {
+    "team_id": 78040,
+    "rating": 631,
+    "taken": 34,
+    "avg_rating": 18.56,
+    "by_category": [
+     0,
+     1,
+     10,
+     13,
+     10
+    ]
+   },
+   {
+    "team_id": 172,
+    "rating": 614,
+    "taken": 34,
+    "avg_rating": 18.06,
+    "by_category": [
+     0,
+     3,
+     6,
+     11,
+     14
+    ]
+   },
+   {
+    "team_id": 66744,
+    "rating": 575,
+    "taken": 33,
+    "avg_rating": 17.42,
+    "by_category": [
+     0,
+     2,
+     7,
+     10,
+     14
+    ]
+   },
+   {
+    "team_id": 3071,
+    "rating": 618,
+    "taken": 32,
+    "avg_rating": 19.31,
+    "by_category": [
+     1,
+     5,
+     4,
+     9,
+     13
+    ]
+   },
+   {
+    "team_id": 72758,
+    "rating": 606,
+    "taken": 30,
+    "avg_rating": 20.2,
+    "by_category": [
+     1,
+     5,
+     5,
+     6,
+     13
+    ]
+   },
+   {
+    "team_id": 6427,
+    "rating": 584,
+    "taken": 30,
+    "avg_rating": 19.47,
+    "by_category": [
+     1,
+     4,
+     5,
+     8,
+     12
+    ]
+   },
+   {
+    "team_id": 96037,
+    "rating": 437,
+    "taken": 29,
+    "avg_rating": 15.07,
+    "by_category": [
+     0,
+     0,
+     7,
+     9,
+     13
+    ]
+   }
+  ]
+ },
+ {
+  "tournament_id": 12639,
+  "categories": {
+   "coffin": 0,
+   "a": 2,
+   "b": 7,
+   "c": 12,
+   "d": 10,
+   "e": 5
+  },
+  "truedl": 3.9,
+  "truedl_by_tour": "1 — 3.9, 2 — 3.9, 3 — 4.0",
+  "teams": [
+   {
+    "team_id": 98778,
+    "rating": 2291,
+    "taken": 33,
+    "avg_rating": 69.42,
+    "by_category": [
+     2,
+     7,
+     9,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 55486,
+    "rating": 2100,
+    "taken": 32,
+    "avg_rating": 65.62,
+    "by_category": [
+     1,
+     5,
+     11,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 54151,
+    "rating": 2031,
+    "taken": 31,
+    "avg_rating": 65.52,
+    "by_category": [
+     1,
+     5,
+     10,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 92677,
+    "rating": 1996,
+    "taken": 31,
+    "avg_rating": 64.39,
+    "by_category": [
+     1,
+     4,
+     11,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 52916,
+    "rating": 1960,
+    "taken": 31,
+    "avg_rating": 63.23,
+    "by_category": [
+     0,
+     5,
+     11,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 86975,
+    "rating": 1980,
+    "taken": 30,
+    "avg_rating": 66.0,
+    "by_category": [
+     1,
+     6,
+     8,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 86405,
+    "rating": 1946,
+    "taken": 30,
+    "avg_rating": 64.87,
+    "by_category": [
+     0,
+     7,
+     9,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 53714,
+    "rating": 1927,
+    "taken": 30,
+    "avg_rating": 64.23,
+    "by_category": [
+     0,
+     5,
+     11,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 71595,
+    "rating": 1887,
+    "taken": 30,
+    "avg_rating": 62.9,
+    "by_category": [
+     1,
+     4,
+     10,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 105600,
+    "rating": 1969,
+    "taken": 29,
+    "avg_rating": 67.9,
+    "by_category": [
+     2,
+     4,
+     10,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 89600,
+    "rating": 1888,
+    "taken": 29,
+    "avg_rating": 65.1,
+    "by_category": [
+     1,
+     4,
+     11,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 67979,
+    "rating": 1855,
+    "taken": 29,
+    "avg_rating": 63.97,
+    "by_category": [
+     0,
+     5,
+     10,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 98728,
+    "rating": 1803,
+    "taken": 29,
+    "avg_rating": 62.17,
+    "by_category": [
+     1,
+     3,
+     10,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 83662,
+    "rating": 1725,
+    "taken": 28,
+    "avg_rating": 61.61,
+    "by_category": [
+     1,
+     4,
+     8,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 239,
+    "rating": 1708,
+    "taken": 28,
+    "avg_rating": 61.0,
+    "by_category": [
+     0,
+     5,
+     8,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 75566,
+    "rating": 1679,
+    "taken": 28,
+    "avg_rating": 59.96,
+    "by_category": [
+     0,
+     4,
+     9,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 104037,
+    "rating": 1670,
+    "taken": 28,
+    "avg_rating": 59.64,
+    "by_category": [
+     0,
+     3,
+     10,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 42483,
+    "rating": 1658,
+    "taken": 28,
+    "avg_rating": 59.21,
+    "by_category": [
+     0,
+     3,
+     10,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 105601,
+    "rating": 1614,
+    "taken": 28,
+    "avg_rating": 57.64,
+    "by_category": [
+     0,
+     2,
+     11,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 99178,
+    "rating": 1655,
+    "taken": 27,
+    "avg_rating": 61.3,
+    "by_category": [
+     0,
+     4,
+     9,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 106201,
+    "rating": 1586,
+    "taken": 27,
+    "avg_rating": 58.74,
+    "by_category": [
+     0,
+     2,
+     12,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 50088,
+    "rating": 1555,
+    "taken": 27,
+    "avg_rating": 57.59,
+    "by_category": [
+     0,
+     3,
+     9,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 44107,
+    "rating": 1704,
+    "taken": 26,
+    "avg_rating": 65.54,
+    "by_category": [
+     1,
+     5,
+     8,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 106129,
+    "rating": 1623,
+    "taken": 26,
+    "avg_rating": 62.42,
+    "by_category": [
+     1,
+     3,
+     8,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 45599,
+    "rating": 1511,
+    "taken": 26,
+    "avg_rating": 58.12,
+    "by_category": [
+     0,
+     3,
+     9,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 6178,
+    "rating": 1493,
+    "taken": 26,
+    "avg_rating": 57.42,
+    "by_category": [
+     0,
+     3,
+     8,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 37591,
+    "rating": 1492,
+    "taken": 26,
+    "avg_rating": 57.38,
+    "by_category": [
+     0,
+     3,
+     9,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 99879,
+    "rating": 1475,
+    "taken": 26,
+    "avg_rating": 56.73,
+    "by_category": [
+     0,
+     2,
+     9,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 91696,
+    "rating": 1471,
+    "taken": 26,
+    "avg_rating": 56.58,
+    "by_category": [
+     0,
+     2,
+     10,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 105721,
+    "rating": 1469,
+    "taken": 26,
+    "avg_rating": 56.5,
+    "by_category": [
+     0,
+     1,
+     11,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 49106,
+    "rating": 1508,
+    "taken": 25,
+    "avg_rating": 60.32,
+    "by_category": [
+     1,
+     3,
+     7,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 83335,
+    "rating": 1459,
+    "taken": 25,
+    "avg_rating": 58.36,
+    "by_category": [
+     0,
+     4,
+     7,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 44104,
+    "rating": 1447,
+    "taken": 25,
+    "avg_rating": 57.88,
+    "by_category": [
+     0,
+     2,
+     10,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 405,
+    "rating": 1420,
+    "taken": 25,
+    "avg_rating": 56.8,
+    "by_category": [
+     0,
+     3,
+     7,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 27839,
+    "rating": 1419,
+    "taken": 25,
+    "avg_rating": 56.76,
+    "by_category": [
+     0,
+     3,
+     9,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 5141,
+    "rating": 1405,
+    "taken": 25,
+    "avg_rating": 56.2,
+    "by_category": [
+     0,
+     3,
+     8,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 38145,
+    "rating": 1400,
+    "taken": 25,
+    "avg_rating": 56.0,
+    "by_category": [
+     0,
+     2,
+     8,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 5427,
+    "rating": 1396,
+    "taken": 25,
+    "avg_rating": 55.84,
+    "by_category": [
+     0,
+     2,
+     8,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 85192,
+    "rating": 1363,
+    "taken": 25,
+    "avg_rating": 54.52,
+    "by_category": [
+     0,
+     2,
+     8,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 39018,
+    "rating": 1361,
+    "taken": 25,
+    "avg_rating": 54.44,
+    "by_category": [
+     0,
+     2,
+     8,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 53904,
+    "rating": 1554,
+    "taken": 24,
+    "avg_rating": 64.75,
+    "by_category": [
+     1,
+     3,
+     9,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 57896,
+    "rating": 1535,
+    "taken": 24,
+    "avg_rating": 63.96,
+    "by_category": [
+     0,
+     5,
+     7,
+     8,
+     4
+    ]
+   },
+   {
+    "team_id": 56116,
+    "rating": 1534,
+    "taken": 24,
+    "avg_rating": 63.92,
+    "by_category": [
+     0,
+     4,
+     9,
+     7,
+     4
+    ]
+   },
+   {
+    "team_id": 105953,
+    "rating": 1463,
+    "taken": 24,
+    "avg_rating": 60.96,
+    "by_category": [
+     0,
+     4,
+     8,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 90600,
+    "rating": 1408,
+    "taken": 24,
+    "avg_rating": 58.67,
+    "by_category": [
+     0,
+     3,
+     8,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 45470,
+    "rating": 1380,
+    "taken": 24,
+    "avg_rating": 57.5,
+    "by_category": [
+     0,
+     2,
+     8,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 69321,
+    "rating": 1366,
+    "taken": 24,
+    "avg_rating": 56.92,
+    "by_category": [
+     0,
+     2,
+     9,
+     9,
+     4
+    ]
+   },
+   {
+    "team_id": 53582,
+    "rating": 1341,
+    "taken": 24,
+    "avg_rating": 55.88,
+    "by_category": [
+     0,
+     2,
+     8,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 77568,
+    "rating": 1337,
+    "taken": 24,
+    "avg_rating": 55.71,
+    "by_category": [
+     0,
+     2,
+     8,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 38038,
+    "rating": 1336,
+    "taken": 24,
+    "avg_rating": 55.67,
+    "by_category": [
+     0,
+     3,
+     7,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 42637,
+    "rating": 1434,
+    "taken": 23,
+    "avg_rating": 62.35,
+    "by_category": [
+     0,
+     5,
+     6,
+     8,
+     4
+    ]
+   },
+   {
+    "team_id": 92794,
+    "rating": 1431,
+    "taken": 23,
+    "avg_rating": 62.22,
+    "by_category": [
+     0,
+     4,
+     8,
+     7,
+     4
+    ]
+   },
+   {
+    "team_id": 91998,
+    "rating": 1364,
+    "taken": 23,
+    "avg_rating": 59.3,
+    "by_category": [
+     0,
+     2,
+     9,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 91945,
+    "rating": 1344,
+    "taken": 23,
+    "avg_rating": 58.43,
+    "by_category": [
+     1,
+     2,
+     8,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 106100,
+    "rating": 1297,
+    "taken": 23,
+    "avg_rating": 56.39,
+    "by_category": [
+     0,
+     2,
+     9,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 90449,
+    "rating": 1289,
+    "taken": 23,
+    "avg_rating": 56.04,
+    "by_category": [
+     0,
+     3,
+     6,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 92746,
+    "rating": 1279,
+    "taken": 23,
+    "avg_rating": 55.61,
+    "by_category": [
+     0,
+     3,
+     6,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 100146,
+    "rating": 1214,
+    "taken": 23,
+    "avg_rating": 52.78,
+    "by_category": [
+     0,
+     1,
+     8,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 50905,
+    "rating": 1206,
+    "taken": 23,
+    "avg_rating": 52.43,
+    "by_category": [
+     0,
+     0,
+     9,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 93765,
+    "rating": 1183,
+    "taken": 23,
+    "avg_rating": 51.43,
+    "by_category": [
+     0,
+     1,
+     8,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 81392,
+    "rating": 1314,
+    "taken": 22,
+    "avg_rating": 59.73,
+    "by_category": [
+     0,
+     4,
+     7,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 38791,
+    "rating": 1284,
+    "taken": 22,
+    "avg_rating": 58.36,
+    "by_category": [
+     1,
+     2,
+     6,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 5093,
+    "rating": 1267,
+    "taken": 22,
+    "avg_rating": 57.59,
+    "by_category": [
+     0,
+     3,
+     7,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 6074,
+    "rating": 1267,
+    "taken": 22,
+    "avg_rating": 57.59,
+    "by_category": [
+     0,
+     4,
+     5,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 69131,
+    "rating": 1256,
+    "taken": 22,
+    "avg_rating": 57.09,
+    "by_category": [
+     0,
+     3,
+     7,
+     8,
+     4
+    ]
+   },
+   {
+    "team_id": 65178,
+    "rating": 1246,
+    "taken": 22,
+    "avg_rating": 56.64,
+    "by_category": [
+     0,
+     2,
+     7,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 48124,
+    "rating": 1217,
+    "taken": 22,
+    "avg_rating": 55.32,
+    "by_category": [
+     0,
+     3,
+     5,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 40026,
+    "rating": 1265,
+    "taken": 21,
+    "avg_rating": 60.24,
+    "by_category": [
+     0,
+     3,
+     8,
+     6,
+     4
+    ]
+   },
+   {
+    "team_id": 10152,
+    "rating": 1224,
+    "taken": 21,
+    "avg_rating": 58.29,
+    "by_category": [
+     1,
+     2,
+     7,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 90948,
+    "rating": 1208,
+    "taken": 21,
+    "avg_rating": 57.52,
+    "by_category": [
+     0,
+     3,
+     5,
+     9,
+     4
+    ]
+   },
+   {
+    "team_id": 2765,
+    "rating": 1206,
+    "taken": 21,
+    "avg_rating": 57.43,
+    "by_category": [
+     0,
+     2,
+     7,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 66848,
+    "rating": 1195,
+    "taken": 21,
+    "avg_rating": 56.9,
+    "by_category": [
+     0,
+     2,
+     9,
+     5,
+     5
+    ]
+   },
+   {
+    "team_id": 56664,
+    "rating": 1192,
+    "taken": 21,
+    "avg_rating": 56.76,
+    "by_category": [
+     1,
+     1,
+     7,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 93212,
+    "rating": 1184,
+    "taken": 21,
+    "avg_rating": 56.38,
+    "by_category": [
+     1,
+     2,
+     5,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 71317,
+    "rating": 1156,
+    "taken": 21,
+    "avg_rating": 55.05,
+    "by_category": [
+     0,
+     3,
+     5,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 65317,
+    "rating": 1117,
+    "taken": 21,
+    "avg_rating": 53.19,
+    "by_category": [
+     0,
+     1,
+     8,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 102426,
+    "rating": 1106,
+    "taken": 21,
+    "avg_rating": 52.67,
+    "by_category": [
+     0,
+     1,
+     7,
+     9,
+     4
+    ]
+   },
+   {
+    "team_id": 2055,
+    "rating": 1099,
+    "taken": 21,
+    "avg_rating": 52.33,
+    "by_category": [
+     0,
+     1,
+     6,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 72915,
+    "rating": 1083,
+    "taken": 21,
+    "avg_rating": 51.57,
+    "by_category": [
+     0,
+     1,
+     7,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 2108,
+    "rating": 1051,
+    "taken": 21,
+    "avg_rating": 50.05,
+    "by_category": [
+     0,
+     2,
+     4,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 87269,
+    "rating": 1033,
+    "taken": 21,
+    "avg_rating": 49.19,
+    "by_category": [
+     0,
+     1,
+     5,
+     10,
+     5
+    ]
+   },
+   {
+    "team_id": 6387,
+    "rating": 1248,
+    "taken": 20,
+    "avg_rating": 62.4,
+    "by_category": [
+     1,
+     2,
+     6,
+     8,
+     3
+    ]
+   },
+   {
+    "team_id": 2742,
+    "rating": 1173,
+    "taken": 20,
+    "avg_rating": 58.65,
+    "by_category": [
+     0,
+     1,
+     9,
+     6,
+     4
+    ]
+   },
+   {
+    "team_id": 46809,
+    "rating": 1135,
+    "taken": 20,
+    "avg_rating": 56.75,
+    "by_category": [
+     0,
+     2,
+     7,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 93047,
+    "rating": 1080,
+    "taken": 20,
+    "avg_rating": 54.0,
+    "by_category": [
+     1,
+     1,
+     5,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 90903,
+    "rating": 1072,
+    "taken": 20,
+    "avg_rating": 53.6,
+    "by_category": [
+     0,
+     3,
+     4,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 58327,
+    "rating": 1059,
+    "taken": 20,
+    "avg_rating": 52.95,
+    "by_category": [
+     0,
+     1,
+     8,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 70336,
+    "rating": 1048,
+    "taken": 20,
+    "avg_rating": 52.4,
+    "by_category": [
+     0,
+     1,
+     6,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 54676,
+    "rating": 1014,
+    "taken": 20,
+    "avg_rating": 50.7,
+    "by_category": [
+     0,
+     1,
+     5,
+     10,
+     4
+    ]
+   },
+   {
+    "team_id": 92466,
+    "rating": 972,
+    "taken": 20,
+    "avg_rating": 48.6,
+    "by_category": [
+     0,
+     1,
+     5,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 83896,
+    "rating": 1124,
+    "taken": 19,
+    "avg_rating": 59.16,
+    "by_category": [
+     0,
+     2,
+     8,
+     5,
+     4
+    ]
+   },
+   {
+    "team_id": 72443,
+    "rating": 1096,
+    "taken": 19,
+    "avg_rating": 57.68,
+    "by_category": [
+     0,
+     3,
+     6,
+     6,
+     4
+    ]
+   },
+   {
+    "team_id": 53559,
+    "rating": 1040,
+    "taken": 19,
+    "avg_rating": 54.74,
+    "by_category": [
+     0,
+     2,
+     5,
+     8,
+     4
+    ]
+   },
+   {
+    "team_id": 70565,
+    "rating": 1029,
+    "taken": 19,
+    "avg_rating": 54.16,
+    "by_category": [
+     0,
+     2,
+     5,
+     8,
+     4
+    ]
+   },
+   {
+    "team_id": 86754,
+    "rating": 981,
+    "taken": 19,
+    "avg_rating": 51.63,
+    "by_category": [
+     1,
+     0,
+     5,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 72081,
+    "rating": 980,
+    "taken": 19,
+    "avg_rating": 51.58,
+    "by_category": [
+     0,
+     2,
+     5,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 45473,
+    "rating": 957,
+    "taken": 19,
+    "avg_rating": 50.37,
+    "by_category": [
+     0,
+     0,
+     7,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 100055,
+    "rating": 1153,
+    "taken": 18,
+    "avg_rating": 64.06,
+    "by_category": [
+     0,
+     5,
+     3,
+     6,
+     4
+    ]
+   },
+   {
+    "team_id": 92287,
+    "rating": 987,
+    "taken": 18,
+    "avg_rating": 54.83,
+    "by_category": [
+     0,
+     1,
+     7,
+     6,
+     4
+    ]
+   },
+   {
+    "team_id": 96529,
+    "rating": 977,
+    "taken": 18,
+    "avg_rating": 54.28,
+    "by_category": [
+     0,
+     2,
+     5,
+     7,
+     4
+    ]
+   },
+   {
+    "team_id": 69228,
+    "rating": 973,
+    "taken": 18,
+    "avg_rating": 54.06,
+    "by_category": [
+     0,
+     2,
+     5,
+     7,
+     4
+    ]
+   },
+   {
+    "team_id": 91712,
+    "rating": 959,
+    "taken": 18,
+    "avg_rating": 53.28,
+    "by_category": [
+     0,
+     2,
+     5,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 96335,
+    "rating": 940,
+    "taken": 18,
+    "avg_rating": 52.22,
+    "by_category": [
+     0,
+     1,
+     6,
+     7,
+     4
+    ]
+   },
+   {
+    "team_id": 49284,
+    "rating": 933,
+    "taken": 18,
+    "avg_rating": 51.83,
+    "by_category": [
+     0,
+     0,
+     7,
+     8,
+     3
+    ]
+   },
+   {
+    "team_id": 60820,
+    "rating": 922,
+    "taken": 18,
+    "avg_rating": 51.22,
+    "by_category": [
+     0,
+     0,
+     6,
+     8,
+     4
+    ]
+   },
+   {
+    "team_id": 42558,
+    "rating": 892,
+    "taken": 18,
+    "avg_rating": 49.56,
+    "by_category": [
+     0,
+     0,
+     6,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 105969,
+    "rating": 832,
+    "taken": 18,
+    "avg_rating": 46.22,
+    "by_category": [
+     0,
+     0,
+     5,
+     8,
+     5
+    ]
+   },
+   {
+    "team_id": 70337,
+    "rating": 975,
+    "taken": 17,
+    "avg_rating": 57.35,
+    "by_category": [
+     0,
+     2,
+     5,
+     7,
+     3
+    ]
+   },
+   {
+    "team_id": 28354,
+    "rating": 914,
+    "taken": 17,
+    "avg_rating": 53.76,
+    "by_category": [
+     0,
+     2,
+     4,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 99278,
+    "rating": 914,
+    "taken": 17,
+    "avg_rating": 53.76,
+    "by_category": [
+     0,
+     2,
+     5,
+     6,
+     4
+    ]
+   },
+   {
+    "team_id": 49998,
+    "rating": 905,
+    "taken": 17,
+    "avg_rating": 53.24,
+    "by_category": [
+     0,
+     3,
+     3,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 99181,
+    "rating": 803,
+    "taken": 17,
+    "avg_rating": 47.24,
+    "by_category": [
+     0,
+     1,
+     4,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 4967,
+    "rating": 797,
+    "taken": 17,
+    "avg_rating": 46.88,
+    "by_category": [
+     0,
+     1,
+     4,
+     7,
+     5
+    ]
+   },
+   {
+    "team_id": 56760,
+    "rating": 746,
+    "taken": 17,
+    "avg_rating": 43.88,
+    "by_category": [
+     0,
+     1,
+     2,
+     9,
+     5
+    ]
+   },
+   {
+    "team_id": 4892,
+    "rating": 856,
+    "taken": 16,
+    "avg_rating": 53.5,
+    "by_category": [
+     0,
+     2,
+     5,
+     5,
+     4
+    ]
+   },
+   {
+    "team_id": 84143,
+    "rating": 847,
+    "taken": 16,
+    "avg_rating": 52.94,
+    "by_category": [
+     0,
+     2,
+     3,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 72295,
+    "rating": 826,
+    "taken": 16,
+    "avg_rating": 51.62,
+    "by_category": [
+     0,
+     2,
+     3,
+     7,
+     4
+    ]
+   },
+   {
+    "team_id": 110,
+    "rating": 783,
+    "taken": 16,
+    "avg_rating": 48.94,
+    "by_category": [
+     0,
+     0,
+     5,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 85346,
+    "rating": 742,
+    "taken": 16,
+    "avg_rating": 46.38,
+    "by_category": [
+     0,
+     0,
+     6,
+     5,
+     5
+    ]
+   },
+   {
+    "team_id": 98228,
+    "rating": 888,
+    "taken": 15,
+    "avg_rating": 59.2,
+    "by_category": [
+     0,
+     2,
+     4,
+     7,
+     2
+    ]
+   },
+   {
+    "team_id": 106216,
+    "rating": 876,
+    "taken": 15,
+    "avg_rating": 58.4,
+    "by_category": [
+     0,
+     1,
+     6,
+     5,
+     3
+    ]
+   },
+   {
+    "team_id": 4631,
+    "rating": 828,
+    "taken": 15,
+    "avg_rating": 55.2,
+    "by_category": [
+     0,
+     1,
+     5,
+     5,
+     4
+    ]
+   },
+   {
+    "team_id": 99180,
+    "rating": 812,
+    "taken": 15,
+    "avg_rating": 54.13,
+    "by_category": [
+     0,
+     3,
+     2,
+     6,
+     4
+    ]
+   },
+   {
+    "team_id": 72758,
+    "rating": 809,
+    "taken": 15,
+    "avg_rating": 53.93,
+    "by_category": [
+     1,
+     1,
+     3,
+     5,
+     5
+    ]
+   },
+   {
+    "team_id": 336,
+    "rating": 771,
+    "taken": 15,
+    "avg_rating": 51.4,
+    "by_category": [
+     0,
+     2,
+     4,
+     5,
+     4
+    ]
+   },
+   {
+    "team_id": 59715,
+    "rating": 771,
+    "taken": 15,
+    "avg_rating": 51.4,
+    "by_category": [
+     0,
+     1,
+     5,
+     5,
+     4
+    ]
+   },
+   {
+    "team_id": 87747,
+    "rating": 758,
+    "taken": 15,
+    "avg_rating": 50.53,
+    "by_category": [
+     0,
+     1,
+     3,
+     8,
+     3
+    ]
+   },
+   {
+    "team_id": 58815,
+    "rating": 751,
+    "taken": 15,
+    "avg_rating": 50.07,
+    "by_category": [
+     0,
+     2,
+     2,
+     7,
+     4
+    ]
+   },
+   {
+    "team_id": 102428,
+    "rating": 714,
+    "taken": 15,
+    "avg_rating": 47.6,
+    "by_category": [
+     0,
+     1,
+     3,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 99689,
+    "rating": 776,
+    "taken": 14,
+    "avg_rating": 55.43,
+    "by_category": [
+     0,
+     1,
+     5,
+     5,
+     3
+    ]
+   },
+   {
+    "team_id": 65980,
+    "rating": 693,
+    "taken": 14,
+    "avg_rating": 49.5,
+    "by_category": [
+     0,
+     2,
+     1,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 99554,
+    "rating": 591,
+    "taken": 14,
+    "avg_rating": 42.21,
+    "by_category": [
+     0,
+     1,
+     1,
+     8,
+     4
+    ]
+   },
+   {
+    "team_id": 105043,
+    "rating": 900,
+    "taken": 13,
+    "avg_rating": 69.23,
+    "by_category": [
+     0,
+     3,
+     5,
+     3,
+     2
+    ]
+   },
+   {
+    "team_id": 5249,
+    "rating": 770,
+    "taken": 13,
+    "avg_rating": 59.23,
+    "by_category": [
+     0,
+     2,
+     5,
+     3,
+     3
+    ]
+   },
+   {
+    "team_id": 106079,
+    "rating": 607,
+    "taken": 13,
+    "avg_rating": 46.69,
+    "by_category": [
+     0,
+     0,
+     4,
+     6,
+     3
+    ]
+   },
+   {
+    "team_id": 103772,
+    "rating": 572,
+    "taken": 13,
+    "avg_rating": 44.0,
+    "by_category": [
+     0,
+     0,
+     3,
+     5,
+     5
+    ]
+   },
+   {
+    "team_id": 7740,
+    "rating": 543,
+    "taken": 13,
+    "avg_rating": 41.77,
+    "by_category": [
+     0,
+     1,
+     2,
+     5,
+     5
+    ]
+   },
+   {
+    "team_id": 69594,
+    "rating": 538,
+    "taken": 13,
+    "avg_rating": 41.38,
+    "by_category": [
+     0,
+     1,
+     1,
+     7,
+     4
+    ]
+   },
+   {
+    "team_id": 102427,
+    "rating": 562,
+    "taken": 12,
+    "avg_rating": 46.83,
+    "by_category": [
+     0,
+     1,
+     3,
+     4,
+     4
+    ]
+   },
+   {
+    "team_id": 90784,
+    "rating": 532,
+    "taken": 12,
+    "avg_rating": 44.33,
+    "by_category": [
+     0,
+     0,
+     3,
+     5,
+     4
+    ]
+   },
+   {
+    "team_id": 105845,
+    "rating": 706,
+    "taken": 11,
+    "avg_rating": 64.18,
+    "by_category": [
+     1,
+     1,
+     4,
+     2,
+     3
+    ]
+   },
+   {
+    "team_id": 101749,
+    "rating": 573,
+    "taken": 11,
+    "avg_rating": 52.09,
+    "by_category": [
+     0,
+     1,
+     3,
+     4,
+     3
+    ]
+   },
+   {
+    "team_id": 93632,
+    "rating": 511,
+    "taken": 10,
+    "avg_rating": 51.1,
+    "by_category": [
+     0,
+     1,
+     3,
+     2,
+     4
+    ]
+   },
+   {
+    "team_id": 92917,
+    "rating": 458,
+    "taken": 10,
+    "avg_rating": 45.8,
+    "by_category": [
+     0,
+     1,
+     2,
+     4,
+     3
+    ]
+   },
+   {
+    "team_id": 86680,
+    "rating": 456,
+    "taken": 10,
+    "avg_rating": 45.6,
+    "by_category": [
+     0,
+     1,
+     2,
+     3,
+     4
+    ]
+   },
+   {
+    "team_id": 90018,
+    "rating": 481,
+    "taken": 9,
+    "avg_rating": 53.44,
+    "by_category": [
+     0,
+     1,
+     3,
+     1,
+     4
+    ]
+   },
+   {
+    "team_id": 43686,
+    "rating": 399,
+    "taken": 8,
+    "avg_rating": 49.88,
+    "by_category": [
+     0,
+     1,
+     2,
+     3,
+     2
+    ]
+   },
+   {
+    "team_id": 103517,
+    "rating": 295,
+    "taken": 8,
+    "avg_rating": 36.88,
+    "by_category": [
+     0,
+     0,
+     1,
+     4,
+     3
+    ]
+   },
+   {
+    "team_id": 106212,
+    "rating": 294,
+    "taken": 8,
+    "avg_rating": 36.75,
+    "by_category": [
+     0,
+     1,
+     0,
+     3,
+     4
+    ]
+   },
+   {
+    "team_id": 54689,
+    "rating": 451,
+    "taken": 7,
+    "avg_rating": 64.43,
+    "by_category": [
+     1,
+     0,
+     1,
+     4,
+     1
+    ]
+   },
+   {
+    "team_id": 58860,
+    "rating": 334,
+    "taken": 7,
+    "avg_rating": 47.71,
+    "by_category": [
+     0,
+     0,
+     2,
+     4,
+     1
+    ]
+   },
+   {
+    "team_id": 92219,
+    "rating": 307,
+    "taken": 7,
+    "avg_rating": 43.86,
+    "by_category": [
+     0,
+     0,
+     2,
+     3,
+     2
+    ]
+   },
+   {
+    "team_id": 105712,
+    "rating": 267,
+    "taken": 7,
+    "avg_rating": 38.14,
+    "by_category": [
+     0,
+     0,
+     2,
+     1,
+     4
+    ]
+   },
+   {
+    "team_id": 105360,
+    "rating": 207,
+    "taken": 7,
+    "avg_rating": 29.57,
+    "by_category": [
+     0,
+     0,
+     0,
+     3,
+     4
+    ]
+   },
+   {
+    "team_id": 74424,
+    "rating": 222,
+    "taken": 5,
+    "avg_rating": 44.4,
+    "by_category": [
+     0,
+     0,
+     1,
+     2,
+     2
+    ]
+   },
+   {
+    "team_id": 89768,
+    "rating": 184,
+    "taken": 4,
+    "avg_rating": 46.0,
+    "by_category": [
+     0,
+     0,
+     1,
+     1,
+     2
+    ]
+   },
+   {
+    "team_id": 91009,
+    "rating": 149,
+    "taken": 4,
+    "avg_rating": 37.25,
+    "by_category": [
+     0,
+     0,
+     1,
+     1,
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "tournament_id": 6342,
+  "categories": {
+   "coffin": 1,
+   "a": 3,
+   "b": 7,
+   "c": 11,
+   "d": 7,
+   "e": 7
+  },
+  "truedl": 3.4,
+  "truedl_by_tour": "1 — 2.4, 2 — 4.7",
+  "teams": [
+   {
+    "team_id": 41366,
+    "rating": 446,
+    "taken": 30,
+    "avg_rating": 14.87,
+    "by_category": [
+     0,
+     5,
+     11,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 65522,
+    "rating": 400,
+    "taken": 27,
+    "avg_rating": 14.81,
+    "by_category": [
+     0,
+     4,
+     10,
+     7,
+     6
+    ]
+   },
+   {
+    "team_id": 74185,
+    "rating": 386,
+    "taken": 26,
+    "avg_rating": 14.85,
+    "by_category": [
+     1,
+     5,
+     7,
+     6,
+     7
+    ]
+   },
+   {
+    "team_id": 48762,
+    "rating": 374,
+    "taken": 26,
+    "avg_rating": 14.38,
+    "by_category": [
+     1,
+     4,
+     7,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 4989,
+    "rating": 366,
+    "taken": 26,
+    "avg_rating": 14.08,
+    "by_category": [
+     0,
+     4,
+     8,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 71595,
+    "rating": 342,
+    "taken": 26,
+    "avg_rating": 13.15,
+    "by_category": [
+     0,
+     2,
+     10,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 27254,
+    "rating": 357,
+    "taken": 24,
+    "avg_rating": 14.88,
+    "by_category": [
+     2,
+     2,
+     9,
+     5,
+     6
+    ]
+   },
+   {
+    "team_id": 2421,
+    "rating": 321,
+    "taken": 24,
+    "avg_rating": 13.38,
+    "by_category": [
+     0,
+     3,
+     8,
+     7,
+     6
+    ]
+   },
+   {
+    "team_id": 8900,
+    "rating": 305,
+    "taken": 24,
+    "avg_rating": 12.71,
+    "by_category": [
+     0,
+     2,
+     8,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 75592,
+    "rating": 311,
+    "taken": 23,
+    "avg_rating": 13.52,
+    "by_category": [
+     0,
+     3,
+     8,
+     5,
+     7
+    ]
+   },
+   {
+    "team_id": 50088,
+    "rating": 293,
+    "taken": 23,
+    "avg_rating": 12.74,
+    "by_category": [
+     0,
+     3,
+     6,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 65787,
+    "rating": 267,
+    "taken": 22,
+    "avg_rating": 12.14,
+    "by_category": [
+     0,
+     2,
+     6,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 69988,
+    "rating": 266,
+    "taken": 21,
+    "avg_rating": 12.67,
+    "by_category": [
+     1,
+     2,
+     5,
+     6,
+     7
+    ]
+   },
+   {
+    "team_id": 51228,
+    "rating": 259,
+    "taken": 21,
+    "avg_rating": 12.33,
+    "by_category": [
+     0,
+     4,
+     3,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 60426,
+    "rating": 259,
+    "taken": 21,
+    "avg_rating": 12.33,
+    "by_category": [
+     0,
+     2,
+     6,
+     6,
+     7
+    ]
+   },
+   {
+    "team_id": 77886,
+    "rating": 222,
+    "taken": 20,
+    "avg_rating": 11.1,
+    "by_category": [
+     0,
+     1,
+     5,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 56563,
+    "rating": 278,
+    "taken": 19,
+    "avg_rating": 14.63,
+    "by_category": [
+     2,
+     2,
+     5,
+     4,
+     6
+    ]
+   },
+   {
+    "team_id": 68169,
+    "rating": 243,
+    "taken": 19,
+    "avg_rating": 12.79,
+    "by_category": [
+     0,
+     4,
+     3,
+     6,
+     6
+    ]
+   },
+   {
+    "team_id": 28209,
+    "rating": 201,
+    "taken": 19,
+    "avg_rating": 10.58,
+    "by_category": [
+     0,
+     0,
+     5,
+     7,
+     7
+    ]
+   },
+   {
+    "team_id": 62135,
+    "rating": 188,
+    "taken": 18,
+    "avg_rating": 10.44,
+    "by_category": [
+     0,
+     1,
+     4,
+     6,
+     7
+    ]
+   },
+   {
+    "team_id": 77934,
+    "rating": 184,
+    "taken": 17,
+    "avg_rating": 10.82,
+    "by_category": [
+     0,
+     1,
+     4,
+     5,
+     7
+    ]
+   },
+   {
+    "team_id": 55928,
+    "rating": 171,
+    "taken": 16,
+    "avg_rating": 10.69,
+    "by_category": [
+     0,
+     0,
+     5,
+     5,
+     6
+    ]
+   },
+   {
+    "team_id": 59391,
+    "rating": 171,
+    "taken": 15,
+    "avg_rating": 11.4,
+    "by_category": [
+     0,
+     2,
+     3,
+     4,
+     6
+    ]
+   },
+   {
+    "team_id": 56154,
+    "rating": 158,
+    "taken": 15,
+    "avg_rating": 10.53,
+    "by_category": [
+     0,
+     0,
+     4,
+     6,
+     5
+    ]
+   },
+   {
+    "team_id": 54653,
+    "rating": 164,
+    "taken": 14,
+    "avg_rating": 11.71,
+    "by_category": [
+     1,
+     2,
+     1,
+     4,
+     6
+    ]
+   },
+   {
+    "team_id": 7015,
+    "rating": 149,
+    "taken": 14,
+    "avg_rating": 10.64,
+    "by_category": [
+     1,
+     1,
+     2,
+     3,
+     7
+    ]
+   },
+   {
+    "team_id": 68749,
+    "rating": 164,
+    "taken": 13,
+    "avg_rating": 12.62,
+    "by_category": [
+     1,
+     0,
+     4,
+     4,
+     4
+    ]
+   },
+   {
+    "team_id": 77073,
+    "rating": 136,
+    "taken": 13,
+    "avg_rating": 10.46,
+    "by_category": [
+     0,
+     1,
+     3,
+     3,
+     6
+    ]
+   },
+   {
+    "team_id": 65325,
+    "rating": 131,
+    "taken": 11,
+    "avg_rating": 11.91,
+    "by_category": [
+     0,
+     1,
+     4,
+     2,
+     4
+    ]
+   },
+   {
+    "team_id": 60250,
+    "rating": 102,
+    "taken": 11,
+    "avg_rating": 9.27,
+    "by_category": [
+     0,
+     1,
+     1,
+     4,
+     5
+    ]
+   },
+   {
+    "team_id": 72763,
+    "rating": 94,
+    "taken": 11,
+    "avg_rating": 8.55,
+    "by_category": [
+     0,
+     0,
+     2,
+     3,
+     6
+    ]
+   },
+   {
+    "team_id": 77802,
+    "rating": 96,
+    "taken": 10,
+    "avg_rating": 9.6,
+    "by_category": [
+     0,
+     1,
+     1,
+     3,
+     5
+    ]
+   },
+   {
+    "team_id": 77939,
+    "rating": 88,
+    "taken": 9,
+    "avg_rating": 9.78,
+    "by_category": [
+     0,
+     0,
+     3,
+     1,
+     5
+    ]
+   },
+   {
+    "team_id": 68255,
+    "rating": 70,
+    "taken": 8,
+    "avg_rating": 8.75,
+    "by_category": [
+     0,
+     0,
+     2,
+     1,
+     5
+    ]
+   }
+  ]
+ }
+]
