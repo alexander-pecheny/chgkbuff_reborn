@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS tournaments (
     town_id integer,
     in_rating integer,
     maii_rating integer,
-    questions_by_tour text
+    questions_by_tour text,
+    hide_questions_to text
 );
 CREATE TABLE IF NOT EXISTS tournament_results (
     id integer,
@@ -82,6 +83,17 @@ CREATE INDEX IF NOT EXISTS idx_tournaments_date_end ON tournaments(date_end);
 CREATE INDEX IF NOT EXISTS idx_results_with_mask ON tournament_results(id) WHERE mask IS NOT NULL;
 """
 
+NEW_COLUMNS = [("tournaments", "hide_questions_to", "text")]
+
+MISSING_MASKS = """
+select id from tournaments
+where date_end >= ? and date_end < ?
+  and (hide_questions_to is null or hide_questions_to < ?)
+  and exists (select 1 from tournament_results r where r.id = tournaments.id)
+  and not exists (
+      select 1 from tournament_results r where r.id = tournaments.id and r.mask is not null
+  );
+"""
 
 DELETED_TOURNAMENTS = """
 with dtrns as (
@@ -102,6 +114,11 @@ def db_init(path):
     for st in DB_INIT.split(";"):
         if st.strip():
             cur.execute(st.strip() + ";")
+    for table, column, decl in NEW_COLUMNS:
+        try:
+            cur.execute(f"alter table {table} add column {column} {decl};")
+        except sqlite3.OperationalError:
+            pass
     conn.commit()
 
 
@@ -326,6 +343,7 @@ class DbUpdater:
                 "in_rating": self.maybe_int(tourn_info.get("rating")),
                 "maii_rating": self.maybe_int(tourn_info.get("maiiRating")),
                 "questions_by_tour": self.get_questions_by_tour(tourn_info),
+                "hide_questions_to": tourn_info.get("hideQuestionsTo"),
             }
         except Exception as e:
             self.logger.error(
@@ -512,6 +530,26 @@ class DbUpdater:
             if tournament[0] not in self.updated_tournament_ids:
                 self.update_tournament_full(tournament[0])
 
+    def update_tournaments_missing_masks(self):
+        """
+        The API does not bump lastEditDate when an organiser finally uploads
+        per-question results, so a tournament can go stale for good. Once
+        hideQuestionsTo has passed, keep asking until the masks turn up.
+        """
+        cur = self.conn.cursor()
+        now = datetime.datetime.now(datetime.timezone.utc)
+        tournaments = cur.execute(
+            MISSING_MASKS,
+            (
+                (now - datetime.timedelta(days=182)).date().isoformat(),
+                now.date().isoformat(),
+                now.strftime("%Y-%m-%dT%H:%M:%S+00:00"),
+            ),
+        ).fetchall()
+        for tournament in tournaments:
+            if tournament[0] not in self.updated_tournament_ids:
+                self.update_tournament_full(tournament[0])
+
     def update(self):
         start = datetime.datetime.now(UTC_PLUS_3)
         if self.args.tourn_ids:
@@ -528,6 +566,7 @@ class DbUpdater:
                 self.process_tournaments_batch(res)
             self.handle_deleted_tournaments()
             self.update_tournaments_last_month()
+            self.update_tournaments_missing_masks()
             self.update_ratings()
             self.insert_wrapper(
                 {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
