@@ -54,7 +54,7 @@ def main():
         return
 
     since = previous_season_start(seasons, season_id)
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(db_path, timeout=60)
     team_ids = [
         row[0]
         for row in conn.execute(RECENT_TEAMS, (since,))

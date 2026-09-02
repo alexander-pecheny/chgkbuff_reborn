@@ -130,7 +130,7 @@ select id, name from dtrns where t_id is null;
 
 
 def db_init(path):
-    conn = sqlite3.connect(path)
+    conn = sqlite3.connect(path, timeout=60)
     cur = conn.cursor()
     for st in DB_INIT.split(";"):
         if st.strip():
@@ -208,7 +208,7 @@ class DbUpdater:
     def __init__(self, db_path, args):
         self.db_path = db_path
         self.args = args
-        self.conn = sqlite3.connect(db_path)
+        self.conn = sqlite3.connect(db_path, timeout=60)
         dir_name = os.path.dirname(db_path)
         log_path = os.path.join(dir_name, "db_updater.log")
         formatter = Formatter("%(asctime)s %(message)s")
@@ -592,6 +592,13 @@ class DbUpdater:
             "delete from team_seasons where team_id = ? and season_id = ?;",
             (team_id, season_id),
         )
+        if not rows:
+            # A fetched-but-empty roster is remembered as player 0, so the
+            # backfill can skip the team and dope reads "no base players".
+            cur.execute(
+                "insert into team_seasons(team_id, season_id, player_id) values (?, ?, 0);",
+                (team_id, season_id),
+            )
         for row in rows:
             cur.execute(
                 "insert or replace into team_seasons("
