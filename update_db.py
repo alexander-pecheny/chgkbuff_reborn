@@ -81,6 +81,22 @@ CREATE INDEX IF NOT EXISTS idx_ratings ON ratings(release_id, team_id);
 CREATE INDEX IF NOT EXISTS idx_tournaments_date_start ON tournaments(date_start DESC, id ASC);
 CREATE INDEX IF NOT EXISTS idx_tournaments_date_end ON tournaments(date_end);
 CREATE INDEX IF NOT EXISTS idx_results_with_mask ON tournament_results(id) WHERE mask IS NOT NULL;
+CREATE TABLE IF NOT EXISTS seasons (
+    id integer PRIMARY KEY,
+    date_start text,
+    date_end text
+);
+CREATE TABLE IF NOT EXISTS team_seasons (
+    team_id integer,
+    season_id integer,
+    player_id integer,
+    date_added text,
+    date_removed text,
+    player_number integer,
+    PRIMARY KEY (team_id, season_id, player_id)
+);
+CREATE INDEX IF NOT EXISTS idx_players_surname ON players(surname);
+CREATE INDEX IF NOT EXISTS idx_tournament_results_team ON tournament_results(team_id);
 """
 
 NEW_COLUMNS = [("tournaments", "hide_questions_to", "text")]
@@ -153,6 +169,13 @@ def parse_date(s):
     return datetime.datetime.strptime(s.split("T")[0], "%Y-%m-%d").date()
 
 
+def season_containing(seasons, day):
+    """seasons: rows of (id, date_start, date_end); day: a date."""
+    for season_id, date_start, date_end in seasons:
+        if parse_date(date_start) <= day <= parse_date(date_end):
+            return season_id
+
+
 def get_releases():
     releases = requests.get(f"{RATING_API}/releases.json").json()
     time.sleep(0.5)
@@ -203,6 +226,7 @@ class DbUpdater:
         self.page = 1
         self.page_thresh = None
         self.updated_tournament_ids = set()
+        self.updated_team_ids = set()
 
     def req_sleep(self, *args, **kwargs):
         """
@@ -412,6 +436,7 @@ class DbUpdater:
                 "flags": json.dumps(res.get("flags"), ensure_ascii=False),
                 "rating": json.dumps(res.get("rating"), ensure_ascii=False),
             }
+            self.updated_team_ids.add(res["team"]["id"])
             self.insert_wrapper(result_dict, "tournament_results")
             self.insert_wrapper(
                 {"id": tournament_id, "team_members": team_members_short}, "search"
@@ -499,6 +524,68 @@ class DbUpdater:
             ):
                 self.update_release(release)
 
+    def update_seasons(self):
+        req = self.req_sleep("get", f"{API}/seasons")
+        cur = self.conn.cursor()
+        for season in req.json():
+            cur.execute("delete from seasons where id = ?;", (season["id"],))
+            cur.execute(
+                "insert into seasons(id, date_start, date_end) values (?, ?, ?);",
+                (season["id"], season["dateStart"], season["dateEnd"]),
+            )
+        self.conn.commit()
+
+    def seasons(self):
+        cur = self.conn.cursor()
+        return cur.execute("select id, date_start, date_end from seasons;").fetchall()
+
+    def current_season_id(self, day=None):
+        day = day or datetime.datetime.now(UTC_PLUS_3).date()
+        return season_containing(self.seasons(), day)
+
+    def replace_team_season(self, team_id, season_id):
+        req = self.req_sleep(
+            "get", f"{API}/teams/{team_id}/seasons", params={"idseason": season_id}
+        )
+        try:
+            rows = req.json()
+        except Exception as e:
+            self.logger.error(
+                f"couldn't parse base roster of team {team_id}: {type(e)} {e}"
+            )
+            return
+        if not isinstance(rows, list):
+            return
+        cur = self.conn.cursor()
+        cur.execute(
+            "delete from team_seasons where team_id = ? and season_id = ?;",
+            (team_id, season_id),
+        )
+        for row in rows:
+            cur.execute(
+                "insert or replace into team_seasons("
+                "team_id, season_id, player_id, date_added, date_removed, player_number"
+                ") values (?, ?, ?, ?, ?, ?);",
+                (
+                    team_id,
+                    season_id,
+                    row["idplayer"],
+                    row.get("dateAdded"),
+                    row.get("dateRemoved"),
+                    row.get("playerNumber"),
+                ),
+            )
+        self.conn.commit()
+        return "ok"
+
+    def update_team_seasons(self):
+        season_id = self.current_season_id()
+        if season_id is None:
+            self.logger.error("no season covers today; skipping base rosters")
+            return
+        for team_id in sorted(self.updated_team_ids):
+            self.replace_team_season(team_id, season_id)
+
     def update_tournament_full(self, tournament_id):
         try:
             self.update_tournament_data(tournament_id)
@@ -567,6 +654,8 @@ class DbUpdater:
             self.handle_deleted_tournaments()
             self.update_tournaments_last_month()
             self.update_tournaments_missing_masks()
+            self.update_seasons()
+            self.update_team_seasons()
             self.update_ratings()
             self.insert_wrapper(
                 {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"

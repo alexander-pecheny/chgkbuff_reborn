@@ -13,6 +13,15 @@ _Avoid_: user, participant
 The roster a player belongs to at one tournament. A player's teammates change from tournament to
 tournament, so a team is never a stable group.
 
+**Base roster (Основной состав)**:
+The players the rating site lists for a team in one season, with the dates each was added and
+removed. Mirrored nightly for every team seen in the tournaments an update touched, and by
+`backfill_team_seasons.py` for every team that played in the current or previous season. Unlike a
+[[Team]] it is a declared membership, not one inferred from who played together.
+
+**Season**:
+The rating site's year, running from late August to late August. Every base roster belongs to one.
+
 **Tournament**:
 One competition on the rating site, with a start and end date and a type. Entries typed
 `Общий зачёт` are aggregate standings rather than a played event and are never counted.
