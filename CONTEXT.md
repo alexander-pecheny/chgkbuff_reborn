@@ -22,6 +22,11 @@ removed. Mirrored nightly for every team seen in the tournaments an update touch
 **Season**:
 The rating site's year, running from late August to late August. Every base roster belongs to one.
 
+**Games count**:
+How many tournaments a player has a result in, counted over every mirrored
+results row and rebuilt whole on each nightly update. It is what orders a
+player suggest, so a namesake with hundreds of games comes before one with two.
+
 **Tournament**:
 One competition on the rating site, with a start and end date and a type. Entries typed
 `Общий зачёт` are aggregate standings rather than a played event and are never counted.

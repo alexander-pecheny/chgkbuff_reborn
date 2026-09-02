@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import argparse
+import collections
 import copy
 import datetime
 import json
@@ -94,6 +95,10 @@ CREATE TABLE IF NOT EXISTS team_seasons (
     date_removed text,
     player_number integer,
     PRIMARY KEY (team_id, season_id, player_id)
+);
+CREATE TABLE IF NOT EXISTS player_games (
+    player_id integer PRIMARY KEY,
+    games integer NOT NULL DEFAULT 0
 );
 CREATE INDEX IF NOT EXISTS idx_players_surname ON players(surname);
 CREATE INDEX IF NOT EXISTS idx_tournament_results_team ON tournament_results(team_id);
@@ -524,6 +529,32 @@ class DbUpdater:
             ):
                 self.update_release(release)
 
+    def rebuild_player_games(self):
+        """
+        How many tournaments each player has, counted from the results rows.
+        Rebuilt whole in one transaction, so a reader never sees it half-built.
+        """
+        cur = self.conn.cursor()
+        counts = collections.Counter()
+        for (members,) in cur.execute(
+            "select team_members from tournament_results where team_members is not null"
+        ):
+            try:
+                ids = json.loads(members)
+            except (TypeError, ValueError):
+                continue
+            if not isinstance(ids, list):
+                continue
+            for player_id in ids:
+                if isinstance(player_id, int):
+                    counts[player_id] += 1
+        cur.execute("delete from player_games;")
+        cur.executemany(
+            "insert into player_games(player_id, games) values (?, ?);", counts.items()
+        )
+        self.conn.commit()
+        self.logger.info(f"player_games rebuilt for {len(counts)} players")
+
     def update_seasons(self):
         req = self.req_sleep("get", f"{API}/seasons")
         cur = self.conn.cursor()
@@ -656,6 +687,7 @@ class DbUpdater:
             self.update_tournaments_missing_masks()
             self.update_seasons()
             self.update_team_seasons()
+            self.rebuild_player_games()
             self.update_ratings()
             self.insert_wrapper(
                 {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
@@ -667,6 +699,11 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--db", default="buff.db")
     parser.add_argument("--tourn_ids")
+    parser.add_argument(
+        "--rebuild-player-games",
+        action="store_true",
+        help="only recount player_games from the results already mirrored",
+    )
     args = parser.parse_args()
 
     if os.path.isabs(args.db):
@@ -674,7 +711,11 @@ def main():
     else:
         db_path = os.path.abspath(os.path.join(DIR, args.db))
     db_init(db_path)
-    DbUpdater(db_path, args).update()
+    updater = DbUpdater(db_path, args)
+    if args.rebuild_player_games:
+        updater.rebuild_player_games()
+        return
+    updater.update()
 
 
 if __name__ == "__main__":
