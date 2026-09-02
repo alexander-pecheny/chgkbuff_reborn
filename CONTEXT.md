@@ -15,8 +15,11 @@ tournament, so a team is never a stable group.
 
 **Base roster (Основной состав)**:
 The players the rating site lists for a team in one season, with the dates each was added and
-removed. Mirrored nightly for every team seen in the tournaments an update touched, and by
-`backfill_team_seasons.py` for every team that played in the current or previous season. Unlike a
+removed. Both the current [[Season]] and the one before it are mirrored: most teams declare a
+roster months in, and until they do the previous season's is the answer. Mirrored nightly for every
+team seen in the tournaments an update touched, and by `backfill_team_seasons.py` for every team
+that played in the current or previous season; a finished season is fetched once. A team whose
+roster came back empty keeps a `player_id = 0` sentinel row so it is not refetched. Unlike a
 [[Team]] it is a declared membership, not one inferred from who played together.
 
 **Season**:

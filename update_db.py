@@ -181,6 +181,17 @@ def season_containing(seasons, day):
             return season_id
 
 
+def previous_season_id(seasons, current_id):
+    """The season that started before current_id, or None when it is the first."""
+    current = next((s for s in seasons if s[0] == current_id), None)
+    if current is None:
+        return None
+    earlier = [s for s in seasons if parse_date(s[1]) < parse_date(current[1])]
+    if not earlier:
+        return None
+    return max(earlier, key=lambda s: parse_date(s[1]))[0]
+
+
 def get_releases():
     releases = requests.get(f"{RATING_API}/releases.json").json()
     time.sleep(0.5)
@@ -574,6 +585,26 @@ class DbUpdater:
         day = day or datetime.datetime.now(UTC_PLUS_3).date()
         return season_containing(self.seasons(), day)
 
+    def mirror_season_ids(self, day=None):
+        """The seasons dope reads, newest first: the current one and the one
+        before it. Most teams declare a base roster months into a season, and
+        until they do the previous one is the answer."""
+        seasons = self.seasons()
+        current = self.current_season_id(day)
+        if current is None:
+            return []
+        previous = previous_season_id(seasons, current)
+        return [current] if previous is None else [current, previous]
+
+    def has_team_season(self, team_id, season_id):
+        cur = self.conn.cursor()
+        return bool(
+            cur.execute(
+                "select 1 from team_seasons where team_id = ? and season_id = ? limit 1;",
+                (team_id, season_id),
+            ).fetchone()
+        )
+
     def replace_team_season(self, team_id, season_id):
         req = self.req_sleep(
             "get", f"{API}/teams/{team_id}/seasons", params={"idseason": season_id}
@@ -617,12 +648,17 @@ class DbUpdater:
         return "ok"
 
     def update_team_seasons(self):
-        season_id = self.current_season_id()
-        if season_id is None:
+        season_ids = self.mirror_season_ids()
+        if not season_ids:
             self.logger.error("no season covers today; skipping base rosters")
             return
+        current, earlier = season_ids[0], season_ids[1:]
         for team_id in sorted(self.updated_team_ids):
-            self.replace_team_season(team_id, season_id)
+            self.replace_team_season(team_id, current)
+            # A finished season's roster no longer moves: fetch it once.
+            for season_id in earlier:
+                if not self.has_team_season(team_id, season_id):
+                    self.replace_team_season(team_id, season_id)
 
     def update_tournament_full(self, tournament_id):
         try:
