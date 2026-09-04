@@ -38,6 +38,18 @@ One competition on the rating site, with a start and end date and a type. Entrie
 The site's own classification — `обычный`, `Синхрон`, `Асинхрон`. Distinct from the played/remote
 split below, which Buff derives itself.
 
+**Difficulty forecast (Прогноз сложности)**:
+How hard a tournament's editors expect it to be, on the rating site's own scale, mirrored as they
+declared it. Absent for most tournaments, and a forecast rather than a measurement — it is what a
+venue reads before the tournament is played, not what the results say afterwards.
+
+**Requests (Заявки площадок)**:
+A venue's declaration that it will play a tournament, carrying the number of teams it expects. Buff
+keeps the sum over a tournament's live requests and how many venues filed them, not the requests
+themselves. Only a tournament still to be played is asked about — the number moves until the last
+venue has signed up, and once the window closes the last count stays as it was. A request the
+organiser turned down counts for nothing; one still waiting on them counts.
+
 **Onlines and asynchronous**:
 Buff's filter for tournaments not played face to face: type `Асинхрон`, or any tournament whose
 name contains "онлайн". Everything else is offline and synchronous.

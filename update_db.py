@@ -100,11 +100,20 @@ CREATE TABLE IF NOT EXISTS player_games (
     player_id integer PRIMARY KEY,
     games integer NOT NULL DEFAULT 0
 );
+CREATE TABLE IF NOT EXISTS tournament_requests (
+    tournament_id integer PRIMARY KEY,
+    teams integer NOT NULL DEFAULT 0,
+    venues integer NOT NULL DEFAULT 0,
+    updated_at text
+);
 CREATE INDEX IF NOT EXISTS idx_players_surname ON players(surname);
 CREATE INDEX IF NOT EXISTS idx_tournament_results_team ON tournament_results(team_id);
 """
 
-NEW_COLUMNS = [("tournaments", "hide_questions_to", "text")]
+NEW_COLUMNS = [
+    ("tournaments", "hide_questions_to", "text"),
+    ("tournaments", "difficulty_forecast", "real"),
+]
 
 MISSING_MASKS = """
 select id from tournaments
@@ -384,6 +393,7 @@ class DbUpdater:
                 "maii_rating": self.maybe_int(tourn_info.get("maiiRating")),
                 "questions_by_tour": self.get_questions_by_tour(tourn_info),
                 "hide_questions_to": tourn_info.get("hideQuestionsTo"),
+                "difficulty_forecast": tourn_info.get("difficultyForecast"),
             }
         except Exception as e:
             self.logger.error(
@@ -691,6 +701,51 @@ class DbUpdater:
             if tournament[0] not in self.updated_tournament_ids:
                 self.update_tournament_full(tournament[0])
 
+    def req_requests(self, tournament_id):
+        req = self.req_sleep("get", f"{API}/tournaments/{tournament_id}/requests")
+        if req.status_code != 200:
+            return None
+        try:
+            return req.json()
+        except Exception as e:
+            self.logger.error(f"couldn't parse requests for {tournament_id}: {type(e)} {e}")
+            return None
+
+    def update_tournament_requests(self):
+        """
+        How many teams a tournament expects, as its venues declared when they
+        asked to play it. Only a tournament still to be played is asked about:
+        the number is a forecast, it moves until the last venue has signed up,
+        and once the window has closed the last count stays as it was.
+        """
+        cur = self.conn.cursor()
+        today = datetime.datetime.now(UTC_PLUS_3).date().isoformat()
+        tournaments = cur.execute(
+            "select id from tournaments where date_end >= ? order by date_start, id;",
+            (today,),
+        ).fetchall()
+        self.logger.info(f"updating requests for {len(tournaments)} tournaments...")
+        now = datetime.datetime.now(UTC_PLUS_3).strftime(DT_FORMAT_STRING)
+        for (tournament_id,) in tournaments:
+            requests = self.req_requests(tournament_id)
+            if requests is None:
+                continue
+            # A rejected request is not a team anyone expects to see; one still
+            # waiting on the organiser is.
+            live = [r for r in requests if r.get("status") != "R"]
+            cur.execute(
+                "insert into tournament_requests(tournament_id, teams, venues, updated_at) "
+                "values(?, ?, ?, ?) on conflict(tournament_id) do update set "
+                "teams = excluded.teams, venues = excluded.venues, updated_at = excluded.updated_at;",
+                (
+                    tournament_id,
+                    sum(r.get("approximateTeamsCount") or 0 for r in live),
+                    len(live),
+                    now,
+                ),
+            )
+            self.conn.commit()
+
     def update_tournaments_missing_masks(self):
         """
         The API does not bump lastEditDate when an organiser finally uploads
@@ -728,6 +783,7 @@ class DbUpdater:
             self.handle_deleted_tournaments()
             self.update_tournaments_last_month()
             self.update_tournaments_missing_masks()
+            self.update_tournament_requests()
             self.update_seasons()
             self.update_team_seasons()
             self.rebuild_player_games()
