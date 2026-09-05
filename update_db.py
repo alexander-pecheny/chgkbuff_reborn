@@ -108,6 +108,9 @@ CREATE TABLE IF NOT EXISTS tournament_requests (
 );
 CREATE INDEX IF NOT EXISTS idx_players_surname ON players(surname);
 CREATE INDEX IF NOT EXISTS idx_tournament_results_team ON tournament_results(team_id);
+-- COLLATE NOCASE because SQLite's LIKE folds ASCII case, so a BINARY index is
+-- no use to `name LIKE 'prefix%'` and the team suggest scanned all 941k rows.
+CREATE INDEX IF NOT EXISTS idx_results_team_name ON tournament_results(team_current_name COLLATE NOCASE);
 """
 
 NEW_COLUMNS = [
