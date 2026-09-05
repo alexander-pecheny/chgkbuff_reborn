@@ -127,7 +127,6 @@ CREATE TABLE IF NOT EXISTS teams (
 -- name_fold is the name lowercased in Python, which folds Cyrillic. SQLite's
 -- own lower() and LIKE fold ASCII only, so «мангаз» would not find «Мангазея»
 -- without it. A searcher lowercases their query the same way and matches this.
--- (Keep semicolons out of these comments: db_init splits the schema on them.)
 CREATE INDEX IF NOT EXISTS idx_teams_name_fold ON teams(name_fold);
 """
 
@@ -162,14 +161,25 @@ select id, name from dtrns where t_id is null;
 def db_init(path):
     conn = sqlite3.connect(path, timeout=60)
     cur = conn.cursor()
-    for st in DB_INIT.split(";"):
-        if st.strip():
-            cur.execute(st.strip() + ";")
+    # executescript is SQLite's own parser: it knows a semicolon inside a
+    # comment or a string ends nothing. Splitting the script on ";" by hand cut
+    # statements in half whenever a comment used one.
+    #
+    # Twice, with the added columns in between, because the two need each other
+    # in both directions: NEW_COLUMNS can only alter a table DB_INIT has created,
+    # and DB_INIT may want to index a column only NEW_COLUMNS adds. Everything in
+    # the script is IF NOT EXISTS, so the first pass does what it can, the alters
+    # follow, and the second pass finishes the rest — and raises if it cannot.
+    try:
+        cur.executescript(DB_INIT)
+    except sqlite3.OperationalError:
+        pass
     for table, column, decl in NEW_COLUMNS:
         try:
             cur.execute(f"alter table {table} add column {column} {decl};")
         except sqlite3.OperationalError:
             pass
+    cur.executescript(DB_INIT)
     conn.commit()
 
 
