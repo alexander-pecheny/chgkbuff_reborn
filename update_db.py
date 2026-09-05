@@ -111,6 +111,24 @@ CREATE INDEX IF NOT EXISTS idx_tournament_results_team ON tournament_results(tea
 -- COLLATE NOCASE because SQLite's LIKE folds ASCII case, so a BINARY index is
 -- no use to `name LIKE 'prefix%'` and the team suggest scanned all 941k rows.
 CREATE INDEX IF NOT EXISTS idx_results_team_name ON tournament_results(team_current_name COLLATE NOCASE);
+-- One row per team, carrying the name and town it played its latest tournament
+-- under. tournament_results names a team per result, and a team that has played
+-- under eight names over the years cannot be searched or displayed from that:
+-- an infix search over 941k results takes two seconds, over these 74k it takes
+-- ten milliseconds, and «the team's name» stops depending on which row a query
+-- plan happened to reach first.
+CREATE TABLE IF NOT EXISTS teams (
+    id integer PRIMARY KEY,
+    name text NOT NULL,
+    name_fold text NOT NULL DEFAULT '',
+    town text NOT NULL DEFAULT '',
+    last_tournament_id integer
+);
+-- name_fold is the name lowercased in Python, which folds Cyrillic. SQLite's
+-- own lower() and LIKE fold ASCII only, so «мангаз» would not find «Мангазея»
+-- without it. A searcher lowercases their query the same way and matches this.
+-- (Keep semicolons out of these comments: db_init splits the schema on them.)
+CREATE INDEX IF NOT EXISTS idx_teams_name_fold ON teams(name_fold);
 """
 
 NEW_COLUMNS = [
@@ -579,6 +597,36 @@ class DbUpdater:
         self.conn.commit()
         self.logger.info(f"player_games rebuilt for {len(counts)} players")
 
+    def rebuild_teams(self):
+        """
+        Each team as it is currently called: the name and town from its latest
+        tournament. Rebuilt whole in one transaction, so a reader never sees it
+        half-built.
+        """
+        cur = self.conn.cursor()
+        rows = cur.execute(
+            """
+            select r.team_id, r.team_current_name, coalesce(r.team_current_town, ''), r.id
+            from tournament_results r
+            join tournaments t on t.id = r.id
+            where r.team_id is not null and r.team_current_name is not null
+            order by r.team_id, t.date_start, r.id
+            """
+        )
+        # Ordered by date within each team, so the last row seen for a team is
+        # the current one and the dict keeps it.
+        latest = {}
+        for team_id, name, town, tournament_id in rows:
+            latest[team_id] = (team_id, name, name.lower(), town, tournament_id)
+        cur.execute("delete from teams;")
+        cur.executemany(
+            "insert into teams(id, name, name_fold, town, last_tournament_id) "
+            "values (?, ?, ?, ?, ?);",
+            latest.values(),
+        )
+        self.conn.commit()
+        self.logger.info(f"teams rebuilt for {len(latest)} teams")
+
     def update_seasons(self):
         req = self.req_sleep("get", f"{API}/seasons")
         cur = self.conn.cursor()
@@ -790,6 +838,7 @@ class DbUpdater:
             self.update_seasons()
             self.update_team_seasons()
             self.rebuild_player_games()
+            self.rebuild_teams()
             self.update_ratings()
             self.insert_wrapper(
                 {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
@@ -806,6 +855,11 @@ def main():
         action="store_true",
         help="only recount player_games from the results already mirrored",
     )
+    parser.add_argument(
+        "--rebuild-teams",
+        action="store_true",
+        help="only rebuild teams from the results already mirrored",
+    )
     args = parser.parse_args()
 
     if os.path.isabs(args.db):
@@ -816,6 +870,9 @@ def main():
     updater = DbUpdater(db_path, args)
     if args.rebuild_player_games:
         updater.rebuild_player_games()
+        return
+    if args.rebuild_teams:
+        updater.rebuild_teams()
         return
     updater.update()
 
