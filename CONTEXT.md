@@ -34,6 +34,19 @@ player suggest, so a namesake with hundreds of games comes before one with two.
 One competition on the rating site, with a start and end date and a type. Entries typed
 `Общий зачёт` are aggregate standings rather than a played event and are never counted.
 
+**Town**:
+Where a team says it is from, as the rating site's own numbered town. Mirrored whole once, then one
+town at a time whenever an update meets an id the mirror has not seen: the site publishes no feed of
+which towns changed, and new ones appear a few a year. A town belongs to a [[Country]], except for
+the two dozen in Crimea, Abkhazia, South Ossetia and Karabakh, which the site deliberately leaves
+without one — so does Buff.
+
+**Country**:
+The rating site's country, mirrored with the one thing the site does not publish: the ISO-3166
+alpha-2 code, which is what a flag is drawn from. The code is written down in `ISO_BY_COUNTRY`; a
+country the site adds and that table does not know is logged and left without a code, which reads as
+"no flag" rather than as the wrong one.
+
 **Tournament type**:
 The site's own classification — `обычный`, `Синхрон`, `Асинхрон`. Distinct from the played/remote
 split below, which Buff derives itself.

@@ -21,6 +21,32 @@ DIR = os.path.dirname(os.path.abspath(__file__))
 API = "https://api.rating.chgk.net"
 RATING_API = "https://rating.chgk.gg/api/v1/b"
 
+# The rating site names its countries and nothing else, so the ISO-3166 alpha-2
+# code a flag is drawn from has to be written down once. Countries are added to
+# the site a couple a decade; a name missing here is logged and stays flagless.
+ISO_BY_COUNTRY = {
+    "Австралия": "AU", "Австрия": "AT", "Азербайджан": "AZ", "Андорра": "AD",
+    "Аргентина": "AR", "Армения": "AM", "Беларусь": "BY", "Бельгия": "BE",
+    "Болгария": "BG", "Босния и Герцеговина": "BA", "Бразилия": "BR",
+    "Великобритания": "GB", "Венгрия": "HU", "Вьетнам": "VN", "Германия": "DE",
+    "Греция": "GR", "Грузия": "GE", "Дания": "DK", "Израиль": "IL",
+    "Ирландия": "IE", "Исландия": "IS", "Испания": "ES", "Италия": "IT",
+    "КНДР": "KP", "Казахстан": "KZ", "Канада": "CA", "Кипр": "CY",
+    "Китай": "CN", "Колумбия": "CO", "Куба": "CU", "Кыргызстан": "KG",
+    "Латвия": "LV", "Литва": "LT", "Люксембург": "LU", "Малайзия": "MY",
+    "Мальта": "MT", "Марокко": "MA", "Мексика": "MX", "Молдова": "MD",
+    "Монголия": "MN", "Нидерланды": "NL", "Никарагуа": "NI", "Норвегия": "NO",
+    "ОАЭ": "AE", "Польша": "PL", "Португалия": "PT", "Россия": "RU",
+    "Румыния": "RO", "США": "US", "Саудовская Аравия": "SA",
+    "Северная Македония": "MK", "Сербия": "RS", "Сингапур": "SG",
+    "Словакия": "SK", "Таджикистан": "TJ", "Таиланд": "TH", "Тунис": "TN",
+    "Туркменистан": "TM", "Турция": "TR", "Узбекистан": "UZ", "Украина": "UA",
+    "Филиппины": "PH", "Финляндия": "FI", "Франция": "FR", "Хорватия": "HR",
+    "Черногория": "ME", "Чехия": "CZ", "Швейцария": "CH", "Швеция": "SE",
+    "Шри-Ланка": "LK", "Эстония": "EE", "ЮАР": "ZA", "Южная Корея": "KR",
+    "Ямайка": "JM", "Япония": "JP",
+}
+
 DB_INIT = """\
 CREATE TABLE IF NOT EXISTS tournaments (
     id integer PRIMARY KEY,
@@ -105,6 +131,27 @@ CREATE TABLE IF NOT EXISTS tournament_requests (
     teams integer NOT NULL DEFAULT 0,
     venues integer NOT NULL DEFAULT 0,
     updated_at text
+);
+-- Every town the rating site knows, with the country it puts it in. Filled once
+-- from /towns, then grown one request at a time as an update meets a town id
+-- this table has never seen: the API offers no "towns changed since" feed, and
+-- re-reading all 1700 of them nightly to learn about the two that are new is
+-- not worth the pages. A town the site leaves without a country -- Crimea,
+-- Abkhazia, South Ossetia, Karabakh -- keeps country_id null here too.
+CREATE TABLE IF NOT EXISTS towns (
+    id integer PRIMARY KEY,
+    name text NOT NULL,
+    country_id integer
+);
+CREATE INDEX IF NOT EXISTS idx_towns_name ON towns(name);
+-- The rating site's countries, plus the one thing it does not publish: the
+-- ISO-3166 alpha-2 code, which is what a flag is drawn from. The name comes
+-- from the API, the code from ISO_BY_COUNTRY below, and a country neither knows
+-- gets an empty code, which reads as "no flag" rather than as a wrong one.
+CREATE TABLE IF NOT EXISTS countries (
+    id integer PRIMARY KEY,
+    name text NOT NULL,
+    iso text NOT NULL DEFAULT ''
 );
 CREATE INDEX IF NOT EXISTS idx_players_surname ON players(surname);
 CREATE INDEX IF NOT EXISTS idx_tournament_results_team ON tournament_results(team_id);
@@ -283,6 +330,7 @@ class DbUpdater:
         self.page_thresh = None
         self.updated_tournament_ids = set()
         self.updated_team_ids = set()
+        self.seen_town_ids = set()
 
     def req_sleep(self, *args, **kwargs):
         """
@@ -416,7 +464,7 @@ class DbUpdater:
                 "editors": json.dumps([x["id"] for x in tourn_info["editors"]]),
                 "game_jury": json.dumps([x["id"] for x in tourn_info["gameJury"]]),
                 "appeal_jury": json.dumps([x["id"] for x in tourn_info["appealJury"]]),
-                "town_id": tourn_info.get("idtown"),
+                "town_id": self.note_town(tourn_info.get("idtown")),
                 # the API used to expose this as "tournamentInRatingBalanced";
                 # it was renamed to "rating" (a boolean). Use .get so a future
                 # rename degrades to NULL instead of wiping the whole record.
@@ -460,6 +508,7 @@ class DbUpdater:
 
     def wrap_town(self, town):
         if town:
+            self.note_town(town.get("id"))
             return town["name"]
 
     def update_results(self, tournament_id):
@@ -636,6 +685,81 @@ class DbUpdater:
         )
         self.conn.commit()
         self.logger.info(f"teams rebuilt for {len(latest)} teams")
+
+    def update_countries(self):
+        """Cheap enough to re-read in full: 75 rows on one page."""
+        req = self.req_sleep("get", f"{API}/countries", params={"itemsPerPage": 500})
+        cur = self.conn.cursor()
+        for country in req.json():
+            iso = ISO_BY_COUNTRY.get(country["name"], "")
+            if not iso:
+                self.logger.error(f"no ISO code for country {country}")
+            cur.execute("delete from countries where id = ?;", (country["id"],))
+            cur.execute(
+                "insert into countries(id, name, iso) values (?, ?, ?);",
+                (country["id"], country["name"], iso),
+            )
+        self.conn.commit()
+
+    def known_town_ids(self):
+        cur = self.conn.cursor()
+        return {row[0] for row in cur.execute("select id from towns;")}
+
+    def store_town(self, town):
+        """town as the API gives it: {id, name, country: {id, name}}."""
+        country = town.get("country") or {}
+        cur = self.conn.cursor()
+        cur.execute("delete from towns where id = ?;", (town["id"],))
+        cur.execute(
+            "insert into towns(id, name, country_id) values (?, ?, ?);",
+            (town["id"], town["name"], country.get("id")),
+        )
+
+    def fill_towns(self):
+        """The whole town list, paged. Only ever runs on a mirror that has none:
+        afterwards resolve_towns keeps it current one town at a time."""
+        if self.known_town_ids():
+            return
+        page = 1
+        while True:
+            req = self.req_sleep(
+                "get", f"{API}/towns", params={"page": page, "itemsPerPage": 500}
+            )
+            towns = req.json()
+            if not towns:
+                break
+            for town in towns:
+                self.store_town(town)
+            self.conn.commit()
+            page += 1
+        self.logger.info(f"towns filled: {len(self.known_town_ids())}")
+
+    def note_town(self, town_id):
+        """Remember a town id this update met, and hand it back so it can be
+        noted in passing wherever it is already being read."""
+        if town_id:
+            self.seen_town_ids.add(int(town_id))
+        return town_id
+
+    def resolve_towns(self):
+        """Every town this update met that the mirror had never heard of, one
+        request each. New towns appear a handful a year, so this costs nothing
+        on a normal night and needs no feed of what changed."""
+        unknown = sorted(self.seen_town_ids - self.known_town_ids())
+        for town_id in unknown:
+            req = self.req_sleep("get", f"{API}/towns/{town_id}")
+            try:
+                town = req.json()
+            except Exception as e:
+                self.logger.error(f"couldn't fetch town {town_id}: {type(e)} {e}")
+                continue
+            if not isinstance(town, dict) or "id" not in town:
+                self.logger.error(f"town {town_id} came back as {town}")
+                continue
+            self.store_town(town)
+        self.conn.commit()
+        if unknown:
+            self.logger.info(f"towns fetched: {unknown}")
 
     def update_seasons(self):
         req = self.req_sleep("get", f"{API}/seasons")
@@ -835,6 +959,8 @@ class DbUpdater:
                 self.logger.info(f"updating data for {t_id}...")
                 self.update_tournament_full(t_id)
         else:
+            self.update_countries()
+            self.fill_towns()
             self.init_tourn_id_table()
             res = self.req_tournaments()
             self.process_tournaments_batch(res)
@@ -850,6 +976,7 @@ class DbUpdater:
             self.rebuild_player_games()
             self.rebuild_teams()
             self.update_ratings()
+            self.resolve_towns()
             self.insert_wrapper(
                 {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
             )
@@ -870,6 +997,11 @@ def main():
         action="store_true",
         help="only rebuild teams from the results already mirrored",
     )
+    parser.add_argument(
+        "--fill-towns",
+        action="store_true",
+        help="only mirror the countries and, on a mirror with none, every town",
+    )
     args = parser.parse_args()
 
     if os.path.isabs(args.db):
@@ -883,6 +1015,10 @@ def main():
         return
     if args.rebuild_teams:
         updater.rebuild_teams()
+        return
+    if args.fill_towns:
+        updater.update_countries()
+        updater.fill_towns()
         return
     updater.update()
 
