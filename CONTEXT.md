@@ -35,7 +35,9 @@ One competition on the rating site, with a start and end date and a type. Entrie
 `Общий зачёт` are aggregate standings rather than a played event and are never counted.
 
 **Town**:
-Where a team says it is from, as the rating site's own numbered town. Mirrored whole once, then one
+Where a team says it is from, as the rating site's own numbered town. A result keeps the town's id
+alongside the name it was called at the time, because the name is not a key: the site tells its four
+Заречныйs apart with a suffix, and results mirrored before it did so carry the bare name. Mirrored whole once, then one
 town at a time whenever an update meets an id the mirror has not seen: the site publishes no feed of
 which towns changed, and new ones appear a few a year. A town belongs to a [[Country]], except for
 the two dozen in Crimea, Abkhazia, South Ossetia and Karabakh, which the site deliberately leaves

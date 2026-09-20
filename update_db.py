@@ -180,6 +180,8 @@ CREATE INDEX IF NOT EXISTS idx_teams_name_fold ON teams(name_fold);
 NEW_COLUMNS = [
     ("tournaments", "hide_questions_to", "text"),
     ("tournaments", "difficulty_forecast", "real"),
+    ("tournament_results", "team_current_town_id", "integer"),
+    ("teams", "town_id", "integer"),
 ]
 
 MISSING_MASKS = """
@@ -511,6 +513,10 @@ class DbUpdater:
             self.note_town(town.get("id"))
             return town["name"]
 
+    def wrap_town_id(self, town):
+        if town:
+            return town.get("id")
+
     def update_results(self, tournament_id):
         results = self.req_results(tournament_id)
         if not results:
@@ -531,6 +537,7 @@ class DbUpdater:
                 "team_id": res["team"]["id"],
                 "team_current_name": res["current"]["name"],
                 "team_current_town": self.wrap_town(res["current"]["town"]),
+                "team_current_town_id": self.wrap_town_id(res["current"]["town"]),
                 "team_members": team_members_short,
                 "team_members_full": json.dumps(tm),
                 "position": res.get("position"),
@@ -665,7 +672,8 @@ class DbUpdater:
         cur = self.conn.cursor()
         rows = cur.execute(
             """
-            select r.team_id, r.team_current_name, coalesce(r.team_current_town, ''), r.id
+            select r.team_id, r.team_current_name, coalesce(r.team_current_town, ''),
+                   r.team_current_town_id, r.id
             from tournament_results r
             join tournaments t on t.id = r.id
             where r.team_id is not null and r.team_current_name is not null
@@ -675,16 +683,47 @@ class DbUpdater:
         # Ordered by date within each team, so the last row seen for a team is
         # the current one and the dict keeps it.
         latest = {}
-        for team_id, name, town, tournament_id in rows:
-            latest[team_id] = (team_id, name, name.lower(), town, tournament_id)
+        for team_id, name, town, town_id, tournament_id in rows:
+            latest[team_id] = (team_id, name, name.lower(), town, town_id, tournament_id)
         cur.execute("delete from teams;")
         cur.executemany(
-            "insert into teams(id, name, name_fold, town, last_tournament_id) "
-            "values (?, ?, ?, ?, ?);",
+            "insert into teams(id, name, name_fold, town, town_id, last_tournament_id) "
+            "values (?, ?, ?, ?, ?, ?);",
             latest.values(),
         )
         self.conn.commit()
         self.logger.info(f"teams rebuilt for {len(latest)} teams")
+
+    def backfill_result_town_ids(self):
+        """Give the results mirrored before the id was kept the town id their
+        name points at. A name that names two towns -- the site tells its four
+        Заречныйs apart with a suffix and buff mirrored the bare name years ago
+        -- is left alone: the row gets its id the next time that tournament is
+        refetched, and guessing between two towns is worse than waiting."""
+        cur = self.conn.cursor()
+        cur.execute(
+            """
+            update tournament_results
+            set team_current_town_id = (
+                select t.id from towns t where t.name = tournament_results.team_current_town
+            )
+            where team_current_town_id is null
+              and exists (
+                select 1 from towns t where t.name = tournament_results.team_current_town
+              );
+            """
+        )
+        self.logger.info(f"town ids backfilled for {cur.rowcount} results")
+        self.conn.commit()
+        unresolved = [
+            row[0]
+            for row in cur.execute(
+                "select distinct team_current_town from tournament_results "
+                "where team_current_town_id is null and trim(coalesce(team_current_town, '')) <> '';"
+            )
+        ]
+        if unresolved:
+            self.logger.info(f"town names the site no longer has: {sorted(unresolved)}")
 
     def update_countries(self):
         """Cheap enough to re-read in full: 75 rows on one page."""
@@ -1002,6 +1041,11 @@ def main():
         action="store_true",
         help="only mirror the countries and, on a mirror with none, every town",
     )
+    parser.add_argument(
+        "--backfill-town-ids",
+        action="store_true",
+        help="only give the results mirrored before it the town id of their town",
+    )
     args = parser.parse_args()
 
     if os.path.isabs(args.db):
@@ -1019,6 +1063,10 @@ def main():
     if args.fill_towns:
         updater.update_countries()
         updater.fill_towns()
+        return
+    if args.backfill_town_ids:
+        updater.backfill_result_town_ids()
+        updater.rebuild_teams()
         return
     updater.update()
 
