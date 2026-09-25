@@ -597,12 +597,44 @@ class DbUpdater:
         self.conn.commit()
         self.logger.info(f"player_games rebuilt for {len(counts)} players")
 
+    def req_team_listing(self):
+        """
+        Every team's name and town as the rating site itself lists them, from
+        its paginated team listing: about 150 pages of 500. A team that plays
+        under two names flips between them in its results (team 308 is "Номер 6"
+        to the site and "Номер 2" to its last result), so the listing is the
+        authority. Returns None when a page fails, so a bad night falls back to
+        the results rather than to half a listing.
+        """
+        listing = {}
+        page = 1
+        while True:
+            try:
+                req = self.req_sleep(
+                    "get", f"{API}/teams", params={"page": page, "itemsPerPage": 500}
+                )
+                rows = req.json()
+            except Exception as e:
+                self.logger.error(f"team listing page {page} failed: {type(e)} {e}")
+                return None
+            if not rows:
+                break
+            for t in rows:
+                if t.get("id") and (t.get("name") or "").strip():
+                    listing[t["id"]] = (t["name"], (t.get("town") or {}).get("name") or "")
+            page += 1
+        self.logger.info(f"team listing: {len(listing)} teams over {page - 1} pages")
+        return listing
+
     def rebuild_teams(self):
         """
-        Each team as it is currently called: the name and town from its latest
-        tournament. Rebuilt whole in one transaction, so a reader never sees it
-        half-built.
+        Each team as it is currently called: the name and town the rating
+        site's own team listing gives, falling back to those of its latest
+        tournament for a team the listing does not carry or when the listing
+        could not be fetched. Rebuilt whole in one transaction, so a reader
+        never sees it half-built.
         """
+        listing = self.req_team_listing() or {}
         cur = self.conn.cursor()
         rows = cur.execute(
             """
@@ -617,6 +649,7 @@ class DbUpdater:
         # the current one and the dict keeps it.
         latest = {}
         for team_id, name, town, tournament_id in rows:
+            name, town = listing.get(team_id, (name, town))
             latest[team_id] = (team_id, name, name.lower(), town, tournament_id)
         cur.execute("delete from teams;")
         cur.executemany(
@@ -858,7 +891,7 @@ def main():
     parser.add_argument(
         "--rebuild-teams",
         action="store_true",
-        help="only rebuild teams from the results already mirrored",
+        help="only rebuild teams from the site's team listing and the results already mirrored",
     )
     args = parser.parse_args()
 
