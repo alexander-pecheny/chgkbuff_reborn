@@ -18,7 +18,7 @@ import requests
 UTC_PLUS_3 = datetime.timezone(datetime.timedelta(seconds=10800))
 DIR = os.path.dirname(os.path.abspath(__file__))
 
-API = "https://api.rating.chgk.net"
+API = "https://api.rating.chgk.info"
 RATING_API = "https://rating.chgk.gg/api/v1/b"
 
 # The rating site names its countries and nothing else, so the ISO-3166 alpha-2
