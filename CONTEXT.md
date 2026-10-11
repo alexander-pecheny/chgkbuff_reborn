@@ -58,6 +58,12 @@ How hard a tournament's editors expect it to be, on the rating site's own scale,
 declared it. Absent for most tournaments, and a forecast rather than a measurement — it is what a
 venue reads before the tournament is played, not what the results say afterwards.
 
+**Package intersection (Пересечение пакетов)**:
+Two tournaments whose packages share questions, as the rating site links them. The site keeps a
+link one way and serves it from both ends, and so does Buff. Asked for every tournament an update
+touched and for every one never asked about, so a link added after a tournament is played shows up
+once anything about that tournament moves.
+
 **Requests (Заявки площадок)**:
 A venue's declaration that it will play a tournament, carrying the number of teams it expects. Buff
 keeps the sum over a tournament's live requests and how many venues filed them, not the requests

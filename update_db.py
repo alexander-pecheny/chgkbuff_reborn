@@ -175,6 +175,20 @@ CREATE TABLE IF NOT EXISTS teams (
 -- own lower() and LIKE fold ASCII only, so «мангаз» would not find «Мангазея»
 -- without it. A searcher lowercases their query the same way and matches this.
 CREATE INDEX IF NOT EXISTS idx_teams_name_fold ON teams(name_fold);
+-- Tournaments whose packages share questions, as the rating site links them
+-- («пересечения пакетов»): one row per pair in each direction. The site keeps
+-- the link one way and serves it from both ends; so does this table.
+CREATE TABLE IF NOT EXISTS tournament_intersections (
+    tournament_id integer NOT NULL,
+    other_id integer NOT NULL,
+    PRIMARY KEY (tournament_id, other_id)
+);
+-- When each tournament's links were last asked for, so one with none is not
+-- asked about again every night.
+CREATE TABLE IF NOT EXISTS intersections_checked (
+    tournament_id integer PRIMARY KEY,
+    checked_at text NOT NULL
+);
 """
 
 NEW_COLUMNS = [
@@ -968,6 +982,61 @@ class DbUpdater:
             self.logger.error(f"couldn't parse requests for {tournament_id}: {type(e)} {e}")
             return None
 
+    def req_intersections(self, tournament_id):
+        req = self.req_sleep("get", f"{API}/tournaments/{tournament_id}/intersections")
+        if req.status_code == 404:
+            return []
+        if req.status_code != 200:
+            return None
+        try:
+            return [t["id"] for t in req.json()]
+        except (ValueError, KeyError, TypeError) as e:
+            self.logger.error(f"couldn't parse intersections for {tournament_id}: {type(e)} {e}")
+            return None
+
+    def update_intersections(self, tournament_ids):
+        """
+        The tournaments each of these shares questions with. A link is stored
+        from both ends, and asking about a tournament again replaces every
+        link it is in, so one the site removed goes here too.
+        """
+        cur = self.conn.cursor()
+        now = datetime.datetime.now(UTC_PLUS_3).strftime(DT_FORMAT_STRING)
+        self.logger.info(f"updating intersections for {len(tournament_ids)} tournaments...")
+        for tournament_id in tournament_ids:
+            others = self.req_intersections(tournament_id)
+            if others is None:
+                continue
+            cur.execute(
+                "delete from tournament_intersections where tournament_id = ? or other_id = ?;",
+                (tournament_id, tournament_id),
+            )
+            pairs = [(tournament_id, o) for o in others] + [(o, tournament_id) for o in others]
+            cur.executemany("insert or ignore into tournament_intersections values (?, ?);", pairs)
+            cur.execute(
+                "insert into intersections_checked values (?, ?) on conflict(tournament_id) "
+                "do update set checked_at = excluded.checked_at;",
+                (tournament_id, now),
+            )
+            self.conn.commit()
+
+    def intersections_due(self, types=None):
+        """
+        The tournaments this run touched, and every one never asked about.
+        `types` narrows the never-asked ones to those tournament types.
+        """
+        cur = self.conn.cursor()
+        sql = (
+            "select id from tournaments where id not in "
+            "(select tournament_id from intersections_checked)"
+        )
+        params = []
+        if types:
+            sql += f" and tournament_type in ({','.join('?' * len(types))})"
+            params = list(types)
+        never = [r[0] for r in cur.execute(sql + " order by id;", params)]
+        return sorted(self.updated_tournament_ids | set(never))
+
     def update_tournament_requests(self):
         """
         How many teams a tournament expects, as its venues declared when they
@@ -1043,6 +1112,7 @@ class DbUpdater:
             self.update_tournaments_last_month()
             self.update_tournaments_missing_masks()
             self.update_tournament_requests()
+            self.update_intersections(self.intersections_due())
             self.update_seasons()
             self.update_team_seasons()
             self.rebuild_player_games()
@@ -1079,6 +1149,11 @@ def main():
         action="store_true",
         help="only give the results mirrored before it the town id of their town",
     )
+    parser.add_argument(
+        "--backfill-intersections",
+        action="store_true",
+        help="only ask for the package intersections of in-person tournaments never asked about",
+    )
     args = parser.parse_args()
 
     if os.path.isabs(args.db):
@@ -1096,6 +1171,9 @@ def main():
     if args.fill_towns:
         updater.update_countries()
         updater.fill_towns()
+        return
+    if args.backfill_intersections:
+        updater.update_intersections(updater.intersections_due(("Обычный", "Региональный")))
         return
     if args.backfill_town_ids:
         updater.backfill_result_town_ids()
