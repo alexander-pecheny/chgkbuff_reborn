@@ -45,15 +45,17 @@ class RateLimit:
         self.starts = collections.deque()
 
     def wait(self):
+        """Sleeps until the next request may start; returns how long."""
         now = time.monotonic()
         while self.starts and now - self.starts[0] >= 3600:
             self.starts.popleft()
         until = self.starts[-1] + self.gap if self.starts else now
         if len(self.starts) >= self.per_hour:
             until = max(until, self.starts[0] + 3600)
-        if until > now:
-            time.sleep(until - now)
+        pause = max(0.0, until - now)
+        time.sleep(pause)
         self.starts.append(time.monotonic())
+        return pause
 
 
 # The rating site names its countries and nothing else, so the ISO-3166 alpha-2
@@ -391,7 +393,8 @@ class DbUpdater:
         than stopping the night's update; the last answer is returned as is.
         """
         for minutes in BACKOFF_MIN + (None,):
-            self.limit.wait()
+            if self.limit.wait() > 60:
+                self.logger.info(f"{self.limit.per_hour} requests in the last hour; resumed after a pause")
             req = getattr(self.session, method)(url, **kwargs)
             if req.status_code != 429 or minutes is None:
                 return req
