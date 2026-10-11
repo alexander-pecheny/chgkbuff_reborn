@@ -21,6 +21,41 @@ DIR = os.path.dirname(os.path.abspath(__file__))
 API = "https://api.rating.chgk.info"
 RATING_API = "https://rating.chgk.gg/api/v1/b"
 
+# rating.chgk.info allows two requests a second, and past an undocumented
+# volume within an hour it answers 429 for a while: about 5000 requests in 70
+# minutes was enough on 2026-10-11. Every request to it waits its turn here.
+MIN_GAP = 0.5
+PER_HOUR = 1500
+# On a 429 without Retry-After, the waits in minutes before each new try.
+BACKOFF_MIN = (5, 10, 20, 40, 60, 60)
+# Of the tournaments never asked about their intersections, a night's update
+# asks this many; --backfill-intersections asks the rest.
+NIGHTLY_BACKLOG = 300
+
+
+class RateLimit:
+    """
+    Spaces requests at least `gap` seconds apart and lets no more than
+    `per_hour` start within any hour.
+    """
+
+    def __init__(self, gap, per_hour):
+        self.gap = gap
+        self.per_hour = per_hour
+        self.starts = collections.deque()
+
+    def wait(self):
+        now = time.monotonic()
+        while self.starts and now - self.starts[0] >= 3600:
+            self.starts.popleft()
+        until = self.starts[-1] + self.gap if self.starts else now
+        if len(self.starts) >= self.per_hour:
+            until = max(until, self.starts[0] + 3600)
+        if until > now:
+            time.sleep(until - now)
+        self.starts.append(time.monotonic())
+
+
 # The rating site names its countries and nothing else, so the ISO-3166 alpha-2
 # code a flag is drawn from has to be written down once. Countries are added to
 # the site a couple a decade; a name missing here is logged and stays flagless.
@@ -340,6 +375,7 @@ class DbUpdater:
         logger.addHandler(fileHandler)
         self.logger = logger
         self.session = requests.Session()
+        self.limit = RateLimit(MIN_GAP, args.per_hour)
         self.last_db_update = self.get_last_db_update()
         self.items_per_page = 100
         self.page = 1
@@ -348,19 +384,21 @@ class DbUpdater:
         self.updated_team_ids = set()
         self.seen_town_ids = set()
 
-    def req_sleep(self, *args, **kwargs):
+    def req_sleep(self, method, url, **kwargs):
         """
-        rating.chgk.info's API has rate limit of 2 requests per second, and
-        past some count in an hour it answers 429 for a while: wait it out,
-        a minute longer each time, rather than stop the night's update.
+        One request to rating.chgk.info, within its limits (RateLimit). A 429
+        is waited out, as long as Retry-After says or else BACKOFF_MIN, rather
+        than stopping the night's update; the last answer is returned as is.
         """
-        for wait in range(1, 11):
-            req = getattr(self.session, args[0])(*args[1:], **kwargs)
-            time.sleep(0.5)
-            if req.status_code != 429:
+        for minutes in BACKOFF_MIN + (None,):
+            self.limit.wait()
+            req = getattr(self.session, method)(url, **kwargs)
+            if req.status_code != 429 or minutes is None:
                 return req
-            self.logger.info(f"429 from {args[1]}, waiting {wait} min")
-            time.sleep(60 * wait)
+            retry = req.headers.get("Retry-After", "")
+            pause = int(retry) if retry.isdigit() else 60 * minutes
+            self.logger.info(f"429 from {url}, {len(self.limit.starts)} requests in the last hour; waiting {pause} s")
+            time.sleep(pause)
         return req
 
     def req_tournaments(self):
@@ -1027,10 +1065,11 @@ class DbUpdater:
             )
             self.conn.commit()
 
-    def intersections_due(self, types=None):
+    def intersections_due(self, types=None, backlog=None):
         """
-        The tournaments this run touched, and every one never asked about.
-        `types` narrows the never-asked ones to those tournament types.
+        The tournaments this run touched, and the ones never asked about:
+        `types` narrows those to these tournament types, and `backlog` to the
+        first that many.
         """
         cur = self.conn.cursor()
         sql = (
@@ -1041,7 +1080,7 @@ class DbUpdater:
         if types:
             sql += f" and tournament_type in ({','.join('?' * len(types))})"
             params = list(types)
-        never = [r[0] for r in cur.execute(sql + " order by id;", params)]
+        never = [r[0] for r in cur.execute(sql + " order by id;", params)][:backlog]
         return sorted(self.updated_tournament_ids | set(never))
 
     def update_tournament_requests(self):
@@ -1119,7 +1158,7 @@ class DbUpdater:
             self.update_tournaments_last_month()
             self.update_tournaments_missing_masks()
             self.update_tournament_requests()
-            self.update_intersections(self.intersections_due())
+            self.update_intersections(self.intersections_due(backlog=NIGHTLY_BACKLOG))
             self.update_seasons()
             self.update_team_seasons()
             self.rebuild_player_games()
@@ -1160,6 +1199,12 @@ def main():
         "--backfill-intersections",
         action="store_true",
         help="only ask for the package intersections of in-person tournaments never asked about",
+    )
+    parser.add_argument(
+        "--per-hour",
+        type=int,
+        default=PER_HOUR,
+        help="the most requests to rating.chgk.info that start within an hour",
     )
     args = parser.parse_args()
 
