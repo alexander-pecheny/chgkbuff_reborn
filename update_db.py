@@ -21,11 +21,11 @@ DIR = os.path.dirname(os.path.abspath(__file__))
 API = "https://api.rating.chgk.info"
 RATING_API = "https://rating.chgk.gg/api/v1/b"
 
-# rating.chgk.info allows two requests a second, and past an undocumented
-# volume within an hour it answers 429 for a while: about 5000 requests in 70
-# minutes was enough on 2026-10-11. Every request to it waits its turn here.
+# rating.chgk.info allows two requests a second, and answers 429 once about
+# 1500 have started within an hour: twice on 2026-10-11, at 1475 and 1499.
+# Every request to it waits its turn here, a margin below that.
 MIN_GAP = 0.5
-PER_HOUR = 1500
+PER_HOUR = 1400
 # On a 429 without Retry-After, the waits in minutes before each new try.
 BACKOFF_MIN = (5, 10, 20, 40, 60, 60)
 # Of the tournaments never asked about their intersections, a night's update
