@@ -350,10 +350,17 @@ class DbUpdater:
 
     def req_sleep(self, *args, **kwargs):
         """
-        rating.chgk.info's API has rate limit of 2 requests per second
+        rating.chgk.info's API has rate limit of 2 requests per second, and
+        past some count in an hour it answers 429 for a while: wait it out,
+        a minute longer each time, rather than stop the night's update.
         """
-        req = getattr(self.session, args[0])(*args[1:], **kwargs)
-        time.sleep(0.5)
+        for wait in range(1, 11):
+            req = getattr(self.session, args[0])(*args[1:], **kwargs)
+            time.sleep(0.5)
+            if req.status_code != 429:
+                return req
+            self.logger.info(f"429 from {args[1]}, waiting {wait} min")
+            time.sleep(60 * wait)
         return req
 
     def req_tournaments(self):
