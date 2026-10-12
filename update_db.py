@@ -105,6 +105,11 @@ CREATE TABLE IF NOT EXISTS ratings (
     trb integer
 );
 CREATE INDEX IF NOT EXISTS idx_ratings ON ratings(release_id, team_id);
+CREATE TABLE IF NOT EXISTS player_ratings (
+    release_id integer,
+    player_id integer PRIMARY KEY,
+    rating integer
+);
 CREATE INDEX IF NOT EXISTS idx_tournaments_date_start ON tournaments(date_start DESC, id ASC);
 CREATE INDEX IF NOT EXISTS idx_tournaments_date_end ON tournaments(date_end);
 CREATE INDEX IF NOT EXISTS idx_results_with_mask ON tournament_results(id) WHERE mask IS NOT NULL;
@@ -287,13 +292,13 @@ def get_releases():
     return releases["items"]
 
 
-def download_release(release_id):
+def download_release(release_id, kind="teams"):
     result = []
     page = 1
     while True:
-        print(f"downloading page {page} of release {release_id}...")
+        print(f"downloading page {page} of {kind} release {release_id}...")
         ratings = requests.get(
-            f"{RATING_API}/teams/{release_id}.json?page={page}"
+            f"{RATING_API}/{kind}/{release_id}.json?page={page}"
         ).json()
         time.sleep(0.5)
         result.extend(ratings["items"])
@@ -308,6 +313,7 @@ class DbUpdater:
     def __init__(self, db_path, args):
         self.db_path = db_path
         self.args = args
+        self.updated_release_ids = set()
         self.conn = sqlite3.connect(db_path, timeout=60)
         dir_name = os.path.dirname(db_path)
         log_path = os.path.join(dir_name, "db_updater.log")
@@ -600,6 +606,7 @@ class DbUpdater:
     def update_release(self, release_dict):
         release_id = release_dict["id"]
         print(f"updating release {release_id}...")
+        self.updated_release_ids.add(release_id)
         ratings = download_release(release_id)
         cur = self.conn.cursor()
         cur.execute(f"delete from releases where id = {release_id};")
@@ -636,6 +643,32 @@ class DbUpdater:
                 or release["updated_at"] > releases_in_db[release["id"]]
             ):
                 self.update_release(release)
+
+    def update_player_ratings(self):
+        """
+        Every player's rating in the newest release already published, and only
+        that one: xy reads it to rate a test's lineup. A release dated in the
+        future is still being counted, so it waits for its date.
+        """
+        cur = self.conn.cursor()
+        today = datetime.date.today().isoformat()
+        latest = cur.execute(
+            "select id from releases where date <= ? order by date desc limit 1;",
+            (today,),
+        ).fetchone()
+        if latest is None:
+            return
+        have = cur.execute("select max(release_id) from player_ratings;").fetchone()[0]
+        if have == latest[0] and latest[0] not in self.updated_release_ids:
+            return
+        items = download_release(latest[0], kind="players")
+        cur.execute("delete from player_ratings;")
+        cur.executemany(
+            "insert into player_ratings(release_id, player_id, rating) values (?, ?, ?);",
+            [(latest[0], i["player_id"], i["rating"]) for i in items],
+        )
+        self.conn.commit()
+        self.logger.info(f"player_ratings: {len(items)} players of release {latest[0]}")
 
     def rebuild_player_games(self):
         """
@@ -1015,6 +1048,7 @@ class DbUpdater:
             self.rebuild_player_games()
             self.rebuild_teams()
             self.update_ratings()
+            self.update_player_ratings()
             self.resolve_towns()
             self.insert_wrapper(
                 {"datetime": start.strftime(DT_FORMAT_STRING)}, "db_updates"
@@ -1046,6 +1080,11 @@ def main():
         action="store_true",
         help="only give the results mirrored before it the town id of their town",
     )
+    parser.add_argument(
+        "--player-ratings",
+        action="store_true",
+        help="only mirror the player ratings of the newest published release",
+    )
     args = parser.parse_args()
 
     if os.path.isabs(args.db):
@@ -1056,6 +1095,9 @@ def main():
     updater = DbUpdater(db_path, args)
     if args.rebuild_player_games:
         updater.rebuild_player_games()
+        return
+    if args.player_ratings:
+        updater.update_player_ratings()
         return
     if args.rebuild_teams:
         updater.rebuild_teams()
